@@ -8,42 +8,45 @@
 
     <EditText
         android:id="@+id/ed_usrenamekurir"
-        android:layout_width="312dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="216dp"
+        android:layout_width="310dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/roundedcorner"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Username" />
 
     <EditText
         android:id="@+id/ed_passkurir"
-        android:layout_width="297dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="310dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/roundedcorner"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="Password"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.561"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_usrenamekurir" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_width="211dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/background_orange"
         android:text="Login"
-        android:background="#FF7629"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintTop_toBottomOf="@+id/ed_passkurir"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -52,6 +55,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Kurir"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="18dp"
         android:textColor="#FF7629"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.139"
@@ -60,13 +65,29 @@
 
     <TextView
         android:id="@+id/loginkurir"
-        android:layout_width="103dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="128dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Login"
         android:textColor="#FF7629"
+        android:textSize="42dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.172"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/belum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum Punya Akun?"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="#FF7629"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.232" />
 </androidx.constraintlayout.widget.ConstraintLayout>
