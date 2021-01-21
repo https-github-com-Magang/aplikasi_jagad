@@ -11,16 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Kurir"
+        android:text="Admin"
         android:textColor="#FF7629"
         android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="@+id/loginkurir"
+        app:layout_constraintEnd_toEndOf="@+id/registeradmin"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/loginkurir"
-        app:layout_constraintTop_toBottomOf="@+id/loginkurir" />
+        app:layout_constraintStart_toStartOf="@+id/registeradmin"
+        app:layout_constraintTop_toBottomOf="@+id/registeradmin" />
 
     <TextView
-        android:id="@+id/loginkurir"
+        android:id="@+id/registeradmin"
         android:layout_width="241dp"
         android:layout_height="65dp"
         android:layout_marginTop="16dp"
