@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/ed_usrenameadmin"
+        android:id="@+id/ed_usernameadmin"
         android:layout_width="310dp"
         android:layout_height="45dp"
         android:layout_marginTop="220dp"
@@ -30,21 +30,22 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Password"
-        app:layout_constraintEnd_toEndOf="@+id/ed_usrenameadmin"
+        app:layout_constraintEnd_toEndOf="@+id/ed_usernameadmin"
         app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="@+id/ed_usrenameadmin"
-        app:layout_constraintTop_toBottomOf="@+id/ed_usrenameadmin" />
+        app:layout_constraintStart_toStartOf="@+id/ed_usernameadmin"
+        app:layout_constraintTop_toBottomOf="@+id/ed_usernameadmin" />
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="211dp"
-        android:layout_height="37dp"
+        android:id="@+id/btn_logAdmin"
+        android:layout_width="254dp"
+        android:layout_height="41dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="240dp"
         android:background="@drawable/background_orange"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/ed_passadmin"
+        app:layout_constraintHorizontal_bias="0.589"
         app:layout_constraintStart_toStartOf="@+id/ed_passadmin"
         app:layout_constraintTop_toBottomOf="@+id/ed_passadmin"
         app:layout_constraintVertical_bias="0.0" />
@@ -88,6 +89,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_logAdmin"
         app:layout_constraintVertical_bias="0.232" />
 </androidx.constraintlayout.widget.ConstraintLayout>
