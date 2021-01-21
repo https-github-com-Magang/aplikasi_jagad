@@ -24,13 +24,13 @@
         android:id="@+id/btn_kurir"
         android:layout_width="260dp"
         android:layout_height="39dp"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/background_orange"
         android:fontFamily="@font/lato_bold"
         android:text="Kurir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_jagad" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/btn_admin"
@@ -44,6 +44,18 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/btn_kurir"
         app:layout_constraintTop_toBottomOf="@+id/btn_kurir" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="177dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/saly_3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
