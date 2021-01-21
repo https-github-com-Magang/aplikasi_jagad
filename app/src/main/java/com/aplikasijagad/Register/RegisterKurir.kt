@@ -1,12 +1,12 @@
-package com.aplikasijagad
+package com.aplikasijagad.Register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aplikasijagad.R
 
-class MainActivity : AppCompatActivity() {
+class RegisterKurir : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        setContentView(R.layout.activity_register_kurir)
     }
 }

@@ -30,9 +30,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Password"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ed_usrenamekurir"
         app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ed_usrenamekurir"
         app:layout_constraintTop_toBottomOf="@+id/ed_usrenamekurir" />
 
     <Button
@@ -44,8 +44,8 @@
         android:background="@drawable/background_orange"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ed_passkurir"
+        app:layout_constraintStart_toStartOf="@+id/ed_passkurir"
         app:layout_constraintTop_toBottomOf="@+id/ed_passkurir"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -53,15 +53,15 @@
         android:id="@+id/kurir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Kurir"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins_semibold"
-        android:textSize="18dp"
+        android:text="Kurir"
         android:textColor="#FF7629"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginkurir"/>
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/loginkurir"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/loginkurir"
+        app:layout_constraintTop_toBottomOf="@+id/loginkurir" />
 
     <TextView
         android:id="@+id/loginkurir"
