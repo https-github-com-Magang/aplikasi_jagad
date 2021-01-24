@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Dashboard.DashboardKurir">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_jagad2"
@@ -44,76 +43,81 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="206dp"
-            android:layout_height="52dp"
+            android:layout_width="237dp"
+            android:layout_height="108dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_namakurir"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Nama"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_namakurir2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins"
-                android:text="Nuril Febri S"
+                android:text="Total Kurir"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_nikkurir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:text="Total Loket"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_nikkurir3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:text="Total Sewa"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="206dp"
-            android:layout_height="52dp"
+            android:layout_height="108dp"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_nikkurir"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Nik"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_nikkurir2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/poppins"
-                android:text="023108421048"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="20 Orang"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_kodekirim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="5 Loket"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_namakurir3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="15"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_loket"
-        android:layout_width="104dp"
-        android:layout_height="104dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/background_putih"
-        android:shadowColor="@color/black"
-        android:text="Loket"
-        android:textSize="18sp"
-        app:cornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_posisikurir"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_posisikurir"
-        app:layout_constraintTop_toBottomOf="@+id/btn_posisikurir" />
 
     <Button
         android:id="@+id/btn_posisikurir"
@@ -123,7 +127,7 @@
         android:background="@drawable/background_putih"
         android:shadowColor="@color/black"
         android:text="Posisi Kurir"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:cornerRadius="15dp"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent" />
@@ -136,7 +140,7 @@
         android:background="@drawable/background_putih"
         android:shadowColor="@color/black"
         android:text="Sewa"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent" />
@@ -149,11 +153,65 @@
         android:background="@drawable/background_putih"
         android:shadowColor="@color/black"
         android:text="Laporan"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="@+id/btn_sewa"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btn_sewa"
         app:layout_constraintTop_toBottomOf="@+id/btn_sewa" />
+
+    <Button
+        android:id="@+id/btn_loket"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/background_putih"
+        android:shadowColor="@color/black"
+        android:text="Loket"
+        android:textSize="14sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_posisikurir"
+        app:layout_constraintStart_toStartOf="@+id/btn_posisikurir"
+        app:layout_constraintTop_toBottomOf="@+id/btn_posisikurir" />
+
+    <LinearLayout
+        android:layout_width="430dp"
+        android:layout_height="55dp"
+        android:background="@drawable/background_putih"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            app:srcCompat="@drawable/home" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            app:srcCompat="@drawable/status" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            app:srcCompat="@drawable/akun" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_jagad2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_jagad2"
+        app:srcCompat="@drawable/akunn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
