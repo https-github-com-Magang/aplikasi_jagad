@@ -32,7 +32,7 @@
         android:drawableLeft="@drawable/password"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="@+id/ed_usernameadmin"
         app:layout_constraintHorizontal_bias="0.561"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/kurir"
+        android:id="@+id/admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -58,7 +58,7 @@
         android:drawableLeft="@drawable/email"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="@+id/ed_useradmin"
         app:layout_constraintHorizontal_bias="0.561"
@@ -74,7 +74,7 @@
         android:drawableLeft="@drawable/password"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="@+id/ed_emailadmin"
         app:layout_constraintHorizontal_bias="0.561"
@@ -109,6 +109,5 @@
         app:layout_constraintStart_toStartOf="@+id/btn_regAdmin"
         app:layout_constraintTop_toBottomOf="@+id/btn_regAdmin"
         app:layout_constraintVertical_bias="0.13" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
