@@ -9,10 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
-        <activity android:name=".Dashboard.DashboardKurir"></activity>
-        <activity android:name=".Dashboard.DashboardAdmin" />
-        <activity android:name=".Register.RegisterKurir" />
-        <activity android:name=".Register.RegisterAdmin" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

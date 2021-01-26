@@ -13,87 +13,9 @@ import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
-    private val landingFragment: LandingFragment = LandingFragment()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference
-
-        if (FirebaseAuth.getInstance().currentUser != null && FirebaseAuth.getInstance().currentUser?.isEmailVerified == true)
-            openViewActivity()
-        else if (FirebaseAuth.getInstance().currentUser != null && FirebaseAuth.getInstance().currentUser?.isEmailVerified == false) {
-            Toast.makeText(this, "Please check email for verification", Toast.LENGTH_SHORT).show()
-            openLandingFragment()
-        } else {
-            openLandingFragment()
-        }
-    }
-
-    private fun openLandingFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(
-                R.anim.slide_up_anim,
-                R.anim.slide_down_anim,
-                R.anim.slide_up_anim,
-                R.anim.slide_down_anim
-            )
-            .add(R.id.main_frame_layout, landingFragment)
-            .commit()
-    }
-
-    private fun openViewActivity() {
-        val intent = Intent(this, ViewActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun signUpUser(email: String, password: String, fullname: String) {
-        FirebaseAuth.getInstance()
-            .createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-
-                if (task.isSuccessful) {
-                    val currentUser = auth.currentUser
-                    val userId = currentUser!!.uid
-                    val data = Users(userId, email, fullname)
-                    database.child("Users").child(userId).setValue(data)
-                }
-
-                checkResult(task, true)
-            }
-    }
-
-    fun loginUser(email: String, password: String) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(
-            email, password
-        )
-            .addOnCompleteListener { task ->
-                checkResult(task, false)
-            }
-    }
-
-    private fun checkResult(task: Task<AuthResult>, isNew: Boolean) {
-        if (task.isSuccessful) {
-            if (FirebaseAuth.getInstance().currentUser?.isEmailVerified == true) {
-                openViewActivity()
-            } else {
-                if (isNew) {
-                    FirebaseAuth.getInstance().currentUser?.sendEmailVerification()
-                }
-                Toast.makeText(
-                    this,
-                    "Please check email for verification",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG)
-                .show()
-        }
     }
 }
