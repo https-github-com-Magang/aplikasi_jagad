@@ -3,7 +3,6 @@ package com.aplikasijagad
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.aplikasijagad.Register.RegisterAdmin
 import com.aplikasijagad.add.add_sewamobil
 import com.aplikasijagad.add.add_sewamotor
 import kotlinx.android.synthetic.main.activity_dashboard_sewa.*
