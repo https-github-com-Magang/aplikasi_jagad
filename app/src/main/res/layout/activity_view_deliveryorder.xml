@@ -62,10 +62,10 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_do"
+                android:id="@+id/rv_viewdo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/list_delivery_order"/>
+                tools:listitem="@layout/list_view_deliveryorder"/>
         </ScrollView>
 
     </LinearLayout>
@@ -85,14 +85,14 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            app:srcCompat="@drawable/home" />
+            app:srcCompat="@drawable/home_nonaktif" />
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            app:srcCompat="@drawable/status" />
+            app:srcCompat="@drawable/status_aktif" />
 
         <ImageView
             android:id="@+id/imageView6"
