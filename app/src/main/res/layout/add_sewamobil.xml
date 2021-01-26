@@ -21,8 +21,8 @@
 
     <TextView
         android:id="@+id/tv_jagad"
-        android:layout_width="128dp"
-        android:layout_height="70dp"
+        android:layout_width="179dp"
+        android:layout_height="63dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Jagad"
@@ -37,6 +37,7 @@
         android:id="@+id/ed_peminjamMotor"
         android:layout_width="310dp"
         android:layout_height="45dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/background_putih"
         android:ems="10"
         android:hint="Nama Peminjam"
@@ -44,13 +45,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_sewaMotor"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="168dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_sewaMotor"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/ed_noKtp"
         android:layout_width="310dp"
         android:layout_height="45dp"
+        android:layout_marginTop="19dp"
         android:background="@drawable/background_putih"
         android:ems="10"
         android:hint="No KTP Peminjam"
@@ -58,13 +60,14 @@
         app:layout_constraintEnd_toEndOf="@+id/ed_peminjamMotor"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/ed_peminjamMotor"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="232dp" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_peminjamMotor"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/ed_tglPinjam"
         android:layout_width="310dp"
         android:layout_height="45dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/background_putih"
         android:ems="10"
         android:hint="Tanggal Peminjaman"
@@ -72,13 +75,14 @@
         app:layout_constraintEnd_toEndOf="@+id/ed_noKtp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/ed_noKtp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="294dp" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_noKtp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/ed_tglPengembalian"
         android:layout_width="310dp"
         android:layout_height="45dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/background_putih"
         android:ems="10"
         android:hint="Tanggal Pengembalian"
@@ -86,33 +90,37 @@
         app:layout_constraintEnd_toEndOf="@+id/ed_tglPinjam"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/ed_tglPinjam"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="354dp" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_tglPinjam"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
         android:layout_width="302dp"
         android:layout_height="104dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/background_putih"
         android:ems="10"
         android:gravity="start|top"
-        android:background="@drawable/background_putih"
         android:hint="Deskripsi"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="@+id/ed_tglPengembalian"
         app:layout_constraintStart_toStartOf="@+id/ed_tglPengembalian"
-        tools:layout_editor_absoluteY="420dp"
+        app:layout_constraintTop_toBottomOf="@+id/ed_tglPengembalian"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="110dp"
         android:layout_height="47dp"
+        android:layout_marginTop="42dp"
         android:layout_marginBottom="64dp"
+        android:background="@drawable/background_orange"
         android:text="Pinjam"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -126,21 +134,21 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/home"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/home" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/laporan"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/list" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/akun"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
