@@ -138,7 +138,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            app:srcCompat="@drawable/home" />
+            app:srcCompat="@drawable/homeicon" />
 
         <ImageView
             android:id="@+id/laporan"
