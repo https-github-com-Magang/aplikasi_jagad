@@ -15,18 +15,6 @@
         android:background="@drawable/background_putih">
 
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_below="@+id/tv_nokode"
-            android:layout_alignStart="@+id/tv_nokode"
-            android:layout_alignEnd="@+id/tv_nokode"
-            android:layout_marginStart="-4dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="19dp"
-            app:srcCompat="@drawable/selesai" />
-
         <TextView
             android:id="@+id/tv_kodekirim"
             android:layout_width="211dp"
@@ -102,6 +90,19 @@
             android:textColor="#FF5722"
             android:textColorHint="@color/btn"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_tambah"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_below="@+id/tv_nokode"
+            android:layout_alignEnd="@+id/tv_nokode"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/poppins"
+            android:text="Tambahkan"
+            android:textSize="12sp"
+            app:cornerRadius="15dp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="125dp"
     android:clickable="true"
     android:elevation="50dp"
     android:focusable="true"
@@ -12,28 +12,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@drawable/background_putih">
 
-
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_below="@+id/tv_nokode"
-            android:layout_alignStart="@+id/tv_nokode"
-            android:layout_alignEnd="@+id/tv_nokode"
-            android:layout_marginStart="-4dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="19dp"
-            app:srcCompat="@drawable/selesai" />
 
         <TextView
             android:id="@+id/tv_kodekirim"
             android:layout_width="211dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginRight="8dp"
+            android:layout_toEndOf="@+id/imageView9"
             android:fontFamily="@font/poppins_semibold"
             android:hint="Kode Pengiriman"
             android:maxLines="1"
@@ -62,7 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_kodekirim"
-            android:layout_marginStart="8dp"
+            android:layout_alignStart="@+id/tv_kodekirim"
+            android:layout_marginStart="0dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
             android:hint="Pengirim :"
@@ -73,11 +65,12 @@
 
         <TextView
             android:id="@+id/tv_date"
-            android:layout_width="match_parent"
+            android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_pengirim"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_alignStart="@+id/tv_pengirim"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppins"
             android:hint="18 Januari 2020"
@@ -92,7 +85,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/tv_kodekirim"
-            android:layout_marginStart="45dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="1dp"
             android:layout_toEndOf="@+id/tv_kodekirim"
             android:fontFamily="@font/poppins_semibold"
@@ -103,5 +96,24 @@
             android:textColorHint="@color/btn"
             android:textSize="16sp" />
 
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_date"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="27dp"
+            app:srcCompat="@drawable/akunn" />
+
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="12dp"
+        app:srcCompat="@drawable/selesai" />
 </androidx.cardview.widget.CardView>

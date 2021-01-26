@@ -61,10 +61,10 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_viewdo"
+                android:id="@+id/rv_laporankurir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/list_view_deliveryorder" />
+                tools:listitem="@layout/list_laporan_kurir"/>
         </ScrollView>
 
     </LinearLayout>
@@ -91,7 +91,7 @@
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
-            app:srcCompat="@drawable/status_aktif" />
+            app:srcCompat="@drawable/status" />
 
         <ImageView
             android:id="@+id/imageView6"
