@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/ed_usernamekurir"
+        android:layout_width="310dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/roundedcorner"
+        android:drawableLeft="@drawable/user"
+        android:ems="10"
+        android:hint="Useraname"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.584"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/ed_passkurir"
+        android:layout_width="310dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/roundedcorner"
+        android:drawableLeft="@drawable/password"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/ed_usernamekurir"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="@+id/ed_usernamekurir"
+        app:layout_constraintTop_toBottomOf="@+id/ed_usernamekurir" />
+
+    <Button
+        android:id="@+id/btn_logKasir"
+        android:layout_width="254dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/background_orange"
+        android:text="Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ed_passkurir"
+        app:layout_constraintStart_toStartOf="@+id/ed_passkurir"
+        app:layout_constraintTop_toBottomOf="@+id/ed_passkurir"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/kurir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Kurir"
+        android:textColor="#FF7629"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="@+id/loginkurir"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/loginkurir"
+        app:layout_constraintTop_toBottomOf="@+id/loginkurir" />
+
+    <TextView
+        android:id="@+id/loginkurir"
+        android:layout_width="128dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Login"
+        android:textColor="#FF7629"
+        android:textSize="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/belum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum Punya Akun?"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="#FF7629"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_logKasir"
+        app:layout_constraintVertical_bias="0.232" />
+</androidx.constraintlayout.widget.ConstraintLayout>
