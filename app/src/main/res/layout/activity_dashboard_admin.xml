@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".DashboardKurir">
 
     <TextView
         android:id="@+id/tv_jagad2"
@@ -32,7 +33,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="280dp"
-        android:layout_height="135dp"
+        android:layout_height="96dp"
         android:layout_marginStart="42dp"
         android:layout_marginTop="120dp"
         android:layout_marginEnd="42dp"
@@ -43,10 +44,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="237dp"
-            android:layout_height="108dp"
+            android:layout_width="183dp"
+            android:layout_height="73dp"
             android:layout_weight="1"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_kodekirim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Nama"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_namakurir"
@@ -54,27 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins"
-                android:text="Total Kurir"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_nikkurir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins"
-                android:text="Total Loket"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_nikkurir3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins"
-                android:text="Total Sewa"
+                android:text="Nuril Febri S"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -82,7 +73,7 @@
 
         <LinearLayout
             android:layout_width="206dp"
-            android:layout_height="108dp"
+            android:layout_height="74dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -92,27 +83,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="20 Orang"
+                android:text="NIK"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_kodekirim"
+                android:id="@+id/tv_nikkurir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="5 Loket"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_namakurir3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="15"
+                android:fontFamily="@font/poppins"
+                android:text="023108421048"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -123,10 +104,10 @@
         android:id="@+id/btn_posisikurir"
         android:layout_width="104dp"
         android:layout_height="104dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="260dp"
         android:background="@drawable/background_putih"
         android:shadowColor="@color/black"
-        android:text="Posisi Kurir"
+        android:text="Delivery Order"
         android:textSize="14sp"
         app:cornerRadius="15dp"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
@@ -136,42 +117,14 @@
         android:id="@+id/btn_sewa"
         android:layout_width="104dp"
         android:layout_height="104dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="260dp"
         android:background="@drawable/background_putih"
         android:shadowColor="@color/black"
-        android:text="Sewa"
+        android:text="Update"
         android:textSize="14sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_laporan"
-        android:layout_width="104dp"
-        android:layout_height="104dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/background_putih"
-        android:shadowColor="@color/black"
-        android:text="Laporan"
-        android:textSize="14sp"
-        app:cornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_sewa"
-        app:layout_constraintStart_toStartOf="@+id/btn_sewa"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sewa" />
-
-    <Button
-        android:id="@+id/btn_loket"
-        android:layout_width="104dp"
-        android:layout_height="104dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/background_putih"
-        android:shadowColor="@color/black"
-        android:text="Loket"
-        android:textSize="14sp"
-        app:cornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_posisikurir"
-        app:layout_constraintStart_toStartOf="@+id/btn_posisikurir"
-        app:layout_constraintTop_toBottomOf="@+id/btn_posisikurir" />
 
     <LinearLayout
         android:layout_width="430dp"
