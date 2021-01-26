@@ -22,15 +22,16 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="367dp"
-        android:layout_height="497dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="358dp"
+        android:layout_height="498dp"
+        android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.718"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/lini1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -45,12 +46,12 @@
                 android:background="@drawable/roundedcorner"
                 android:ems="10"
                 android:hint="Nama"
-                android:inputType="number"
+                android:inputType="textPersonName"
                 android:paddingLeft="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_jagad" />
+                app:layout_constraintTop_toBottomOf="@+id/lini1" />
 
             <EditText
                 android:id="@+id/ed_almtAsal"
@@ -78,9 +79,9 @@
                 android:hint="Kecamatan Asal"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/ed_nmPenerima"
-                app:layout_constraintStart_toStartOf="@+id/ed_nmPenerima"
-                app:layout_constraintTop_toBottomOf="@+id/ed_nmPenerima" />
+                app:layout_constraintEnd_toEndOf="@+id/ed_almtAsal"
+                app:layout_constraintStart_toStartOf="@+id/ed_almtAsal"
+                app:layout_constraintTop_toBottomOf="@+id/ed_almtAsal" />
 
             <EditText
                 android:id="@+id/ed_kabAsal"
@@ -93,9 +94,9 @@
                 android:hint="Kabupaten Asal"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/ed_nmPenerima"
-                app:layout_constraintStart_toStartOf="@+id/ed_nmPenerima"
-                app:layout_constraintTop_toBottomOf="@+id/ed_nmPenerima" />
+                app:layout_constraintEnd_toEndOf="@+id/ed_kecAsal"
+                app:layout_constraintStart_toStartOf="@+id/ed_kecAsal"
+                app:layout_constraintTop_toBottomOf="@+id/ed_kecAsal" />
 
             <EditText
                 android:id="@+id/ed_provAsal"
@@ -108,23 +109,113 @@
                 android:hint="Provinsi Asal"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/ed_nmPenerima"
-                app:layout_constraintStart_toStartOf="@+id/ed_nmPenerima"
-                app:layout_constraintTop_toBottomOf="@+id/ed_nmPenerima" />
+                app:layout_constraintEnd_toEndOf="@+id/ed_kabAsal"
+                app:layout_constraintStart_toStartOf="@+id/ed_kabAsal"
+                app:layout_constraintTop_toBottomOf="@+id/ed_kabAsal" />
 
             <EditText
                 android:id="@+id/ed_kodePos"
+                android:layout_width="340dp"
+                android:layout_height="57dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/roundedcorner"
+                android:ems="10"
+                android:hint="Kode Pos"
+                android:inputType="number"
+                android:paddingLeft="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_provAsal"
+                app:layout_constraintStart_toStartOf="@+id/ed_provAsal"
+                app:layout_constraintTop_toBottomOf="@+id/ed_provAsal" />
+
+            <EditText
+                android:id="@+id/ed_almtTujuan"
                 android:layout_width="340dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="28dp"
                 android:background="@drawable/roundedcorner"
                 android:ems="10"
-                android:hint="Kode Pos"
+                android:hint="Alamat Tujuan"
+                android:inputType="textMultiLine"
+                android:paddingLeft="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_kodePos"
+                app:layout_constraintStart_toStartOf="@+id/ed_kodePos"
+                app:layout_constraintTop_toBottomOf="@+id/ed_kodePos" />
+
+            <EditText
+                android:id="@+id/ed_provTujuan"
+                android:layout_width="340dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/roundedcorner"
+                android:ems="10"
+                android:hint="Provinsi Tujuan"
                 android:inputType="textPersonName"
                 android:paddingLeft="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/ed_nmPenerima"
-                app:layout_constraintStart_toStartOf="@+id/ed_nmPenerima"
+                app:layout_constraintEnd_toEndOf="@+id/ed_almtTujuan"
+                app:layout_constraintStart_toStartOf="@+id/ed_almtTujuan"
+                app:layout_constraintTop_toBottomOf="@+id/ed_almtTujuan" />
+
+            <EditText
+                android:id="@+id/ed_kabTujuan"
+                android:layout_width="340dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/roundedcorner"
+                android:ems="10"
+                android:hint="Kabupaten Tujuan"
+                android:inputType="textPersonName"
+                android:paddingLeft="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_provTujuan"
+                app:layout_constraintStart_toStartOf="@+id/ed_provTujuan"
+                app:layout_constraintTop_toBottomOf="@+id/ed_provTujuan" />
+
+            <EditText
+                android:id="@+id/ed_kacTujuan"
+                android:layout_width="340dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/roundedcorner"
+                android:ems="10"
+                android:hint="Kecamatan Tujuan"
+                android:inputType="textPersonName"
+                android:paddingLeft="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_kabTujuan"
+                app:layout_constraintStart_toStartOf="@+id/ed_kabTujuan"
+                app:layout_constraintTop_toBottomOf="@+id/ed_kabTujuan" />
+
+            <EditText
+                android:id="@+id/ed_kodePosTujuan"
+                android:layout_width="340dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/roundedcorner"
+                android:ems="10"
+                android:hint="Kode Pos Tujuan"
+                android:inputType="number"
+                android:paddingLeft="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_kacTujuan"
+                app:layout_constraintStart_toStartOf="@+id/ed_kacTujuan"
+                app:layout_constraintTop_toBottomOf="@+id/ed_kacTujuan" />
+
+            <EditText
+                android:id="@+id/ed_beratBarang"
+                android:layout_width="340dp"
+                android:layout_height="57dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/roundedcorner"
+                android:ems="10"
+                android:hint="Berat Barang"
+                android:inputType="number"
+                android:paddingLeft="15dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_kodePosTujuan"
+                app:layout_constraintStart_toStartOf="@+id/ed_kodePosTujuan"
                 app:layout_constraintTop_toBottomOf="@+id/ed_nmPenerima" />
 
             <Button
@@ -132,15 +223,18 @@
                 android:layout_width="235dp"
                 android:layout_height="37dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="180dp"
+                android:background="@drawable/background_orange"
                 android:text="Simpan"
-                app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-                app:layout_constraintHorizontal_bias="0.178"
-                app:layout_constraintStart_toEndOf="@+id/btn_batal"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="685dp" />
+                app:layout_constraintEnd_toEndOf="@+id/ed_beratBarang"
+                app:layout_constraintStart_toStartOf="@+id/ed_beratBarang"
+                app:layout_constraintTop_toBottomOf="@+id/ed_beratBarang" />
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="430dp"
         android:layout_height="55dp"
         android:background="@drawable/background_putih"
@@ -151,24 +245,25 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/home"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/home" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/laporan"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/list" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/akun"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/usernon" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

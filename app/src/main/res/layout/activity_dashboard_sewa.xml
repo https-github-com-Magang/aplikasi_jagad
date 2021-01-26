@@ -25,10 +25,11 @@
         android:id="@+id/btn_motor"
         android:layout_width="104dp"
         android:layout_height="104dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/background_putih"
-        android:shadowColor="@color/black"
+        android:shadowColor="@color/btn"
+        android:textColor="@color/btn"
         android:text="Motor"
         android:textSize="18sp"
         app:cornerRadius="15dp"
@@ -40,14 +41,15 @@
         android:layout_width="104dp"
         android:layout_height="104dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="84dp"
         android:background="@drawable/background_putih"
-        android:shadowColor="@color/black"
-        android:text="Motor"
+        android:shadowColor="@color/btn"
+        android:text="Mobil"
+        android:textColor="@color/btn"
         android:textSize="18sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btn_motor"
         app:layout_constraintTop_toBottomOf="@+id/tv_jagad2" />
 
@@ -62,21 +64,21 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/home"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/home" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/laporan"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/list" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/akun"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
