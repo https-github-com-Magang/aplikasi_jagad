@@ -22,7 +22,7 @@
         <activity android:name=".profile.profileKurir" />
         <activity android:name=".profile.profileAdmin" />
         <activity
-            android:name=".DashboardKurir"
+            android:name=".DashboardAdmin"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".DashboardAdmin"
