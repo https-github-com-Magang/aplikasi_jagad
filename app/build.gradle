@@ -65,4 +65,9 @@ dependencies {
 
     //ui-firebase
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.room:room-runtime:2.2.5'
+    kapt 'androidx.room:room-compiler:2.2.5'
+
 }
