@@ -17,7 +17,7 @@
 
 
         <TextView
-            android:id="@+id/tv_kodekirim"
+            android:id="@+id/tv_totalloket"
             android:layout_width="211dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -52,8 +52,8 @@
             android:id="@+id/tv_pengirim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_kodekirim"
-            android:layout_alignStart="@+id/tv_kodekirim"
+            android:layout_below="@+id/tv_totalloket"
+            android:layout_alignStart="@+id/tv_totalloket"
             android:layout_marginStart="0dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
@@ -84,10 +84,10 @@
             android:id="@+id/tv_nokode"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/tv_kodekirim"
+            android:layout_alignTop="@+id/tv_totalloket"
             android:layout_marginStart="5dp"
             android:layout_marginTop="1dp"
-            android:layout_toEndOf="@+id/tv_kodekirim"
+            android:layout_toEndOf="@+id/tv_totalloket"
             android:fontFamily="@font/poppins_semibold"
             android:hint="002"
             android:maxLines="1"

@@ -1,11 +1,13 @@
 package com.aplikasijagad
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.content.Intent
-import com.aplikasijagad.Login.LoginAdmin
-import com.aplikasijagad.Login.LoginKurir
-import com.aplikasijagad.add.add_loket
+import androidx.fragment.app.Fragment
+import com.aplikasijagad.fragment.HomeKurirFragment
+import com.aplikasijagad.fragment.ProfileKurirFragment
+import com.aplikasijagad.fragment.ViewDeliveryOrderFragment
 import kotlinx.android.synthetic.main.activity_dashboard_kurir.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -13,13 +15,25 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard_kurir)
+        setContentView(R.layout.activity_main)
 
-////        btn_kurir.setOnClickListener { startActivity(Intent(this, LoginKurir::class.java)) }
-////        btn_admin.setOnClickListener { startActivity(Intent(this, LoginAdmin::class.java)) }
-        btn_sewa.setOnClickListener { startActivity(Intent(this, DashboardSewa::class.java)) }
-        btn_loket.setOnClickListener { startActivity(Intent(this, add_loket::class.java)) }
+        btn_admin.setOnClickListener { launchIntent(DashboardAdmin::class.java) }
+        btn_kurir.setOnClickListener { launchIntent(DashboardKurir::class.java) }
+
     }
 
 
+    @SuppressLint("PrivateResource")
+    private fun launchIntent(activity: Class<*>){
+        val intent = Intent(applicationContext, activity)
+        startActivity(intent)
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
+    }
+
+    @SuppressLint("PrivateResource")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
+    }
 }
