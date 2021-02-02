@@ -1,10 +1,8 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-}
-
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -51,18 +49,18 @@ dependencies {
 
     implementation "androidx.cardview:cardview:1.0.0"
 
+    //database
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    //implementation 'androidx.room:room-runtime:2.2.5'
+    //kapt 'androidx.room:room-compiler:2.2.5'
+//livedata
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
     //firebase
-    implementation 'com.google.firebase:firebase-auth:20.0.2'
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
-    //cloud storage
-    implementation 'com.google.firebase:firebase-firestore:22.0.1'
-
-    //firebase storage
-    implementation 'com.google.firebase:firebase-storage:19.2.1'
-
-    //realtime database
-    implementation 'com.google.firebase:firebase-database:19.6.0'
-
-    //ui-firebase
-    implementation 'com.firebaseui:firebase-ui-database:6.2.1'
+    implementation 'com.google.firebase:firebase-database-ktx'
 }
