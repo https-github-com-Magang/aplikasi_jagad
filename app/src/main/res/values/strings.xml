@@ -11,4 +11,8 @@
         <item>Motor</item>
         <item>Mobil</item>
     </string-array>
+    <string-array name="status">
+        <item>Ditolak</item>
+        <item>Diterima</item>
+    </string-array>
 </resources>
