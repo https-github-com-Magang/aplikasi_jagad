@@ -39,5 +39,20 @@ class HomeAdminFragment : Fragment() {
             val intents = Intent(requireContext(), add_loket::class.java)
             startActivity(intents)
         }
+
+        btn_sewa.setOnClickListener {
+            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            startActivity(intents)
+        }
+
+        btn_posisikurir.setOnClickListener {
+            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            startActivity(intents)
+        }
+
+        btn_laporan.setOnClickListener {
+            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            startActivity(intents)
+        }
     }
 }
