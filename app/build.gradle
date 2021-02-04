@@ -1,17 +1,15 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-}
-
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.aplikasijagad"
-        minSdkVersion 27
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -49,4 +47,20 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    //database
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    //implementation 'androidx.room:room-runtime:2.2.5'
+    //kapt 'androidx.room:room-compiler:2.2.5'
+//livedata
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    implementation 'com.google.firebase:firebase-database-ktx'
 }
