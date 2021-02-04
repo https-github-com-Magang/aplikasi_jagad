@@ -66,6 +66,7 @@ class add_loket : AppCompatActivity() {
                 }
                 else -> {
                     savedata()
+
                 }
             }
 
