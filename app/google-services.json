@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:743808673386:android:fa3f279bbfaa0da27d0c13",
+        "mobilesdk_app_id": "1:743808673386:android:7d76d2e7b7751c747d0c13",
         "android_client_info": {
           "package_name": "com.aplikasijagad"
         }
@@ -30,6 +30,35 @@
             "certificate_hash": "c69fcb4d5edf5c8f8c29718ffdb7ee0c16b6136a"
           }
         },
+        {
+          "client_id": "743808673386-10o8ponq0pa7o3h8mh6p0veqqt7sumsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBJiEkBplZcx3Q_VMsq6tdlKL-2ir1uEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743808673386-10o8ponq0pa7o3h8mh6p0veqqt7sumsv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743808673386:android:b02f6d0637ad45ac7d0c13",
+        "android_client_info": {
+          "package_name": "org.aplikasijagad"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "743808673386-10o8ponq0pa7o3h8mh6p0veqqt7sumsv.apps.googleusercontent.com",
           "client_type": 3
