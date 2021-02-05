@@ -6,25 +6,42 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Loket
+import com.aplikasijagad.model.KurirViewHolder
+import java.util.ArrayList
 
-//class KurirAdapter(val mCtx: Context, val layoutResId: Int, val list: List<Loket> )
-//    : ArrayAdapter<Loket>(mCtx,layoutResId,list) {
-//
-//    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-//        val layoutInflater: LayoutInflater = LayoutInflater.from(mCtx)
-//        val view: View = layoutInflater.inflate(layoutResId, null)
-//
-//        val textNama = view.findViewById<TextView>(R.id.ed_nmPenerima)
-//        val noId = view.findViewById<TextView>(R.id.ed_beratBarang)
-//
-//        val user = list[position]
-//
-//        textNama.text = user.nama
-//        noId.text = user.status
-//
-//        return view
-//
-//    }
-//}
+class KurirAdapter(private val context: Context,
+                   private val daftarLoket: ArrayList<Loket?>?) : RecyclerView.Adapter<KurirViewHolder>() {
+
+    private val listener: FirebaseDataListener
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KurirViewHolder {
+
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_view_deliveryorder, parent, false)
+        return KurirViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: KurirViewHolder, position: Int) {
+        //val generator = ColorGenerator.MATERIAL //custom color
+        //val color = generator.randomColor
+
+        //holder.view.setCardBackgroundColor(color)
+        holder.idPengirim.text = (daftarLoket?.get(position)?.berat_barang)
+        holder.namaPengirim.text = (daftarLoket?.get(position)?.nama)
+        holder.view.setOnClickListener{ listener.onDataClick(daftarLoket?.get(position), position)}
+    }
+
+    override fun getItemCount(): Int {
+        return daftarLoket?.size!!
+    }
+
+    interface FirebaseDataListener {
+        fun onDataClick(barang: Loket?, position: Int)
+    }
+
+    init {
+        listener = context as FirebaseDataListener
+    }
+}
