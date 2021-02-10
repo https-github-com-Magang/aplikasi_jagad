@@ -7,8 +7,5 @@
     <string name="statusPenerima_wajib_diisi" />
     <string name="keterangan_wajib_diisi" />
     <string name="signature_wajib_diisi" />
-    <string-array name="sewa">
-        <item>Motor</item>
-        <item>Mobil</item>
-    </string-array>
+
 </resources>

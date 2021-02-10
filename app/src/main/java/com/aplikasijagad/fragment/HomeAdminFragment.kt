@@ -1,6 +1,5 @@
 package com.aplikasijagad.fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
 import com.aplikasijagad.R
+import com.aplikasijagad.add.Add_Sewa
 import com.aplikasijagad.add.add_loket
+import com.aplikasijagad.add.add_sewa_kendaraan
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import kotlinx.android.synthetic.main.fragment_home_admin.*
 
@@ -41,18 +42,18 @@ class HomeAdminFragment : Fragment() {
         }
 
         btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(),add_sewa_kendaraan::class.java)
             startActivity(intents)
         }
 
         btn_posisikurir.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), Add_Sewa::class.java)
             startActivity(intents)
         }
-
-        btn_laporan.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
-            startActivity(intents)
-        }
+//
+//        btn_laporan.setOnClickListener {
+//            val intents = Intent(requireContext(), DashboardSewa::class.java)
+//            startActivity(intents)
+//        }
     }
 }
