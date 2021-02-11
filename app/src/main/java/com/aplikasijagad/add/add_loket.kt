@@ -16,7 +16,7 @@ class add_loket : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_loket)
-        ref = FirebaseDatabase.getInstance().getReference("LOKET")
+        ref = FirebaseDatabase.getInstance().getReference("Loket")
         home.setOnClickListener { startActivity(Intent(this, DashboardAdmin::class.java)) }
         btn_simpanloket.setOnClickListener {
             when {

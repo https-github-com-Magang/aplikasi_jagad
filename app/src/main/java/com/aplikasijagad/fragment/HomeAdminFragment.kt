@@ -1,6 +1,5 @@
 package com.aplikasijagad.fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
+import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.add.add_loket
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
@@ -46,7 +46,7 @@ class HomeAdminFragment : Fragment() {
         }
 
         btn_posisikurir.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), MapsActivity::class.java)
             startActivity(intents)
         }
 
