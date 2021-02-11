@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
+import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.add.Add_Sewa
 import com.aplikasijagad.add.add_loket
@@ -51,6 +52,12 @@ class HomeAdminFragment : Fragment() {
 //            val intents = Intent(requireContext(), add_order::class.java)
 //            startActivity(intents)
 //        }
+
+        btn_posisikurir.setOnClickListener {
+            val intents = Intent(requireContext(), MapsActivity::class.java)
+            startActivity(intents)
+        }
+
 
         btn_laporan.setOnClickListener {
             val intents = Intent(requireContext(), add_order::class.java)
