@@ -47,10 +47,10 @@ class HomeAdminFragment : Fragment() {
             startActivity(intents)
         }
 
-        btn_posisikurir.setOnClickListener {
-            val intents = Intent(requireContext(), add_order::class.java)
-            startActivity(intents)
-        }
+//        btn_posisikurir.setOnClickListener {
+//            val intents = Intent(requireContext(), add_order::class.java)
+//            startActivity(intents)
+//        }
 
         btn_laporan.setOnClickListener {
             val intents = Intent(requireContext(), add_order::class.java)
