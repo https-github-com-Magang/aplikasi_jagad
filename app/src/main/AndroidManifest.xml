@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
-        <activity android:name=".add.add_sewa_kendaraan"></activity>
+        <activity android:name=".add.add_order"></activity>
+        <activity android:name=".add.add_sewa_kendaraan" />
         <activity
             android:name=".add.add_loket"
             android:theme="@style/Theme.Design.Light.NoActionBar" />

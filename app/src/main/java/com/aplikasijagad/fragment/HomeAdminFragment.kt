@@ -11,6 +11,7 @@ import com.aplikasijagad.DashboardSewa
 import com.aplikasijagad.R
 import com.aplikasijagad.add.Add_Sewa
 import com.aplikasijagad.add.add_loket
+import com.aplikasijagad.add.add_order
 import com.aplikasijagad.add.add_sewa_kendaraan
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import kotlinx.android.synthetic.main.fragment_home_admin.*
@@ -47,13 +48,13 @@ class HomeAdminFragment : Fragment() {
         }
 
         btn_posisikurir.setOnClickListener {
-            val intents = Intent(requireContext(), Add_Sewa::class.java)
+            val intents = Intent(requireContext(), add_order::class.java)
             startActivity(intents)
         }
-//
-//        btn_laporan.setOnClickListener {
-//            val intents = Intent(requireContext(), DashboardSewa::class.java)
-//            startActivity(intents)
-//        }
+
+        btn_laporan.setOnClickListener {
+            val intents = Intent(requireContext(), add_order::class.java)
+            startActivity(intents)
+        }
     }
 }
