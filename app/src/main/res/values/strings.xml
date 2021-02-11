@@ -11,4 +11,18 @@
         <item>Motor</item>
         <item>Mobil</item>
     </string-array>
+    <string-array name="kurir">
+        <item>Pilih Kurir</item>
+        <item>Paijo</item>
+        <item>Paimen</item>
+        <item>Bima</item>
+        <item>Cakra</item>
+        <item>Galih</item>
+        <item>Wahyu</item>
+    </string-array>
+    <string-array name="status">
+        <item>Status Pembayaran</item>
+        <item>Lunas</item>
+        <item>Belum</item>
+    </string-array>
 </resources>

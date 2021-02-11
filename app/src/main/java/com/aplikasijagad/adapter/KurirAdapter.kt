@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.aplikasijagad.R
-import com.aplikasijagad.database.Loket
 
 //class KurirAdapter(val mCtx: Context, val layoutResId: Int, val list: List<Loket> )
 //    : ArrayAdapter<Loket>(mCtx,layoutResId,list) {

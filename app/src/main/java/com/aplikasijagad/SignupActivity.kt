@@ -53,13 +53,14 @@ class SignupActivity : AppCompatActivity() {
         val email = et2_email.text.toString().trim()
         val password = et2_password.text.toString().trim()
         val phone = et2_phone.text.toString().trim()
+        val address = et2_address.text.toString().trim()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
 
                 if (task.isSuccessful) {
                     val uid = auth.currentUser!!.uid
-                    val data = Users(uid, name, nik, email, password, phone, usertype)
+                    val data = Users(uid, name, nik, email, password, phone, usertype, address)
                     database.child(uid).setValue(data)
                         .addOnFailureListener { e ->
                             Toast.makeText(

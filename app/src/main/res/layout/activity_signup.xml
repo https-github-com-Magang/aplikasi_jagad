@@ -117,6 +117,25 @@
                 android:inputType="textLongMessage" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_address"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_phone">
+
+            <EditText
+                android:id="@+id/et2_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Address"
+                android:inputType="textLongMessage" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/btn_signup"
             android:layout_width="254dp"
@@ -138,8 +157,8 @@
             android:backgroundTint="@color/white"
             android:text="Admin"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@+id/et_phone"
-            app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+            app:layout_constraintStart_toStartOf="@+id/et_address"
+            app:layout_constraintTop_toBottomOf="@+id/et_address" />
 
         <Button
             android:id="@+id/btn_courier"
@@ -149,8 +168,8 @@
             android:backgroundTint="@color/white"
             android:text="Courier"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/et_phone"
-            app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+            app:layout_constraintEnd_toEndOf="@+id/et_address"
+            app:layout_constraintTop_toBottomOf="@+id/et_address" />
 
         <TextView
             android:id="@+id/tv_loginacc"

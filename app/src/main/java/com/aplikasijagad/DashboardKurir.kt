@@ -16,9 +16,6 @@ class DashboardKurir : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard_kurir)
 
-//        btn_update.setOnClickListener { launchIntent(UbahStatusDeliv::class.java) }
-//        btn_delivorder.setOnClickListener { launchIntent(DeliveryOrder::class.java) }
-
         val homeKurirFragment = HomeKurirFragment()
         val viewDOFragment = ViewDeliveryOrderFragment()
         val profileKurirFragment = ProfileKurirFragment()
@@ -26,7 +23,7 @@ class DashboardKurir : AppCompatActivity() {
         makeCurrentFragment(homeKurirFragment)
 
         bottom_navigation.setOnNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.ic_home -> makeCurrentFragment(homeKurirFragment)
                 R.id.ic_view -> makeCurrentFragment(viewDOFragment)
                 R.id.ic_akun -> makeCurrentFragment(profileKurirFragment)
@@ -40,14 +37,4 @@ class DashboardKurir : AppCompatActivity() {
             replace(R.id.fl_wrapper, fragment)
             commit()
         }
-
-//    @SuppressLint("PrivateResource")
-//    private fun launchIntent(activity: Class<*>){
-//        val intent = Intent(applicationContext, activity)
-//        startActivity(intent)
-//        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out)
-//    }
-
-
-
 }

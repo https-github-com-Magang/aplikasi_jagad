@@ -1,36 +1,26 @@
 package com.aplikasijagad.database
 
-data class Loket(
-    //val id: String,
-    val nama: String,
-    val alamat_asal: String,
-    val kecamatan_asal: String,
-    val kabupaten_asal: String,
-    val provinsi_asal: String,
-    val kodepos_asal: String,
-    val alamat_tujuan: String,
-    val kecamatan_tujuan: String,
-    val kabupaten_tujuan: String,
-    val provinsi_tujuan: String,
-    val kodepos_tujuan: String,
-    val berat_barang: String
-) {
-    constructor() :
+data class Order (
+    val namaPengirim :String,
+    val noPengirim :String,
+    val namaPenerima:String,
+    val noPenerima:String,
+    val alamat:String,
+    val waktu:String,
+    val tanggal:String,
+    val status:String,
+    val kurir:String,
+){
+    constructor():
             this(
                 "",
                 "",
                 "",
                 "",
                 "",
+                "13:52",
+                "dd/mm/yy",
                 "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-
-            ) {
-
-    }
+                ""
+            )
 }
