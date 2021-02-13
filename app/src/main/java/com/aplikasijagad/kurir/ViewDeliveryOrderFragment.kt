@@ -1,4 +1,4 @@
-package com.aplikasijagad.fragment
+package com.aplikasijagad.kurir
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,13 +19,8 @@ class ViewDeliveryOrderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         ref = FirebaseDatabase.getInstance().getReference("Loket")
-//        listView = findViewById(R.id.)
 
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_delivery_order, container, false)
     }
-
-
 }

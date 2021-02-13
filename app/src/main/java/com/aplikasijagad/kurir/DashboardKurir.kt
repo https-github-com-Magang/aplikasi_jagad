@@ -1,14 +1,11 @@
-package com.aplikasijagad
+package com.aplikasijagad.kurir
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.aplikasijagad.fragment.HomeKurirFragment
-import com.aplikasijagad.fragment.ProfileKurirFragment
-import com.aplikasijagad.fragment.ViewDeliveryOrderFragment
+import com.aplikasijagad.R
 import kotlinx.android.synthetic.main.activity_dashboard_kurir.*
-import kotlinx.android.synthetic.main.fragment_home_kurir.*
 
 class DashboardKurir : AppCompatActivity() {
     @SuppressLint("PrivateResource")

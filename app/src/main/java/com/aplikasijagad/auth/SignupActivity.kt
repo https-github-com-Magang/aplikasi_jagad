@@ -1,9 +1,12 @@
-package com.aplikasijagad
+package com.aplikasijagad.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.aplikasijagad.admin.DashboardAdmin
+import com.aplikasijagad.R
+import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -60,7 +63,16 @@ class SignupActivity : AppCompatActivity() {
 
                 if (task.isSuccessful) {
                     val uid = auth.currentUser!!.uid
-                    val data = Users(uid, name, nik, email, password, phone, usertype, address)
+                    val data = Users(
+                        uid,
+                        name,
+                        nik,
+                        email,
+                        password,
+                        phone,
+                        usertype,
+                        address
+                    )
                     database.child(uid).setValue(data)
                         .addOnFailureListener { e ->
                             Toast.makeText(

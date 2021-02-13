@@ -1,9 +1,13 @@
-package com.aplikasijagad
+package com.aplikasijagad.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.aplikasijagad.admin.DashboardAdmin
+import com.aplikasijagad.kurir.DashboardKurir
+import com.aplikasijagad.R
+import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*

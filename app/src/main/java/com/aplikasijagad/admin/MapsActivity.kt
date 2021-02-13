@@ -1,4 +1,4 @@
-package com.aplikasijagad
+package com.aplikasijagad.admin
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import com.aplikasijagad.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

@@ -12,20 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
-        <activity android:name=".MapsActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".LoketActivity"></activity>
+        <activity android:name=".admin.MapsActivity" />
+        <activity android:name=".auth.LoginActivity" />
+        <activity android:name=".auth.SignupActivity" />
         <activity
             android:name=".add.add_loket"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".DashboardSewa"
+            android:name=".admin.DashboardSewa"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".DashboardAdmin"
+            android:name=".admin.DashboardAdmin"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".DashboardKurir"
+            android:name=".kurir.DashboardKurir"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
@@ -40,7 +41,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -18,16 +18,31 @@
 
         <TextView
             android:id="@+id/tv_totalloket"
-            android:layout_width="211dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginRight="8dp"
             android:fontFamily="@font/poppins_semibold"
-            android:hint="Kode Pengiriman"
             android:maxLines="1"
-            android:text="Kode Pengiriman"
+            android:text="Kode Pengiriman - "
+            android:textColor="@android:color/holo_orange_dark"
+            android:textColorHint="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_totalloket1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            android:layout_toEndOf="@+id/tv_totalloket"
+            android:fontFamily="@font/poppins_semibold"
+            android:maxLines="1"
+            android:text="0000"
             android:textColor="@android:color/holo_orange_dark"
             android:textColorHint="@color/black"
             android:textSize="16sp" />

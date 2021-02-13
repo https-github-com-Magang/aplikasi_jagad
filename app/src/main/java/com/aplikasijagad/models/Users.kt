@@ -1,4 +1,4 @@
-package com.aplikasijagad
+package com.aplikasijagad.models
 
 data class Users(
     var uid: String = "",
