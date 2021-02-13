@@ -8,5 +8,9 @@ data class Users(
     var password: String = "",
     var phone: String = "",
     var usertype: String = "",
-    var address: String = ""
-)
+    val lat: Double? = null,
+    val lng: Double? = null
+) {
+    constructor() : this("", "", "", "", "",
+    "", "", null, null, )
+}
