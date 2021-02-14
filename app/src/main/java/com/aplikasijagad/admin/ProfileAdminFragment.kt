@@ -71,7 +71,7 @@ class ProfileAdminFragment : Fragment() {
                             tv_nohpAdmin.text = data.phone
                             tv_emailAdmin.text = data.email
                             tv_Admin.text = data.usertype
-//                            tv_alamatAdmin.text = data.address
+                            tv_alamatAdmin.text = data.address
                         }
                     }
                 }

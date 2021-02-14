@@ -71,7 +71,7 @@ class ProfileKurirFragment : Fragment() {
                             tv_nohpKurir.text = data.phone
                             tv_emailKurir.text = data.email
                             tv_kurir.text = data.usertype
-//                            tv_alamatKurir.text = data.address
+                            tv_alamatKurir.text = data.address
                         }
                     }
                 }

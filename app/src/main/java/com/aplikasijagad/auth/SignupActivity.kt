@@ -12,6 +12,10 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.aplikasijagad.admin.DashboardAdmin
+import com.aplikasijagad.auth.LoginActivity
+import com.aplikasijagad.kurir.DashboardKurir
+import com.aplikasijagad.models.Users
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.GoogleMap
 import com.google.firebase.auth.FirebaseAuth
@@ -73,13 +77,14 @@ class SignupActivity : AppCompatActivity() {
         val email = et2_email.text.toString().trim()
         val password = et2_password.text.toString().trim()
         val phone = et2_phone.text.toString().trim()
+        val address = et2_address.text.toString().trim()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
 
                 if (task.isSuccessful) {
                     val uid = auth.currentUser!!.uid
-                    val data = Users(uid, name, nik, email, password, phone, usertype, latitude, longitude)
+                    val data = Users(uid, name, nik, email, password, phone, address, usertype, latitude, longitude)
                     database.child(uid).setValue(data)
                         .addOnFailureListener { e ->
                             Toast.makeText(
@@ -94,7 +99,22 @@ class SignupActivity : AppCompatActivity() {
                                 "Data has been saved",
                                 Toast.LENGTH_LONG
                             ).show()
-                            startActivity(Intent(this@SignupActivity, DashboardAdmin::class.java))
+
+                            if (usertype == "Admin") {
+                                startActivity(
+                                    Intent(
+                                        this@SignupActivity,
+                                        DashboardAdmin::class.java
+                                    )
+                                )
+                            } else if (usertype == "Courier") {
+                                startActivity(
+                                    Intent(
+                                        this@SignupActivity,
+                                        DashboardKurir::class.java
+                                    )
+                                )
+                            }
                         }
                 }
             }

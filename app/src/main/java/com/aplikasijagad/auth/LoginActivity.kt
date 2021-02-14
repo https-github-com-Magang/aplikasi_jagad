@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         listUsers = mutableListOf()
+        usertype = ""
 
         btn_logadmin.setOnClickListener {
             usertype = "Admin"
@@ -47,74 +48,86 @@ class LoginActivity : AppCompatActivity() {
 
     private fun logIn() {
         if (checkInput()) {
+            if (usertype == "Admin" || usertype == "Courier") {
+                val nik = et2_lognik.text.toString().trim()
+                val password = et2_logpassword.text.toString().trim()
 
-            val nik = et2_lognik.text.toString().trim()
-            val password = et2_logpassword.text.toString().trim()
+                database.orderByChild("nik").equalTo(nik)
+                    .addValueEventListener(object : ValueEventListener {
 
-            database.orderByChild("nik").equalTo(nik)
-                .addValueEventListener(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Database Error",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
 
-                    override fun onCancelled(p0: DatabaseError) {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Error",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                        override fun onDataChange(p0: DataSnapshot) {
+                            if (p0.exists()) {
+                                for (userSnapshot in p0.children) {
+                                    val pass = userSnapshot.getValue(Users::class.java)
+                                    pass?.let { listUsers.add(it) }
+                                    if (pass!!.password == password) {
 
-                    override fun onDataChange(p0: DataSnapshot) {
-                        if (p0.exists()) {
-                            for (userSnapshot in p0.children) {
-                                val pass = userSnapshot.getValue(Users::class.java)
-                                pass?.let { listUsers.add(it) }
-                                if (pass!!.password == password) {
+                                        loginUser(pass.email, password)
 
-                                    loginUser(pass.email, password)
-
-                                    if (usertype == "Admin") {
-                                        startActivity(
-                                            Intent(
-                                                this@LoginActivity,
-                                                DashboardAdmin::class.java
+                                        if (usertype == pass.usertype && usertype == "Admin") {
+                                            startActivity(
+                                                Intent(
+                                                    this@LoginActivity,
+                                                    DashboardAdmin::class.java
+                                                )
                                             )
-                                        )
-                                    }
-
-                                    if (usertype == "Courier") {
-                                        startActivity(
-                                            Intent(
-                                                this@LoginActivity,
-                                                DashboardKurir::class.java
+                                        } else if (usertype == pass.usertype && usertype == "Courier") {
+                                            startActivity(
+                                                Intent(
+                                                    this@LoginActivity,
+                                                    DashboardKurir::class.java
+                                                )
                                             )
-                                        )
+                                        } else {
+                                            Toast.makeText(
+                                                this@LoginActivity,
+                                                "Select the correct user",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                        }
                                     } else {
                                         Toast.makeText(
                                             this@LoginActivity,
                                             "Wrong Password",
                                             Toast.LENGTH_LONG
                                         ).show()
+
                                     }
                                 }
+                            } else {
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "NIK Not Found",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
-                        } else {
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Record Not Found",
-                                Toast.LENGTH_LONG
-                            ).show()
                         }
-                    }
-                })
-            Toast.makeText(this, "Select User", Toast.LENGTH_LONG).show()
+                    })
+            } else {
+                Toast.makeText(
+                    this@LoginActivity,
+                    "Select User",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
         }
     }
 
     private fun checkInput(): Boolean {
-        if (et2_lognik.text.isNullOrBlank() || et2_logpassword.text.isNullOrBlank() || usertype.isNullOrEmpty()) {
+        return if (et2_lognik.text.isNullOrBlank() || et2_logpassword.text.isNullOrBlank()) {
             Toast.makeText(this@LoginActivity, "Fields cannot be null", Toast.LENGTH_SHORT).show()
-            return false
+            false
         } else
-            return true
+            true
     }
 
     private fun loginUser(email: String, password: String) {

@@ -13,10 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
-        <activity android:name=".LoketActivity"></activity>
-        <activity android:name=".admin.MapsActivity" />
+        <activity android:name=".LoketActivity"/>
         <activity android:name=".auth.LoginActivity" />
-        <activity android:name=".auth.SignupActivity" />
+        <activity android:name=".MapsActivity"/>
+        <activity android:name=".SignupActivity"/>
         <activity
             android:name=".add.add_sewa_kendaraan"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
@@ -24,7 +24,7 @@
             android:name=".add.add_order"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".admin.DashboardSewa"
+            android:name=".DashboardSewa"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".admin.DashboardAdmin"

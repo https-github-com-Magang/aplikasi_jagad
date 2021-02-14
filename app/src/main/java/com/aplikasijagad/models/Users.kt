@@ -7,10 +7,11 @@ data class Users(
     var email: String = "",
     var password: String = "",
     var phone: String = "",
+    var address: String = "",
     var usertype: String = "",
     val lat: Double? = null,
     val lng: Double? = null
 ) {
     constructor() : this("", "", "", "", "",
-    "", "", null, null, )
+    "", "","", null, null, )
 }
