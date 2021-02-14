@@ -118,7 +118,6 @@ class LoginActivity : AppCompatActivity() {
                     "Select User",
                     Toast.LENGTH_LONG
                 ).show()
-
             }
         }
     }
