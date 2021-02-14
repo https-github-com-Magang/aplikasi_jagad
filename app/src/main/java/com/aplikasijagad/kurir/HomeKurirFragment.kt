@@ -11,6 +11,7 @@ import com.aplikasijagad.R
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home_kurir.*
 
@@ -19,6 +20,7 @@ class HomeKurirFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
+    private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHomeKurirBinding
 
     override fun onCreateView(
@@ -28,6 +30,7 @@ class HomeKurirFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         listUsers = mutableListOf()
+        user = auth.currentUser!!
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_kurir, container, false)
 
@@ -42,7 +45,7 @@ class HomeKurirFragment : Fragment() {
 
 
     private fun load() {
-        val uid = auth.currentUser!!.uid
+        val uid = user.uid
 
         database.orderByChild("uid").equalTo(uid)
             .addValueEventListener(object : ValueEventListener {
