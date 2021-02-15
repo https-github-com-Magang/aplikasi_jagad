@@ -81,7 +81,7 @@
                 android:background="@drawable/roundedcorner"
                 android:ems="10"
                 android:hint="No Telp Penerima"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:paddingLeft="15dp"
                 app:layout_constraintEnd_toEndOf="@+id/ed_nmPenerima"
                 app:layout_constraintStart_toStartOf="@+id/ed_nmPenerima"

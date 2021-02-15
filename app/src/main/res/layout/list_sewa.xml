@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="110dp"
     android:clickable="true"
@@ -28,7 +29,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_nama"
+            android:id="@+id/tv_noKtppem"
             android:layout_width="134dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/tv_noKTPem"
@@ -64,10 +65,10 @@
             android:fontFamily="@font/poppins"
             android:hint="18 Januari 2020"
             android:maxLines="1"
-            android:text="18 Januari 2020"
             android:textColor="@color/btn"
             android:textColorHint="@color/btn"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="18 Januari 2020" />
 
         <TextView
             android:id="@+id/tv_namaP"
