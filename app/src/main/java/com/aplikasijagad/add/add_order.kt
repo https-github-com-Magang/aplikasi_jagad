@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
@@ -12,9 +13,11 @@ import com.aplikasijagad.database.Order
 import com.aplikasijagad.databinding.ActivityAddOrderBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_add_order.*
 
 class add_order : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddOrderBinding
     lateinit var ref: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,26 +41,24 @@ class add_order : AppCompatActivity() {
         val noPenerima = ed_noPenerima.text.toString()
         val alamat = ed_almtPenerima.text.toString()
         val berat = ed_beratBarang.text.toString()
-        val harga =ed_harga.text.toString()
+        val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
 
         val order = Order(
-            namaPengirim ,
-         noPengirim,
-         namaPenerima,
-         noPenerima,
-         alamat,
-         berat,
-         harga,
-        //val waktu : String,
-        //val tanggal : String,
-         status,
-         kurir
+            namaPengirim,
+            noPengirim,
+            namaPenerima,
+            noPenerima,
+            alamat,
+            berat,
+            harga,
+            status,
+            kurir
         )
-        val orderid=ref.push().key.toString()
-        ref.child(orderid).setValue(order).addOnCompleteListener(){
-            Toast.makeText(this,"data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+        val orderid = ref.push().key.toString()
+        ref.child(orderid).setValue(order).addOnCompleteListener() {
+            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
             ed_nmPenerima.setText("")
