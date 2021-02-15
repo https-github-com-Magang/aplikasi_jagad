@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".LoginActivity">
+        tools:context=".auth.LoginActivity">
 
         <TextView
             android:id="@+id/tv_login"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="NIK"
-                android:inputType="textLongMessage" />
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

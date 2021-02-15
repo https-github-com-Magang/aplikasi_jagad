@@ -8,4 +8,18 @@
     <string name="keterangan_wajib_diisi" />
     <string name="signature_wajib_diisi" />
 
+    <string-array name="status">
+        <item>Status Pembayaran</item>
+        <item>Lunas</item>
+        <item>Belum</item>
+    </string-array>
+    <string-array name="kurir">
+        <item>Pilih Kurir</item>
+        <item>Paijo</item>
+        <item>Paimen</item>
+        <item>Bima</item>
+        <item>Cakra</item>
+        <item>Galih</item>
+        <item>Wahyu</item>
+    </string-array>
 </resources>

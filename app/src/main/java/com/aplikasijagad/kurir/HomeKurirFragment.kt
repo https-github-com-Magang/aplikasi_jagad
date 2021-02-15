@@ -1,27 +1,25 @@
-package com.aplikasijagad.fragment
+package com.aplikasijagad.kurir
 
-import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import com.aplikasijagad.MainActivity
 import com.aplikasijagad.R
-import com.aplikasijagad.Users
-import com.aplikasijagad.databinding.FragmentProfileKurirBinding
+import com.aplikasijagad.models.Users
+import com.aplikasijagad.databinding.FragmentHomeKurirBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_profile_kurir.*
+import kotlinx.android.synthetic.main.fragment_home_kurir.*
 
-class ProfileKurirFragment : Fragment() {
+class HomeKurirFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
-    private lateinit var binding: FragmentProfileKurirBinding
+    private lateinit var binding: FragmentHomeKurirBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +29,7 @@ class ProfileKurirFragment : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Users")
         listUsers = mutableListOf()
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_profile_kurir, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_home_kurir, container, false)
 
         return binding.root
     }
@@ -40,11 +38,6 @@ class ProfileKurirFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         load()
-
-        logoutKurir.setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
-        }
     }
 
 
@@ -58,7 +51,7 @@ class ProfileKurirFragment : Fragment() {
                         requireContext(),
                         "Error",
                         Toast.LENGTH_LONG
-                    )
+                    ).show()
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
@@ -66,12 +59,8 @@ class ProfileKurirFragment : Fragment() {
                         for (userSnapshot in p0.children) {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
-                            tv_namaKurir.text = data!!.name
-                            tv_nikKurir.text = data.nik
-                            tv_nohpKurir.text = data.phone
-                            tv_emailKurir.text = data.email
-                            tv_kurir.text = data.usertype
-//                            tv_alamatKurir.text = data.address
+                            tv_totkurir.text = data!!.name
+                            tv_totloket.text = data.nik
                         }
                     }
                 }

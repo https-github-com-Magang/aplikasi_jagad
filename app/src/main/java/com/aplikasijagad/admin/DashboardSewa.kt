@@ -4,9 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.aplikasijagad.fragment.HomeSewaFragment
+import com.aplikasijagad.admin.HomeSewaFragment
 import kotlinx.android.synthetic.main.activity_dashboard_sewa.btn_mobil
-import kotlinx.android.synthetic.main.activity_dashboard_sewa.btn_motor
 
 class DashboardSewa : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
