@@ -46,14 +46,14 @@
                 android:background="@drawable/background_putih"
                 android:ems="10"
                 android:hint="Nama Peminjam"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:paddingLeft="25dp" />
 
             <EditText
                 android:id="@+id/ed_noKtp"
                 android:layout_width="310dp"
                 android:layout_height="45dp"
                 android:layout_below="@+id/ed_nama"
-
                 android:layout_alignStart="@+id/ed_nama"
                 android:layout_alignEnd="@+id/ed_nama"
                 android:layout_marginStart="0dp"
@@ -62,7 +62,8 @@
                 android:background="@drawable/background_putih"
                 android:ems="10"
                 android:hint="No KTP Peminjam"
-                android:inputType="number" />
+                android:inputType="number"
+                android:paddingLeft="25dp" />
 
             <Spinner
                 android:id="@+id/spinner2"
@@ -93,7 +94,8 @@
                 android:background="@drawable/background_putih"
                 android:ems="10"
                 android:hint="Jumlah Hari"
-                android:inputType="datetime" />
+                android:inputType="datetime"
+                android:paddingLeft="25dp" />
 
 
             <EditText
@@ -110,7 +112,8 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="Deskripsi"
-                android:inputType="textMultiLine" />
+                android:inputType="textMultiLine"
+                android:paddingLeft="25dp" />
 
             <Button
                 android:id="@+id/btnPinjam"

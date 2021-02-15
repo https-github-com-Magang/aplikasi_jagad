@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/ed_ttd"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -166,7 +166,8 @@
                 android:id="@+id/btn_addOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Buat Order" />
+                android:text="Buat Order"
+                android:background="@drawable/background_orange" />
 
         </LinearLayout>
     </ScrollView>

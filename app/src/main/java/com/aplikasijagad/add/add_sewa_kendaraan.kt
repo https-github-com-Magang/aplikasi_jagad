@@ -14,7 +14,6 @@ import com.aplikasijagad.databinding.ActivityAddSewaBinding
 import com.aplikasijagad.databinding.ActivityAddSewaKendaraanBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_add_loket.*
 import kotlinx.android.synthetic.main.activity_add_sewa.*
 import kotlinx.android.synthetic.main.activity_add_sewa.deskripsi
 import kotlinx.android.synthetic.main.activity_add_sewa.ed_jmlhHari
