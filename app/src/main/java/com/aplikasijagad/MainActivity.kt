@@ -5,13 +5,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.aplikasijagad.fragment.HomeKurirFragment
-import com.aplikasijagad.fragment.ProfileKurirFragment
-import com.aplikasijagad.fragment.ViewDeliveryOrderFragment
+import com.aplikasijagad.admin.DashboardAdmin
+import com.aplikasijagad.auth.LoginActivity
+import com.aplikasijagad.auth.SignupActivity
+import com.aplikasijagad.models.Users
+import com.aplikasijagad.kurir.DashboardKurir
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_dashboard_kurir.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 

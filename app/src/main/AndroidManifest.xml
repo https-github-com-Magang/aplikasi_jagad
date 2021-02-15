@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
-        <activity android:name=".MapsActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".LoketActivity"/>
+        <activity android:name=".auth.LoginActivity" />
+        <activity android:name=".MapsActivity"/>
+        <activity android:name=".auth.SignupActivity"/>
         <activity
             android:name=".add.add_sewa_kendaraan"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
@@ -25,10 +27,10 @@
             android:name=".DashboardSewa"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".DashboardAdmin"
+            android:name=".admin.DashboardAdmin"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".DashboardKurir"
+            android:name=".kurir.DashboardKurir"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
@@ -43,7 +45,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

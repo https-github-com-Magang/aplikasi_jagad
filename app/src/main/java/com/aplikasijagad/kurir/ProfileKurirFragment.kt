@@ -1,4 +1,4 @@
-package com.aplikasijagad.fragment
+package com.aplikasijagad.kurir
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.MainActivity
 import com.aplikasijagad.R
-import com.aplikasijagad.Users
+import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentProfileKurirBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
