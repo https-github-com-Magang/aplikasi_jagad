@@ -11,6 +11,10 @@ import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
 import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
+import com.aplikasijagad.add.add_order
+import com.aplikasijagad.add.add_sewa_kendaraan
+import com.aplikasijagad.database.Order
+import com.aplikasijagad.database.SewaKendaraan
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +35,7 @@ class HomeAdminFragment : Fragment() {
     ): View? {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
+
         listUsers = mutableListOf()
         binding =
             DataBindingUtil.inflate(
@@ -44,15 +49,15 @@ class HomeAdminFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        load()
+        load()
 
         btn_loket.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), add_order::class.java)
             startActivity(intents)
         }
 
         btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), add_sewa_kendaraan::class.java)
             startActivity(intents)
         }
 
@@ -92,4 +97,6 @@ class HomeAdminFragment : Fragment() {
                 }
             })
     }
+
+
 }

@@ -8,17 +8,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
+import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home_kurir.*
+import kotlinx.android.synthetic.main.list_laporan_kurir.*
 
 class HomeKurirFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
+//    private lateinit var listOrder: MutableList<Order>
+
     private lateinit var binding: FragmentHomeKurirBinding
 
     override fun onCreateView(
@@ -38,6 +42,7 @@ class HomeKurirFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         load()
+//        loadLaporan()
     }
 
 
@@ -66,4 +71,32 @@ class HomeKurirFragment : Fragment() {
                 }
             })
     }
+
+    private fun munculData() {
+        val uid = auth.currentUser!!.uid
+
+        database.orderByChild("uid").equalTo(uid)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Error",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.exists()) {
+                        for (userSnapshot in p0.children) {
+                            val data = userSnapshot.getValue(Users::class.java)
+                            data?.let { listUsers.add(it) }
+                            tv_totkurir.text = data!!.name
+                            tv_totloket.text = data.nik
+                        }
+                    }
+                }
+            })
+    }
+
+
 }
