@@ -15,13 +15,19 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
 
 class add_order : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddOrderBinding
-    lateinit var ref: DatabaseReference
+    private lateinit var ref: DatabaseReference
+    private lateinit var orderId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
+        orderId = ref.child("Events").push().key!!
+
         onItemSelectedstatus()
         onItemSelectedkurir()
         btn_addOrder.setOnClickListener {
@@ -65,26 +71,28 @@ class add_order : AppCompatActivity() {
         val noPenerima = ed_noPenerima.text.toString()
         val alamat = ed_almtPenerima.text.toString()
         val berat = ed_beratBarang.text.toString()
-        val harga =ed_harga.text.toString()
+        val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
 
         val order = Order(
-            namaPengirim ,
-         noPengirim,
-         namaPenerima,
-         noPenerima,
-         alamat,
-         berat,
-         harga,
-        //val waktu : String,
-        //val tanggal : String,
-         status,
-         kurir
+            namaPengirim,
+            noPengirim,
+            namaPenerima,
+            noPenerima,
+            alamat,
+            berat,
+            harga,
+            //val waktu : String,
+            //val tanggal : String,
+            status,
+            kurir,
+            orderId,
+            orderId
         )
-        val orderid=ref.push().key.toString()
-        ref.child(orderid).setValue(order).addOnCompleteListener(){
-            Toast.makeText(this,"data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+        val orderid = ref.push().key.toString()
+        ref.child(orderid).setValue(order).addOnCompleteListener() {
+            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
             ed_nmPenerima.setText("")

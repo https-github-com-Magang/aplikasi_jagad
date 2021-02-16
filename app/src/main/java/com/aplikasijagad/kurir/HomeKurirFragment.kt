@@ -1,5 +1,6 @@
 package com.aplikasijagad.kurir
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,19 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
+import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.R
+import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home_kurir.*
+import kotlinx.android.synthetic.main.list_laporan_kurir.view.*
 
 class HomeKurirFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
+    private lateinit var database: FirebaseDatabase
     private lateinit var listUsers: MutableList<Users>
+    private lateinit var listOrders: MutableList<Order>
+    private lateinit var adapter: AdapterUtil<Order>
     private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHomeKurirBinding
 
@@ -28,8 +35,9 @@ class HomeKurirFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().getReference("Users")
+        database = FirebaseDatabase.getInstance()
         listUsers = mutableListOf()
+        listOrders = mutableListOf()
         user = auth.currentUser!!
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_kurir, container, false)
@@ -40,14 +48,15 @@ class HomeKurirFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        load()
+        infoProfile()
+        orderKurir()
     }
 
 
-    private fun load() {
+    private fun infoProfile() {
         val uid = user.uid
 
-        database.orderByChild("uid").equalTo(uid)
+        database.getReference("Users").orderByChild("uid").equalTo(uid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     Toast.makeText(
@@ -68,5 +77,40 @@ class HomeKurirFragment : Fragment() {
                     }
                 }
             })
+    }
+
+    private fun orderKurir() {
+        val uid = auth.currentUser!!.uid
+
+        database.getReference("ORDER").orderByChild("kurirId").equalTo(uid).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    for (eventSnapshot in p0.children) {
+                        val data = eventSnapshot.getValue(Order::class.java)
+                        data?.let {
+                            listOrders.add(it)
+                        }
+                    }
+                }
+
+                adapter = AdapterUtil(R.layout.list_laporan_kurir, listOrders, { itemView, item ->
+                    itemView.tv_totalloket.text = item.orderId
+                    itemView.tv_pengirim.text = item.namaPenerima
+                    itemView.tv_nama.text = item.alamat
+                }, { _, item ->
+                    val intent = Intent(requireContext(), DetailOrderActivity::class.java)
+//                    intent.putExtra("data", item)
+                    startActivity(intent)
+                })
+
+                binding.rvOrderKurir.apply {
+                    this.adapter = this@HomeKurirFragment.adapter
+                    this.layoutManager = GridLayoutManager(context, 1)
+                }
+            }
+        })
     }
 }

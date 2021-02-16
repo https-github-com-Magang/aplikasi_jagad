@@ -9,9 +9,13 @@ data class Order(
     val berat :String,
     val harga:String,
     val status :String,
-    val kurir: String
+    val kurir: String,
+    val orderId: String,
+    val kurirId: String
 ){ constructor():
         this(
+            "",
+            "",
             "",
             "",
             "",

@@ -66,7 +66,7 @@
             android:layout_marginVertical="22dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_laporankurir"
+                android:id="@+id/rvOrderKurir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/list_laporan_kurir" />

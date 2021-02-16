@@ -14,6 +14,7 @@ import com.aplikasijagad.R
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home_admin.*
 
@@ -23,6 +24,7 @@ class HomeAdminFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
+    private lateinit var user: FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +34,7 @@ class HomeAdminFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         listUsers = mutableListOf()
+        user = auth.currentUser!!
         binding =
             DataBindingUtil.inflate(
                 inflater,
@@ -44,7 +47,7 @@ class HomeAdminFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        load()
+        load()
 
         btn_loket.setOnClickListener {
             val intents = Intent(requireContext(), DashboardSewa::class.java)
@@ -68,7 +71,7 @@ class HomeAdminFragment : Fragment() {
     }
 
     private fun load() {
-        val uid = auth.currentUser!!.uid
+        val uid = user.uid
 
         database.orderByChild("uid").equalTo(uid)
             .addValueEventListener(object : ValueEventListener {
@@ -85,8 +88,8 @@ class HomeAdminFragment : Fragment() {
                         for (userSnapshot in p0.children) {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
-                            tv_no_adm.text = data!!.name
-                            tv_nama_adm.text = data.nik
+                            tv_nama_adm.text = data!!.name
+                            tv_no_adm.text = data.nik
                         }
                     }
                 }
