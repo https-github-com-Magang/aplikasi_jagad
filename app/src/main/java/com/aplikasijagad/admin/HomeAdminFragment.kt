@@ -11,19 +11,27 @@ import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
 import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
+import com.aplikasijagad.add.add_order
+import com.aplikasijagad.add.add_sewa_kendaraan
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_home_admin.*
+
 
 class HomeAdminFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeAdminBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var namadriver: DatabaseReference
+    private lateinit var databaseorder :DatabaseReference
+    private lateinit var databasesewa :DatabaseReference
     private lateinit var listUsers: MutableList<Users>
-
+    private var currentUserId : String=""
+    private var countfriend : Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +39,9 @@ class HomeAdminFragment : Fragment() {
     ): View? {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
+        namadriver = FirebaseDatabase.getInstance().getReference().child("DRIVER")
+        databaseorder = FirebaseDatabase.getInstance().getReference().child("ORDER")
+        databasesewa = FirebaseDatabase.getInstance().getReference().child("SEWA")
         listUsers = mutableListOf()
         binding =
             DataBindingUtil.inflate(
@@ -43,16 +54,17 @@ class HomeAdminFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        load()
-
+        load()
+        getchildrenscountdriver()
+        getchildrenscountloket()
+        getchildrenscountsewa()
         btn_loket.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), add_order ::class.java)
             startActivity(intents)
         }
 
         btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), add_sewa_kendaraan::class.java)
             startActivity(intents)
         }
 
@@ -65,6 +77,52 @@ class HomeAdminFragment : Fragment() {
             val intents = Intent(requireContext(), DashboardSewa::class.java)
             startActivity(intents)
         }
+    }
+
+    private fun getchildrenscountdriver(){
+        namadriver.child(currentUserId).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // get total available quest
+                if (dataSnapshot.exists()){
+                    countfriend =dataSnapshot.childrenCount.toInt()
+                    tv_totalkurir.setText(Integer.toString(countfriend)+" kurir")
+                }else{
+                    tv_totalkurir.setText("0 kurir")
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+    private fun getchildrenscountloket(){
+        databaseorder.child(currentUserId).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // get total available quest
+                if (dataSnapshot.exists()){
+                    countfriend =dataSnapshot.childrenCount.toInt()
+                    tv_totalloket.setText(Integer.toString(countfriend)+" order")
+                }else{
+                    tv_totalloket.setText("0 order")
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+    private fun getchildrenscountsewa(){
+        databasesewa.child(currentUserId).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // get total available quest
+                if (dataSnapshot.exists()){
+                    countfriend =dataSnapshot.childrenCount.toInt()
+                    tv_totalsewa.setText(Integer.toString(countfriend)+" sewa")
+                }else{
+                    tv_totalsewa.setText("0 sewa")
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 
     private fun load() {
@@ -92,4 +150,8 @@ class HomeAdminFragment : Fragment() {
                 }
             })
     }
+}
+
+private fun Firebase.setAndroidContext(homeAdminFragment: HomeAdminFragment) {
+
 }

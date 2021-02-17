@@ -12,6 +12,18 @@ data class Users(
     val lat: Double? = null,
     val lng: Double? = null
 ) {
-    constructor() : this("", "", "", "", "",
-    "", "","", null, null, )
+    constructor() : this(
+        "", "", "", "", "",
+        "", "", "", null, null,
+    )
+}
+
+data class Driver(
+    var uid: String = "",
+    var name: String = ""
+) {
+    constructor() : this(
+        "",
+        ""
+    )
 }
