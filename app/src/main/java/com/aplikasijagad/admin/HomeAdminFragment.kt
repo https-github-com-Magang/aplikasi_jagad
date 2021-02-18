@@ -9,8 +9,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
+import com.aplikasijagad.LaporanSewa
 import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
+import com.aplikasijagad.add.add_order
+import com.aplikasijagad.add.add_sewa_kendaraan
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
@@ -47,12 +50,12 @@ class HomeAdminFragment : Fragment() {
 //        load()
 
         btn_loket.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), add_order::class.java)
             startActivity(intents)
         }
 
         btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), add_sewa_kendaraan::class.java)
             startActivity(intents)
         }
 
@@ -62,7 +65,7 @@ class HomeAdminFragment : Fragment() {
         }
 
         btn_laporan.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), LaporanSewa::class.java)
             startActivity(intents)
         }
     }

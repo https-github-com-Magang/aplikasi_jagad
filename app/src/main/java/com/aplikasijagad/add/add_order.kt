@@ -1,11 +1,14 @@
 package com.aplikasijagad.add
 
+import android.annotation.SuppressLint
+import android.icu.util.Calendar
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
@@ -13,6 +16,7 @@ import com.aplikasijagad.databinding.ActivityAddOrderBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
+import java.text.SimpleDateFormat
 
 class add_order : AppCompatActivity() {
     private lateinit var binding: ActivityAddOrderBinding
@@ -58,6 +62,8 @@ class add_order : AppCompatActivity() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    @SuppressLint("SimpleDateFormat")
     private fun saveDataOrder() {
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
@@ -68,6 +74,8 @@ class add_order : AppCompatActivity() {
         val harga =ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
+        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
+        val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
 
         val order = Order(
             namaPengirim ,
@@ -77,10 +85,10 @@ class add_order : AppCompatActivity() {
          alamat,
          berat,
          harga,
-        //val waktu : String,
-        //val tanggal : String,
          status,
-         kurir
+         kurir,
+            waktu,
+            tanggal
         )
         val orderid=ref.push().key.toString()
         ref.child(orderid).setValue(order).addOnCompleteListener(){
