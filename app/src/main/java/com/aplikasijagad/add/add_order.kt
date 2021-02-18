@@ -2,6 +2,7 @@ package com.aplikasijagad.add
 
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
+import android.icu.util.TimeZone
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat
 class add_order : AppCompatActivity() {
     private lateinit var binding: ActivityAddOrderBinding
     lateinit var ref: DatabaseReference
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
@@ -74,8 +76,9 @@ class add_order : AppCompatActivity() {
         val harga =ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
-        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
         val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
+        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
+
 
         val order = Order(
             namaPengirim ,
@@ -87,8 +90,8 @@ class add_order : AppCompatActivity() {
          harga,
          status,
          kurir,
-            waktu,
-            tanggal
+            tanggal,
+            waktu
         )
         val orderid=ref.push().key.toString()
         ref.child(orderid).setValue(order).addOnCompleteListener(){
