@@ -13,6 +13,8 @@ import com.aplikasijagad.databinding.ActivityAddOrderBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class add_order : AppCompatActivity() {
 
@@ -74,6 +76,8 @@ class add_order : AppCompatActivity() {
         val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
+        val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
+        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
 
         val order = Order(
             namaPengirim,

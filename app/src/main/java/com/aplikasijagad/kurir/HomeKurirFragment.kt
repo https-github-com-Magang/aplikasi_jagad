@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aplikasijagad.AdapterUtil
+import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
@@ -102,15 +104,16 @@ class HomeKurirFragment : Fragment() {
                     itemView.tv_nama.text = item.alamat
                 }, { _, item ->
                     val intent = Intent(requireContext(), DetailOrderActivity::class.java)
-//                    intent.putExtra("data", item)
+                    intent.putExtra("data", item)
                     startActivity(intent)
                 })
 
                 binding.rvOrderKurir.apply {
                     this.adapter = this@HomeKurirFragment.adapter
-                    this.layoutManager = GridLayoutManager(context, 1)
+                    this.layoutManager = LinearLayoutManager(context)
                 }
             }
         })
     }
 }
+
