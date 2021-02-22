@@ -99,7 +99,7 @@ class HomeKurirFragment : Fragment() {
                 }
 
                 adapter = AdapterUtil(R.layout.list_laporan_kurir, listOrders, { itemView, item ->
-                    itemView.tv_totalloket.text = item.orderId
+                    itemView.tv_totalloket.text = item.uidorder.toString()
                     itemView.tv_pengirim.text = item.namaPenerima
                     itemView.tv_alamatPenerima.text = item.alamat
                 }, { _, item ->

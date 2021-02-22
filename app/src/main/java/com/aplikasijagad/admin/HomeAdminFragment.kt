@@ -50,7 +50,7 @@ class HomeAdminFragment : Fragment() {
         load()
 
         btn_loket.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+            val intents = Intent(requireContext(), add_order::class.java)
             startActivity(intents)
         }
 

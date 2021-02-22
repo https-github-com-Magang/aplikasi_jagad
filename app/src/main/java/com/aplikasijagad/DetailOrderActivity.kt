@@ -28,14 +28,14 @@ class DetailOrderActivity : AppCompatActivity() {
         orderId = database.getReference("ORDER").push().key!!
 
         val data = intent.getParcelableExtra<Order>("data")
-        detail_kode.text = data?.orderId
+        detail_kode.text = data?.uidorder.toString()
         detail_nama_pengirim.text = data?.namaPenerima
         detail_no_pengirim.text = data?.noPengirim
         detail_nama_penerima.text = data?.namaPenerima
         detail_no_penerima.text = data?.noPenerima
         detail_alamat_penerima.text = data?.alamat
-//        detail_rincian_waktu.text = data?.
-//        detail_rincian_tanggal.text = data?.
+        detail_rincian_waktu.text = data?.waktu
+        detail_rincian_tanggal.text = data?.tanggal
         detail_rincian_berat.text = data?.berat
         detail_rincian_harga.text = data?.harga
         detail_rincian_status.text = data?.status

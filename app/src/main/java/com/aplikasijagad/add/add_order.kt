@@ -1,8 +1,9 @@
 package com.aplikasijagad.add
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -10,17 +11,35 @@ import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.databinding.ActivityAddOrderBinding
+
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+
+
 class add_order : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddOrderBinding
+
     private lateinit var ref: DatabaseReference
     private lateinit var orderId: String
+
+    private lateinit var namadriver: DatabaseReference
+    private lateinit var database:DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private var status: String = ""
+    private var countId: Int = 0
+    var maxid: String = ""
+    var maxidorder :Int=0
+
+    private var currentUser: String = ""
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +47,45 @@ class add_order : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
-        
+
         orderId = ref.child("Events").push().key!!
 
         onItemSelectedstatus()
         onItemSelectedkurir()
+
+        database = FirebaseDatabase.getInstance().getReference("Users")
+        //namadriver = FirebaseDatabase.getInstance().getReference("DRIVER")
+        onItemSelectedstatus()
+        onItemSelectedkurir()
+        //dataload()
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // get total available quest
+                if (dataSnapshot.exists()) {
+                    // maxid = dataSnapshot.childrenCount.toString()
+                    maxidorder=dataSnapshot.childrenCount.toInt()
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    currentUser=dataSnapshot.childrenCount.toString()
+
+                }
+
+            }
+
+        })
+
+
         btn_addOrder.setOnClickListener {
             when {
                 ed_nmPengirim.text.isEmpty() -> {
@@ -61,12 +114,16 @@ class add_order : AppCompatActivity() {
                 }
                 else -> {
                     saveDataOrder()
+
                 }
             }
         }
     }
 
 
+
+
+    @SuppressLint("SimpleDateFormat")
     private fun saveDataOrder() {
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
@@ -79,8 +136,13 @@ class add_order : AppCompatActivity() {
         val kurir = binding.spinKurir.selectedItem.toString()
         val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
         val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
+        val uidorder = maxidorder!!
+        val uiduser = currentUser!!
+
 
         val order = Order(
+            uidorder,
+            uiduser,
             namaPengirim,
             noPengirim,
             namaPenerima,
@@ -93,12 +155,16 @@ class add_order : AppCompatActivity() {
             status,
             kurir,
             tanggal,
-            waktu,
-            orderId,
-            orderId
+            waktu
+
         )
+//        ref.child("uid").setValue(order).addOnCompleteListener(){
+//            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//        }
+
+        val objek = "order"
         val orderid = ref.push().key.toString()
-        ref.child(orderid).setValue(order).addOnCompleteListener() {
+        ref.child((objek+maxidorder)).setValue(order).addOnCompleteListener() {
             Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
@@ -110,8 +176,24 @@ class add_order : AppCompatActivity() {
             binding.spinStatus.selectedItem
             binding.spinKurir.selectedItem
 
+        }.addOnFailureListener() {
+            Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
         }
+//        ref.child(uid).setValue(order)
+//            .addOnFailureListener { e ->
+//                Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnSuccessListener {
+//                Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//
+//
+//                val orderid = ref.push().key.toString()
+//                ref.child(orderid).setValue(order).addOnCompleteListener() {
+//                    Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//                }
+//            }
     }
+
 
     private fun onItemSelectedstatus() {
         val option_order = binding.spinStatus
@@ -150,6 +232,8 @@ class add_order : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
+                val item = parent?.getItemAtPosition(position).toString()
+                status = item
             }
         }
 
