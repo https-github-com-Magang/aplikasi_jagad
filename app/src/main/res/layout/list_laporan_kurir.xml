@@ -3,18 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:elevation="40dp"
-    android:layout_marginBottom="10dp"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:padding="50dp">
+    app:cardElevation="4dp"
+    android:layout_marginStart="0dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/background_putih">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_totalloket"
@@ -22,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="1dp"
             android:layout_marginRight="8dp"
             android:fontFamily="@font/poppins_semibold"
             android:maxLines="1"
@@ -57,6 +56,21 @@
             android:hint="Nuril"
             android:maxLines="1"
             android:text="Nuril"
+            android:textColorHint="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_proses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tv_totalloket"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins"
+            android:maxLines="1"
+            android:text="PROSES"
+            android:paddingHorizontal="5dp"
+            android:background="@color/gray"
             android:textColorHint="@color/black"
             android:textSize="14sp" />
 
