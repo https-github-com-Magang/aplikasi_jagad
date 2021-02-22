@@ -101,7 +101,7 @@ class HomeKurirFragment : Fragment() {
                 adapter = AdapterUtil(R.layout.list_laporan_kurir, listOrders, { itemView, item ->
                     itemView.tv_totalloket.text = item.orderId
                     itemView.tv_pengirim.text = item.namaPenerima
-                    itemView.tv_nama.text = item.alamat
+                    itemView.tv_alamatPenerima.text = item.alamat
                 }, { _, item ->
                     val intent = Intent(requireContext(), DetailOrderActivity::class.java)
                     intent.putExtra("data", item)

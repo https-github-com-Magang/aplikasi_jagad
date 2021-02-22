@@ -14,6 +14,8 @@ data class Order(
     val harga:String = "",
     val status :String = "",
     val kurir: String = "",
+    val tanggal:String ="",
+    val waktu:String="",
     val orderId: String = "",
     val kurirId: String = ""
 ) : Parcelable

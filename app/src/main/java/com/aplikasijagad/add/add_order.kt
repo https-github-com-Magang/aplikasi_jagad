@@ -28,6 +28,7 @@ class add_order : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
+        
         orderId = ref.child("Events").push().key!!
 
         onItemSelectedstatus()
@@ -91,6 +92,8 @@ class add_order : AppCompatActivity() {
             //val tanggal : String,
             status,
             kurir,
+            tanggal,
+            waktu,
             orderId,
             orderId
         )
