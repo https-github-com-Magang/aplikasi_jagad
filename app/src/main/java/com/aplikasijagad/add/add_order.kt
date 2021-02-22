@@ -1,23 +1,19 @@
 package com.aplikasijagad.add
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.databinding.ActivityAddOrderBinding
-import com.aplikasijagad.models.Users
+import com.google.firebase.FirebaseError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.database.core.view.View
 import kotlinx.android.synthetic.main.activity_add_order.*
-
+import kotlinx.android.synthetic.main.fragment_home_admin.*
 
 
 class add_order : AppCompatActivity() {
@@ -25,24 +21,54 @@ class add_order : AppCompatActivity() {
     private lateinit var binding: ActivityAddOrderBinding
     lateinit var ref: DatabaseReference
     private lateinit var namadriver: DatabaseReference
+    private lateinit var database:DatabaseReference
     private lateinit var auth: FirebaseAuth
     private var status: String = ""
+    private var countId: Int = 0
+    var maxid: String = ""
+    var maxidorder :Int=0
 
-    //coba
-    var spinner: Spinner? = null
-    var listener: ValueEventListener? = null
-    var adapter: ArrayAdapter<String>? = null
-    var spinnerdatalist: ArrayAdapter<String>? = null
+    private var currentUser: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
+        database = FirebaseDatabase.getInstance().getReference("Users")
         //namadriver = FirebaseDatabase.getInstance().getReference("DRIVER")
         onItemSelectedstatus()
         onItemSelectedkurir()
         //dataload()
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // get total available quest
+                if (dataSnapshot.exists()) {
+                   // maxid = dataSnapshot.childrenCount.toString()
+                    maxidorder=dataSnapshot.childrenCount.toInt()
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    currentUser=dataSnapshot.childrenCount.toString()
+
+                }
+
+            }
+
+        })
+
+
         btn_addOrder.setOnClickListener {
             when {
                 ed_nmPengirim.text.isEmpty() -> {
@@ -71,6 +97,7 @@ class add_order : AppCompatActivity() {
                 }
                 else -> {
                     saveDataOrder()
+
                 }
             }
         }
@@ -116,7 +143,6 @@ class add_order : AppCompatActivity() {
 //        })
 //    }
 
-
     private fun saveDataOrder() {
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
@@ -127,9 +153,13 @@ class add_order : AppCompatActivity() {
         val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
+        val uidorder = maxidorder!!
+        val uiduser = currentUser!!
 
 
         val order = Order(
+            uidorder,
+            uiduser,
             namaPengirim,
             noPengirim,
             namaPenerima,
@@ -140,8 +170,13 @@ class add_order : AppCompatActivity() {
             status,
             kurir
         )
+//        ref.child("uid").setValue(order).addOnCompleteListener(){
+//            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//        }
+
+        val objek = "order"
         val orderid = ref.push().key.toString()
-        ref.child(orderid).setValue(order).addOnCompleteListener() {
+        ref.child((objek+maxidorder)).setValue(order).addOnCompleteListener() {
             Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
@@ -153,14 +188,30 @@ class add_order : AppCompatActivity() {
             binding.spinStatus.selectedItem
             binding.spinKurir.selectedItem
 
+        }.addOnFailureListener() {
+            Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
         }
+//        ref.child(uid).setValue(order)
+//            .addOnFailureListener { e ->
+//                Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnSuccessListener {
+//                Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//
+//
+//                val orderid = ref.push().key.toString()
+//                ref.child(orderid).setValue(order).addOnCompleteListener() {
+//                    Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//                }
+//            }
     }
+
 
     private fun onItemSelectedstatus() {
         val option_order = binding.spinStatus
         val options_order = arrayOf("Lunas", "Belum Lunas")
         option_order.adapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,options_order)
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options_order)
         option_order.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
@@ -182,7 +233,7 @@ class add_order : AppCompatActivity() {
         val option_kurir = binding.spinKurir
         val options_kurir = arrayOf("phadisa", "vira", "veronika")
         option_kurir.adapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,options_kurir)
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options_kurir)
         option_kurir.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
@@ -195,7 +246,7 @@ class add_order : AppCompatActivity() {
                 id: Long
             ) {
                 val item = parent?.getItemAtPosition(position).toString()
-                status=item
+                status = item
             }
         }
 

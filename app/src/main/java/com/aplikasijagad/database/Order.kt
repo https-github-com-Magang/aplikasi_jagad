@@ -4,7 +4,8 @@ import androidx.room.Entity
 
 
 data class Order(
-
+    val uidorder:Int?=null,
+    val uiduser:String="",
     val namaPengirim : String="",
     val noPengirim : String="",
     val namaPenerima : String="",
@@ -16,6 +17,7 @@ data class Order(
     val kurir: String
 ){ constructor():
         this(
+            null,
             "",
             "",
             "",
@@ -25,6 +27,9 @@ data class Order(
             "",
             "",
             "",
+            ""
+
+
 
 
 

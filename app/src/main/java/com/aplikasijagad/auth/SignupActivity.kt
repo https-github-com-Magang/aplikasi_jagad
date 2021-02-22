@@ -31,6 +31,7 @@ class SignupActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var ref: DatabaseReference
     private lateinit var namadriver: DatabaseReference
     private lateinit var usertype: String
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -47,6 +48,7 @@ class SignupActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
+        ref = FirebaseDatabase.getInstance().getReference("ORDER")
         usertype = ""
         namadriver = FirebaseDatabase.getInstance().getReference("DRIVER")
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
