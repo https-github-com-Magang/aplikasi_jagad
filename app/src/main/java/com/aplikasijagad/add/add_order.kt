@@ -229,5 +229,5 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
     override fun onFirebaseLoadFailed(message: String) {
         TODO("Not yet implemented")
     }
-    
+
 }
