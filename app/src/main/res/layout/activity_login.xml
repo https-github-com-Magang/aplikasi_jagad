@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".auth.LoginActivity">
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Log In"
+            android:textColor="#FF7629"
+            android:textSize="42dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_lognik"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login">
+
+            <EditText
+                android:id="@+id/et2_lognik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="NIK"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_logpassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/et_lognik"
+            app:layout_constraintStart_toStartOf="@+id/et_lognik"
+            app:layout_constraintTop_toBottomOf="@+id/et_lognik">
+
+            <EditText
+                android:id="@+id/et2_logpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/white"
+            android:text="Log In"
+            android:textColor="@color/white"
+            android:layout_width="254dp"
+            android:layout_height="41dp"
+            android:background="@drawable/background_orange"
+            app:layout_constraintEnd_toEndOf="@+id/btn_logcourier"
+            app:layout_constraintStart_toStartOf="@+id/btn_logadmin"
+            app:layout_constraintTop_toBottomOf="@+id/btn_logcourier" />
+
+        <Button
+            android:id="@+id/btn_logadmin"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:text="Admin"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/et_logpassword"
+            app:layout_constraintTop_toBottomOf="@+id/et_logpassword" />
+
+        <Button
+            android:id="@+id/btn_logcourier"
+            android:layout_width="140dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:text="Courier"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/et_logpassword"
+            app:layout_constraintTop_toBottomOf="@+id/et_logpassword" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
