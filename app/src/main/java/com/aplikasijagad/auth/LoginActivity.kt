@@ -8,6 +8,8 @@ import com.aplikasijagad.admin.DashboardAdmin
 import com.aplikasijagad.kurir.DashboardKurir
 import com.aplikasijagad.R
 import com.aplikasijagad.models.Users
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -70,29 +72,22 @@ class LoginActivity : AppCompatActivity() {
                                     val pass = userSnapshot.getValue(Users::class.java)
                                     pass?.let { listUsers.add(it) }
                                     if (pass!!.password == password) {
+                                        when (usertype) {
+                                            pass.usertype -> {
+                                                loginUser(pass.email, password)
 
-                                        loginUser(pass.email, password)
+                                            }
+                                            pass.usertype -> {
+                                                loginUser(pass.email, password)
 
-                                        if (usertype == pass.usertype && usertype == "Admin") {
-                                            startActivity(
-                                                Intent(
+                                            }
+                                            else -> {
+                                                Toast.makeText(
                                                     this@LoginActivity,
-                                                    DashboardAdmin::class.java
-                                                )
-                                            )
-                                        } else if (usertype == pass.usertype && usertype == "Courier") {
-                                            startActivity(
-                                                Intent(
-                                                    this@LoginActivity,
-                                                    DashboardKurir::class.java
-                                                )
-                                            )
-                                        } else {
-                                            Toast.makeText(
-                                                this@LoginActivity,
-                                                "Select the correct user",
-                                                Toast.LENGTH_LONG
-                                            ).show()
+                                                    "Select the correct user",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            }
                                         }
                                     } else {
                                         Toast.makeText(
@@ -132,5 +127,45 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser(email: String, password: String) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                checkResult(task)
+            }
+    }
+
+    private fun checkResult(task: Task<AuthResult>) {
+        if (task.isSuccessful) {
+            if (auth.currentUser != null) {
+                if (usertype == "Admin") {
+                    startActivity(
+                        Intent(
+                            this@LoginActivity,
+                            DashboardAdmin::class.java
+                        )
+                    )
+                } else if (usertype == "Courier") {
+                    startActivity(
+                        Intent(
+                            this@LoginActivity,
+                            DashboardKurir::class.java
+                        )
+                    )
+                } else {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "No User Detected",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            } else {
+                Toast.makeText(
+                    this@LoginActivity,
+                    "No User Detected",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        } else {
+            Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG)
+                .show()
+        }
     }
 }
