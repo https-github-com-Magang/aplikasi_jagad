@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aplikasijagad.R.id.rv_laporansewa
 import com.aplikasijagad.adapter.SewaAdapter
 import com.aplikasijagad.database.SewaKendaraan
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
 
 class LaporanSewa() : AppCompatActivity() {

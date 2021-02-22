@@ -1,5 +1,6 @@
 package com.aplikasijagad.add
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
@@ -168,6 +169,7 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
     }
 
 
+    @SuppressLint("SimpleDateFormat")
     private fun saveDataOrder() {
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
@@ -178,6 +180,8 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         val harga =ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
+        val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
+        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
 
         val order = Order(
             namaPengirim ,
@@ -187,10 +191,11 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
          alamat,
          berat,
          harga,
-        //val waktu : String,
-        //val tanggal : String,
          status,
-         kurir
+         kurir,
+            tanggal,
+            waktu
+
         )
         val orderid=ref.push().key.toString()
         ref.child(orderid).setValue(order).addOnCompleteListener(){
