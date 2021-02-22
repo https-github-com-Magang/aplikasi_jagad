@@ -19,12 +19,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_maps.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var newestCoord:LatLng
+    private lateinit var newestCoord :LatLng
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+//        getMapUpdate()
 //        refresh_btn.setOnClickListener {
 //            getMapUpdate()
 //        }
@@ -65,12 +68,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+
         mMap = googleMap
 
         mMap.uiSettings.isZoomControlsEnabled = true
 
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
-
 
         // Add a marker in Sydney and move the camera
         val latitude = -6.9213415
@@ -90,12 +93,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //                for (ds in snapshot.children){
 //                    val latitude = ds.child("lat").getValue(Double::class.java)
 //                    val longitude = ds.child("lng").getValue(Double::class.java)
-//                    val name = ds.child("name").getValue(String::class.java)
 //                    Log.d("getDataCoor", "latitude= "+latitude+" longitude: "+longitude)
 //
 //                    val userCoord = LatLng(latitude!!, longitude!!)
 //                    newestCoord = userCoord
-//                    mMap.addMarker(MarkerOptions().position(userCoord).title(name))
+//                    mMap.addMarker(MarkerOptions().position(userCoord))
 //                }
 //                val zoomLevel = 15f
 //                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newestCoord,zoomLevel))
@@ -107,3 +109,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //        reference.addListenerForSingleValueEvent(valueEventListener)
 //    }
 }
+

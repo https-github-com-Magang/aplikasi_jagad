@@ -1,43 +1,63 @@
 package com.aplikasijagad.add
 
-import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.databinding.ActivityAddOrderBinding
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.aplikasijagad.models.Users
+import com.google.firebase.database.*
 import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
 import kotlinx.android.synthetic.main.activity_add_order.*
 import java.io.FileOutputStream
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-class add_order : AppCompatActivity() {
+class add_order : AppCompatActivity(), FirebaseLoadData {
     private lateinit var binding: ActivityAddOrderBinding
     lateinit var ref: DatabaseReference
-    private val STORAGE_CODE: Int = 100;
+    private val STORAGE_CODE: Int = 100
+    private var spinner: Spinner? = null
+    var arrayList: ArrayList<String> = ArrayList()
 
+    lateinit var kurirRef: DatabaseReference
+    lateinit var FirebaseLoadData: FirebaseLoadData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
+        kurirRef = FirebaseDatabase.getInstance().getReference("Users")
+
+        FirebaseLoadData = this
+        kurirRef.addValueEventListener(object : ValueEventListener{
+            var kurirList:MutableList<Users> = ArrayList<Users>()
+            override fun onCancelled(error: DatabaseError) {
+                FirebaseLoadData.onFirebaseLoadFailed(error.message)
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (kurirSnapshot in snapshot.children)
+                    kurirSnapshot.getValue<Users>(Users::class.java!!)?.let { kurirList.add(it) }
+                FirebaseLoadData.onFirebaseLoadSuccess(kurirList)
+            }
+
+        })
         onItemSelectedstatus()
-        onItemSelectedkurir()
+
+        spinner = findViewById(R.id.spinKurir)
+//        showDataSpinner()
         btn_addOrder.setOnClickListener {
             when {
                 ed_nmPengirim.text.isEmpty() -> {
@@ -87,6 +107,7 @@ class add_order : AppCompatActivity() {
 //            savePdf()
 //        }
     }
+
 
     private fun savePdf(){
 
@@ -208,24 +229,63 @@ class add_order : AppCompatActivity() {
 
     }
 
-    private fun onItemSelectedkurir() {
-        val option_kurir = binding.spinKurir
-        val options_kurir = arrayOf("padhisa", "vira", "veronika")
-        option_kurir.adapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options_kurir)
-        option_kurir.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+//    private fun onItemSelectedkurir() {
+//        val option_kurir = binding.spinKurir
+//
+//        val options_kurir = arrayOf("padhisa", "vira", "veronika")
+//        option_kurir.adapter =
+//            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options_kurir)
+//        option_kurir.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: android.view.View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//            }
+//        }
+//
+//    }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: android.view.View?,
-                position: Int,
-                id: Long
-            ) {
-            }
-        }
+    override fun onFirebaseLoadSuccess(kurirList: List<Users>) {
+        val kurir_name_title = getKurirNameList(kurirList)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, kurir_name_title)
+
+        spinKurir.adapter = adapter
+    }
+
+    private fun getKurirNameList(kurirList: List<Users>): List<String> {
+        val result = ArrayList<String>()
+        for (Users in kurirList)
+            result.add(Users.name!!)
+        return result
 
     }
+
+    override fun onFirebaseLoadFailed(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    //    private fun showDataSpinner() {
+//        ref.child("Users").addValueEventListener(object : ValueEventListener {
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//
+//            }
+//
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                arrayList.clear()
+//                for (DataSnapshot item: dataSnapshot.getChildren){
+//                    arrayList.add(item.child("usertype").getValue(String.class))
+//
+//                }
+//                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<> ()
+//            }
+//
+//        })
+//    }
 }
