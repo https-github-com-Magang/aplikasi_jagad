@@ -20,15 +20,27 @@
             android:id="@+id/logout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
             android:background="@drawable/background_orange"
             android:text="LOGOUT"
             android:textColor="#FFFFFF"
             map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.498"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
-            map:layout_constraintVertical_bias="0.959" />
+            map:layout_constraintVertical_bias="0.941" />
+
+        <Button
+            android:id="@+id/refresh_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="70dp"
+            android:background="@drawable/background_orange"
+            android:text="Refresh"
+            android:textColor="#FFFFFF"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintVertical_bias="0.941" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>
