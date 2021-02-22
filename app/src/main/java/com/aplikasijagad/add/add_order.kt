@@ -90,22 +90,6 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
                 }
             }
         }
-
-//        btn_addOrder.setOnClickListener {
-//            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-//                if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                    == PackageManager.PERMISSION_DENIED){
-//
-//                    val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                    requestPermissions(permission, STORAGE_CODE)
-//
-//                    }
-//                else{
-//                    savePdf()
-//                }
-//            }
-//            savePdf()
-//        }
     }
 
 
@@ -187,8 +171,6 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
          alamat,
          berat,
          harga,
-        //val waktu : String,
-        //val tanggal : String,
          status,
          kurir
         )
@@ -229,28 +211,6 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
     }
 
-//    private fun onItemSelectedkurir() {
-//        val option_kurir = binding.spinKurir
-//
-//        val options_kurir = arrayOf("padhisa", "vira", "veronika")
-//        option_kurir.adapter =
-//            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options_kurir)
-//        option_kurir.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onItemSelected(
-//                parent: AdapterView<*>?,
-//                view: android.view.View?,
-//                position: Int,
-//                id: Long
-//            ) {
-//            }
-//        }
-//
-//    }
-
     override fun onFirebaseLoadSuccess(kurirList: List<Users>) {
         val kurir_name_title = getKurirNameList(kurirList)
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, kurir_name_title)
@@ -269,23 +229,5 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
     override fun onFirebaseLoadFailed(message: String) {
         TODO("Not yet implemented")
     }
-
-    //    private fun showDataSpinner() {
-//        ref.child("Users").addValueEventListener(object : ValueEventListener {
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//
-//            }
-//
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                arrayList.clear()
-//                for (DataSnapshot item: dataSnapshot.getChildren){
-//                    arrayList.add(item.child("usertype").getValue(String.class))
-//
-//                }
-//                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<> ()
-//            }
-//
-//        })
-//    }
+    
 }
