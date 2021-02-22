@@ -55,7 +55,7 @@ class HomeAdminFragment : Fragment() {
         }
 
         btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), add_sewa_kendaraan::class.java)
+            val intents = Intent(requireContext(), DashboardSewa::class.java)
             startActivity(intents)
         }
 
