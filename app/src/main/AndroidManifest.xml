@@ -17,6 +17,8 @@
 <!--        <activity android:name=".LoketActivity" />-->
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".MapsActivity" />
+        <activity android:name=".master.KendaraanActivity"/>
+        <activity android:name=".LaporanSewa"/>
         <activity android:name=".auth.SignupActivity" />
         <activity
             android:name=".add.add_sewa_kendaraan"

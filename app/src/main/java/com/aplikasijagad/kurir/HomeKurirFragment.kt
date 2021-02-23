@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
+//import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
@@ -99,7 +100,7 @@ class HomeKurirFragment : Fragment() {
                 }
 
                 adapter = AdapterUtil(R.layout.list_laporan_kurir, listOrders, { itemView, item ->
-                    itemView.tv_totalloket.text = item.uidorder.toString()
+                    itemView.tv_totalloket.text = item.uidorder
                     itemView.tv_pengirim.text = item.namaPenerima
                     itemView.tv_alamatPenerima.text = item.alamat
                 }, { _, item ->

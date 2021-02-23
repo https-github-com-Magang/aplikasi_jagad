@@ -1,6 +1,8 @@
 package com.aplikasijagad.add
 
 import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -15,8 +17,7 @@ import com.aplikasijagad.databinding.ActivityAddOrderBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -35,7 +36,7 @@ class add_order : AppCompatActivity() {
     private var status: String = ""
     private var countId: Int = 0
     var maxid: String = ""
-    var maxidorder :Int=0
+    var maxidorder :String =""
 
     private var currentUser: String = ""
 
@@ -63,7 +64,7 @@ class add_order : AppCompatActivity() {
                 // get total available quest
                 if (dataSnapshot.exists()) {
                     // maxid = dataSnapshot.childrenCount.toString()
-                    maxidorder=dataSnapshot.childrenCount.toInt()
+                    maxidorder=dataSnapshot.childrenCount.toString()
 
                 }
             }
@@ -134,8 +135,8 @@ class add_order : AppCompatActivity() {
         val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
-        val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
-        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
+        val tanggal =SimpleDateFormat("dd-mm-yyyy").format(Calendar.getInstance().time)
+        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
         val uidorder = maxidorder!!
         val uiduser = currentUser!!
 
@@ -150,8 +151,6 @@ class add_order : AppCompatActivity() {
             alamat,
             berat,
             harga,
-            //val waktu : String,
-            //val tanggal : String,
             status,
             kurir,
             tanggal,
@@ -163,7 +162,6 @@ class add_order : AppCompatActivity() {
 //        }
 
         val objek = "order"
-        val orderid = ref.push().key.toString()
         ref.child((objek+maxidorder)).setValue(order).addOnCompleteListener() {
             Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
