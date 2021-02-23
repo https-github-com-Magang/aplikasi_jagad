@@ -2,7 +2,6 @@ package com.aplikasijagad.database
 
 import androidx.room.Entity
 
-
 data class Order(
     val uidorder:Int?=null,
     val uiduser:String="",

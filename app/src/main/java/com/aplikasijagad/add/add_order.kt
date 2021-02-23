@@ -29,9 +29,14 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
     private val STORAGE_CODE: Int = 100
     private var spinner: Spinner? = null
     var arrayList: ArrayList<String> = ArrayList()
+    private lateinit var database:DatabaseReference
 
     lateinit var kurirRef: DatabaseReference
     lateinit var FirebaseLoadData: FirebaseLoadData
+
+    var maxid: String = ""
+    var maxidorder :Int=0
+    private var currentUser: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +44,7 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
         kurirRef = FirebaseDatabase.getInstance().getReference("Users")
+        database = FirebaseDatabase.getInstance().getReference("Users")
 
         FirebaseLoadData = this
         kurirRef.addValueEventListener(object : ValueEventListener{
@@ -55,6 +61,33 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
         })
         onItemSelectedstatus()
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // get total available quest
+                if (dataSnapshot.exists()) {
+                    // maxid = dataSnapshot.childrenCount.toString()
+                    maxidorder=dataSnapshot.childrenCount.toInt()
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    currentUser=dataSnapshot.childrenCount.toString()
+
+                }
+
+            }
+
+        })
 
         spinner = findViewById(R.id.spinKurir)
 //        showDataSpinner()
@@ -153,6 +186,8 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
 
     private fun saveDataOrder() {
+        val uidorder = maxidorder!!
+        val uiduser = currentUser!!
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
         val namaPenerima = ed_nmPenerima.text.toString()
@@ -164,7 +199,9 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         val kurir = binding.spinKurir.selectedItem.toString()
 
         val order = Order(
-            namaPengirim ,
+         uidorder,
+         uiduser,
+         namaPengirim ,
          noPengirim,
          namaPenerima,
          noPenerima,
@@ -174,8 +211,10 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
          status,
          kurir
         )
+
+        val objek = "order"
         val orderid=ref.push().key.toString()
-        ref.child(orderid).setValue(order).addOnCompleteListener(){
+        ref.child((objek+maxidorder)).setValue(order).addOnCompleteListener() {
             Toast.makeText(this,"data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
@@ -187,6 +226,8 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
             binding.spinStatus.selectedItem
             binding.spinKurir.selectedItem
 
+        }.addOnFailureListener() {
+            Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
         }
     }
 
