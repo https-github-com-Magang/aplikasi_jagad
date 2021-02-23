@@ -1,22 +1,23 @@
 package com.aplikasijagad.database
 
-import androidx.room.Entity
+import java.sql.Time
+import java.text.DateFormat
+import java.util.*
 
 data class Order(
-    val uidorder:Int?=null,
-    val uiduser:String="",
-    val namaPengirim : String="",
-    val noPengirim : String="",
-    val namaPenerima : String="",
-    val noPenerima : String="",
-    val alamat : String="",
-    val berat :String="",
-    val harga:String="",
-    val status :String="",
-    val kurir: String
+    val namaPengirim: String,
+    val noPengirim: String,
+    val namaPenerima: String,
+    val noPenerima: String,
+    val alamat: String,
+    val berat:String,
+    val harga:String,
+    val status:String,
+    val kurir: String,
+    val tanggal: String,
+    val waktu: String
 ){ constructor():
         this(
-            null,
             "",
             "",
             "",
@@ -26,11 +27,8 @@ data class Order(
             "",
             "",
             "",
-            ""
-
-
-
-
+            "18-02-2021",
+            "15:44"
 
 
         )

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.aplikasijagad.LaporanSewa
 import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.add.add_order
@@ -49,10 +50,10 @@ class HomeAdminFragment : Fragment() {
             val intents = Intent(requireContext(), MapsActivity::class.java)
             startActivity(intents)
         }
-//
-//        btn_laporan.setOnClickListener {
-//            val intents = Intent(requireContext(), DashboardSewa::class.java)
-//            startActivity(intents)
-//        }
+
+        btn_laporan.setOnClickListener {
+            val intents = Intent(requireContext(), LaporanSewa::class.java)
+            startActivity(intents)
+        }
     }
 }

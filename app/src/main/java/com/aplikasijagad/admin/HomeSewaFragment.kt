@@ -16,7 +16,8 @@ class HomeSewaFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_home_sewa, container, false)
+        return inflater.inflate(R.layout.activity_laporan_sewa, container, false)
     }
+
 
 }
