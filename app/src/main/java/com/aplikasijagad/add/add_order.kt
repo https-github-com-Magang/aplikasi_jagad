@@ -1,12 +1,16 @@
 package com.aplikasijagad.add
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.icu.util.TimeZone
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
@@ -33,11 +37,14 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
     lateinit var kurirRef: DatabaseReference
     lateinit var FirebaseLoadData: FirebaseLoadData
+    private lateinit var orderId: String
+    private var countId: Int = 0
 
     var maxid: String = ""
-    var maxidorder :Int=0
+    var maxidorder :String =""
     private var currentUser: String = ""
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
@@ -62,12 +69,12 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         })
         onItemSelectedstatus()
 
+        orderId = ref.child("Events").push().key!!
+
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // get total available quest
                 if (dataSnapshot.exists()) {
-                    // maxid = dataSnapshot.childrenCount.toString()
-                    maxidorder=dataSnapshot.childrenCount.toInt()
+                    maxidorder=dataSnapshot.childrenCount.toString()
 
                 }
             }
@@ -78,15 +85,12 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
             override fun onCancelled(error: DatabaseError) {
 
             }
-
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     currentUser=dataSnapshot.childrenCount.toString()
 
                 }
-
             }
-
         })
 
         spinner = findViewById(R.id.spinKurir)
@@ -136,6 +140,8 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
             mDoc.open()
 
+            val uidorder = maxidorder!!
+            val uiduser = currentUser!!
             val namaPengirim = ed_nmPengirim.text.toString()
             val noPengirim = ed_noPengirim.text.toString()
             val namaPenerima = ed_nmPenerima.text.toString()
@@ -145,10 +151,15 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
             val harga =ed_harga.text.toString()
             val status = binding.spinStatus.selectedItem.toString()
             val kurir = binding.spinKurir.selectedItem.toString()
+            val tanggal =SimpleDateFormat("dd-mm-yyyy").format(Calendar.getInstance().time)
+            val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
 
             mDoc.addAuthor("Data Order")
             mDoc.add(Paragraph( "Data Order \n \n" +
-                "Nama Pengirim = " + namaPengirim + "\n" +
+                    "Id Order = " + uidorder + "\n" +
+                    "Id User = " + uiduser + "\n" +
+                    "Tanggal / Waktu = " + tanggal + " / " + waktu + "\n" +
+                    "Nama Pengirim = " + namaPengirim + "\n" +
                     "No pengirim = " + noPengirim + "\n" +
                     "Nama Penerima = " + namaPenerima + "\n" +
                     "No Penerma = "  + noPenerima + "\n" +
@@ -184,7 +195,8 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         }
     }
 
-
+    @RequiresApi(Build.VERSION_CODES.N)
+    @SuppressLint("SimpleDateFormat")
     private fun saveDataOrder() {
         val uidorder = maxidorder!!
         val uiduser = currentUser!!
@@ -197,6 +209,8 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         val harga =ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
+        val tanggal =SimpleDateFormat("dd-mm-yyyy").format(Calendar.getInstance().time)
+        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
 
         val order = Order(
          uidorder,
@@ -209,7 +223,9 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
          berat,
          harga,
          status,
-         kurir
+         kurir,
+            tanggal,
+            waktu
         )
 
         val objek = "order"

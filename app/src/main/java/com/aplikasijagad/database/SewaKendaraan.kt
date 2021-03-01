@@ -17,3 +17,18 @@ data class SewaKendaraan(
 
             )
 }
+
+data class Kendaraan(
+//    val idKendaraan: String,
+    val nama_kendaran:String,
+    val warna_kendaraan: String,
+    val no_polisi:String
+){
+    constructor():
+            this(
+                "",
+                "",
+                ""
+
+                )
+}

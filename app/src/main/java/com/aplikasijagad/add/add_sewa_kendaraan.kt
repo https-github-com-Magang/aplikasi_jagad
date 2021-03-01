@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
+import com.aplikasijagad.database.Kendaraan
 import com.aplikasijagad.database.Sewa
 import com.aplikasijagad.database.SewaKendaraan
 import com.aplikasijagad.databinding.ActivityAddSewaBinding
 import com.aplikasijagad.databinding.ActivityAddSewaKendaraanBinding
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.aplikasijagad.models.Users
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_add_order.*
 import kotlinx.android.synthetic.main.activity_add_sewa.*
 import kotlinx.android.synthetic.main.activity_add_sewa.deskripsi
 import kotlinx.android.synthetic.main.activity_add_sewa.ed_jmlhHari
@@ -21,15 +24,38 @@ import kotlinx.android.synthetic.main.activity_add_sewa.ed_nama
 import kotlinx.android.synthetic.main.activity_add_sewa.ed_noKtp
 import kotlinx.android.synthetic.main.activity_add_sewa_kendaraan.*
 
-class add_sewa_kendaraan : AppCompatActivity() {
+class add_sewa_kendaraan : AppCompatActivity(), FirebaseLoadNopol {
     private lateinit var binding: ActivityAddSewaKendaraanBinding
     lateinit var ref: DatabaseReference
     private var status: String = ""
+    var arrayList: ArrayList<String> = ArrayList()
+
+    private var spinner: Spinner? = null
+    lateinit var nopolRef: DatabaseReference
+    lateinit var FirebaseLoadNopol: FirebaseLoadNopol
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_sewa_kendaraan)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_sewa_kendaraan)
         ref = FirebaseDatabase.getInstance().getReference("SEWA")
+        nopolRef = FirebaseDatabase.getInstance().getReference("Kendaraan")
+
+        FirebaseLoadNopol = this
+        nopolRef.addValueEventListener(object : ValueEventListener{
+            var nopolList:MutableList<Kendaraan> = ArrayList<Kendaraan>()
+
+            override fun onCancelled(error: DatabaseError) {
+                FirebaseLoadNopol.onFirebaseNopolFailed(error.message)
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (nopolSnapshot in snapshot.children)
+                    nopolSnapshot.getValue<Kendaraan>(Kendaraan::class.java!!)?.let { nopolList.add(it) }
+                FirebaseLoadNopol.onFirebaseNopolSuccess(nopolList)
+            }
+        })
 
         btnSewaKendaraan.setOnClickListener {
             when {
@@ -57,6 +83,8 @@ class add_sewa_kendaraan : AppCompatActivity() {
 
         }
         onItemSelectedkendaraan()
+        spinner = findViewById(R.id.spin_noPolisi)
+
     }
     private fun saveDataSewa() {
         val nama_pengirim_sewa = ed_nama.text.toString()
@@ -87,14 +115,12 @@ class add_sewa_kendaraan : AppCompatActivity() {
 
     private fun onItemSelectedkendaraan() {
         val option = binding.spinner2
-        val options = arrayOf( "motor", "mobil")
+        val options = arrayOf( "Motor", "Mobil")
 
         option.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
         option.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
-//                if (binding.spinner2.selectedItem==null){
-//                    Toast.makeText(getApplicationContext(),"data pilih kendaraan kosong",Toast.LENGTH_SHORT).show()
-//                }
+
             }
 
             override fun onItemSelected(
@@ -113,8 +139,27 @@ class add_sewa_kendaraan : AppCompatActivity() {
 //                    status = item
 //                }
             }
-
         }
+    }
+
+    override fun onFirebaseNopolSuccess(nopolList: List<Kendaraan>) {
+        val nopol_name_title = getNopolNameList(nopolList)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nopol_name_title)
+
+        spin_noPolisi.adapter = adapter
+    }
+
+    private fun getNopolNameList(nopolList: List<Kendaraan> ): List<String> {
+        val result = ArrayList<String>()
+        for (Kendaraan in nopolList)
+            result.add(Kendaraan.no_polisi!!)
+        return result
 
     }
+
+    override fun onFirebaseNopolFailed(message: String) {
+        TODO("Not yet implemented")
+    }
+
+
 }

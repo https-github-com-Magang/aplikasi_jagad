@@ -14,7 +14,7 @@ data class Users(
 ) {
     constructor() : this(
         "", "", "", "", "",
-        "", "", "", null, null,
+        "", "", "", null, null
     )
 }
 

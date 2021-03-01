@@ -1,10 +1,8 @@
 package com.aplikasijagad.database
 
-import java.sql.Time
-import java.text.DateFormat
-import java.util.*
-
 data class Order(
+    val uidorder: String,
+    val uiduser: String,
     val namaPengirim: String,
     val noPengirim: String,
     val namaPenerima: String,
@@ -16,8 +14,11 @@ data class Order(
     val kurir: String,
     val tanggal: String,
     val waktu: String
+
 ){ constructor():
         this(
+            "",
+            "",
             "",
             "",
             "",
