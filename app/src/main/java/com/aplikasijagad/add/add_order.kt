@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat
 class add_order : AppCompatActivity() {
     private lateinit var binding: ActivityAddOrderBinding
     lateinit var ref: DatabaseReference
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +74,7 @@ class add_order : AppCompatActivity() {
         val noPenerima = ed_noPenerima.text.toString()
         val alamat = ed_almtPenerima.text.toString()
         val berat = ed_beratBarang.text.toString()
-        val harga =ed_harga.text.toString()
+        val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
         val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
@@ -81,21 +82,21 @@ class add_order : AppCompatActivity() {
 
 
         val order = Order(
-            namaPengirim ,
-         noPengirim,
-         namaPenerima,
-         noPenerima,
-         alamat,
-         berat,
-         harga,
-         status,
-         kurir,
+            namaPengirim,
+            noPengirim,
+            namaPenerima,
+            noPenerima,
+            alamat,
+            berat,
+            harga,
+            status,
+            kurir,
             tanggal,
             waktu
         )
-        val orderid=ref.push().key.toString()
-        ref.child(orderid).setValue(order).addOnCompleteListener(){
-            Toast.makeText(this,"data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+        val orderid = ref.push().key.toString()
+        ref.child(orderid).setValue(order).addOnCompleteListener() {
+            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
             ed_nmPenerima.setText("")
