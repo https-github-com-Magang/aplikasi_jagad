@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.databinding.ActivityAddOrderBinding
+import com.aplikasijagad.models.Driver
 import com.aplikasijagad.models.Users
 import com.google.firebase.database.*
 import com.itextpdf.text.Document
@@ -50,19 +51,19 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         setContentView(R.layout.activity_add_order)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
-        kurirRef = FirebaseDatabase.getInstance().getReference("Users")
+        kurirRef = FirebaseDatabase.getInstance().getReference("DRIVER")
         database = FirebaseDatabase.getInstance().getReference("Users")
 
         FirebaseLoadData = this
         kurirRef.addValueEventListener(object : ValueEventListener{
-            var kurirList:MutableList<Users> = ArrayList<Users>()
+            var kurirList:MutableList<Driver> = ArrayList<Driver>()
             override fun onCancelled(error: DatabaseError) {
                 FirebaseLoadData.onFirebaseLoadFailed(error.message)
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (kurirSnapshot in snapshot.children)
-                    kurirSnapshot.getValue<Users>(Users::class.java!!)?.let { kurirList.add(it) }
+                    kurirSnapshot.getValue<Driver>(Driver::class.java!!)?.let { kurirList.add(it) }
                 FirebaseLoadData.onFirebaseLoadSuccess(kurirList)
             }
 
@@ -268,17 +269,17 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
     }
 
-    override fun onFirebaseLoadSuccess(kurirList: List<Users>) {
+    override fun onFirebaseLoadSuccess(kurirList: List<Driver>) {
         val kurir_name_title = getKurirNameList(kurirList)
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, kurir_name_title)
 
         spinKurir.adapter = adapter
     }
 
-    private fun getKurirNameList(kurirList: List<Users>): List<String> {
+    private fun getKurirNameList(kurirList: List<Driver>): List<String> {
         val result = ArrayList<String>()
-        for (Users in kurirList)
-            result.add(Users.name!!)
+        for (Driver in kurirList)
+            result.add(Driver.name!!)
         return result
 
     }

@@ -90,6 +90,7 @@ class add_sewa_kendaraan : AppCompatActivity(), FirebaseLoadNopol {
         val nama_pengirim_sewa = ed_nama.text.toString()
         val no_Ktp_sewa = ed_noKtp.text.toString()
         val kendaraan_sewa =binding.spinner2.selectedItem.toString()
+        val noPolisi = binding.spinNoPolisi.selectedItem.toString()
         val hari_sewa = ed_jmlhHari.text.toString()
         val deskripsi_hari = deskripsi.text.toString()
 
@@ -97,6 +98,7 @@ class add_sewa_kendaraan : AppCompatActivity(), FirebaseLoadNopol {
             nama_pengirim_sewa,
             no_Ktp_sewa,
             kendaraan_sewa,
+            noPolisi,
             hari_sewa,
             deskripsi_hari
 
@@ -107,6 +109,7 @@ class add_sewa_kendaraan : AppCompatActivity(), FirebaseLoadNopol {
             ed_nama.setText("")
             ed_noKtp.setText("")
             binding.spinner2.selectedItem
+            binding.spinNoPolisi.selectedItem
             ed_jmlhHari.setText("")
             deskripsi.setText("")
         }
@@ -129,15 +132,14 @@ class add_sewa_kendaraan : AppCompatActivity(), FirebaseLoadNopol {
                 position: Int,
                 id: Long
             ) {
-
-//                if (options[position] == "motor") {
-//                    val item = parent?.getItemAtPosition(position).toString()
-//                    status = item
-//                }
-//                if (options[position] == "mobil") {
-//                    val item = parent?.getItemAtPosition(position).toString()
-//                    status = item
-//                }
+                if (options[position] == "motor") {
+                    val item = parent?.getItemAtPosition(position).toString()
+                    status = item
+                }
+                if (options[position] == "mobil") {
+                    val item = parent?.getItemAtPosition(position).toString()
+                    status = item
+                }
             }
         }
     }
