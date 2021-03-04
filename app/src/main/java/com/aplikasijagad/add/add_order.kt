@@ -231,7 +231,7 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
         val objek = "order"
         val orderid=ref.push().key.toString()
-        ref.child((objek+maxidorder)).setValue(order).addOnCompleteListener() {
+        ref.child((objek+orderid+maxidorder)).setValue(order).addOnCompleteListener() {
             Toast.makeText(this,"data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
@@ -288,4 +288,11 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         TODO("Not yet implemented")
     }
 
+    private fun getKurirIdList(kurirList: List<Driver>): List<String> {
+        val result = ArrayList<String>()
+        for (Driver in kurirList)
+            result.add(Driver.uid!!)
+        return result
+
+    }
 }
