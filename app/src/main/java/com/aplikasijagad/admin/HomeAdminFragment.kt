@@ -59,7 +59,7 @@ class HomeAdminFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        load()
+        //load()
         getchildrenscountdriver()
         getchildrenscountloket()
         getchildrenscountsewa()

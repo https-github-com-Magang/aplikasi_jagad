@@ -19,7 +19,7 @@ data class Users(
 }
 
 data class Driver(
-    var uid: String = "",
+    var uidriver: String = "",
     var name: String = ""
 ) {
     constructor() : this(

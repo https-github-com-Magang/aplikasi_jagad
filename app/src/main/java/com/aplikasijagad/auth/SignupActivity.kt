@@ -154,12 +154,12 @@ class SignupActivity : AppCompatActivity() {
     private fun SendDataDriver() {
 
         val name = et2_name.text.toString().trim()
-        val uid = auth.currentUser!!.uid
+        val uidriver = auth.currentUser!!.uid
         val driver = Driver(
-            uid,
+            uidriver,
             name
         )
-        namadriver.child(uid).setValue(driver)
+        namadriver.child(uidriver).setValue(driver)
             .addOnFailureListener { e ->
                 Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
             }

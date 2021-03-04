@@ -5,6 +5,7 @@ import java.text.DateFormat
 import java.util.*
 
 data class Order(
+    val uidorder:String,
     val namaPengirim: String,
     val noPengirim: String,
     val namaPenerima: String,
@@ -14,10 +15,12 @@ data class Order(
     val harga:String,
     val status:String,
     val kurir: String,
-    val tanggal: String,
-    val waktu: String
+    val UIKURIR : String,
+    //val tanggal: String,
+    //val waktu: String
 ){ constructor():
         this(
+
             "",
             "",
             "",
@@ -27,8 +30,12 @@ data class Order(
             "",
             "",
             "",
-            "18-02-2021",
-            "15:44"
+            "",
+            ""
+
+
+            //"18-02-2021",
+            //"15:44"
 
 
         )
