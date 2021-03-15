@@ -30,12 +30,12 @@ class add_order : AppCompatActivity() {
     private lateinit var ref: DatabaseReference
     private lateinit var orderId: String
 
-    private lateinit var namadriver: DatabaseReference
+//    private lateinit var namadriver: DatabaseReference
     private lateinit var database:DatabaseReference
-    private lateinit var auth: FirebaseAuth
+//    private lateinit var auth: FirebaseAuth
     private var status: String = ""
-    private var countId: Int = 0
-    var maxid: String = ""
+//    private var countId: Int = 0
+//    var maxid: String = ""
     var maxidorder :String =""
 
     private var currentUser: String = ""

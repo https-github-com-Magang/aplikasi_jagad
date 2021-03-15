@@ -23,12 +23,14 @@ data class Kendaraan(
     val nama_kendaran:String,
     val warna_kendaraan: String,
     val no_polisi:String,
+//    val jenis:String
 ){
     constructor():
             this(
                 "",
                 "",
                 "",
+
 
             )
 }
