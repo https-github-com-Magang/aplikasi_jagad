@@ -32,13 +32,13 @@ class LoginActivity : AppCompatActivity() {
         usertype = ""
 
         btn_logadmin.setOnClickListener {
-            usertype = "Admin"
+            usertype = "Spv"
             btn_logadmin.setBackgroundColor(resources.getColor(R.color.gray))
             btn_logcourier.setBackgroundColor(resources.getColor(R.color.white))
         }
 
         btn_logcourier.setOnClickListener {
-            usertype = "Courier"
+            usertype = "Driver"
             btn_logcourier.setBackgroundColor(resources.getColor(R.color.gray))
             btn_logadmin.setBackgroundColor(resources.getColor(R.color.white))
         }
@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun logIn() {
         if (checkInput()) {
-            if (usertype == "Admin" || usertype == "Courier") {
+            if (usertype == "Spv" || usertype == "Driver") {
                 val nik = et2_lognik.text.toString().trim()
                 val password = et2_logpassword.text.toString().trim()
 
@@ -135,14 +135,14 @@ class LoginActivity : AppCompatActivity() {
     private fun checkResult(task: Task<AuthResult>) {
         if (task.isSuccessful) {
             if (auth.currentUser != null) {
-                if (usertype == "Admin") {
+                if (usertype == "Spv") {
                     startActivity(
                         Intent(
                             this@LoginActivity,
                             DashboardAdmin::class.java
                         )
                     )
-                } else if (usertype == "Courier") {
+                } else if (usertype == "Driver") {
                     startActivity(
                         Intent(
                             this@LoginActivity,

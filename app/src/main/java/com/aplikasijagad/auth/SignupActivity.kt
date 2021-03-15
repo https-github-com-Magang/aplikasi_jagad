@@ -47,14 +47,14 @@ class SignupActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         btn_admin.setOnClickListener {
-            usertype = "Admin"
+            usertype = "Spv"
             btn_admin.setBackgroundColor(resources.getColor(R.color.gray))
             btn_courier.setBackgroundColor(resources.getColor(R.color.white))
         }
 
         btn_courier.setOnClickListener {
             getLastLocation()
-            usertype = "Courier"
+            usertype = "Driver"
             btn_courier.setBackgroundColor(resources.getColor(R.color.gray))
             btn_admin.setBackgroundColor(resources.getColor(R.color.white))
         }
@@ -74,7 +74,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun signUp() {
         if (checkInput()) {
-            if (usertype == "Admin" || usertype == "Courier") {
+            if (usertype == "Spv" || usertype == "Driver") {
                 val name = et2_name.text.toString().trim()
                 val nik = et2_nik.text.toString().trim()
                 val email = et2_email.text.toString().trim()
@@ -114,14 +114,14 @@ class SignupActivity : AppCompatActivity() {
                                         Toast.LENGTH_LONG
                                     ).show()
 
-                                    if (usertype == "Admin") {
+                                    if (usertype == "Spv") {
                                         startActivity(
                                             Intent(
                                                 this@SignupActivity,
                                                 DashboardAdmin::class.java
                                             )
                                         )
-                                    } else if (usertype == "Courier") {
+                                    } else if (usertype == "Driver") {
                                         startActivity(
                                             Intent(
                                                 this@SignupActivity,

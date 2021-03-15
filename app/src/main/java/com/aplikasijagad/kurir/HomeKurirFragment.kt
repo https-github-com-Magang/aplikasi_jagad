@@ -14,6 +14,7 @@ import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
 //import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.R
+import com.aplikasijagad.admin.HomeAdminFragment
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
@@ -75,7 +76,6 @@ class HomeKurirFragment : Fragment() {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
                             tv_totkurir.text = data!!.name
-                            tv_totloket.text = data.nik
                         }
                     }
                 }
@@ -115,6 +115,14 @@ class HomeKurirFragment : Fragment() {
                 }
             }
         })
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            HomeKurirFragment().apply {
+                arguments = Bundle().apply {}
+            }
     }
 }
 

@@ -49,6 +49,7 @@ class HomeAdminFragment : Fragment() {
         databasesewa = FirebaseDatabase.getInstance().getReference().child("SEWA")
 
         listUsers = mutableListOf()
+
         binding =
             DataBindingUtil.inflate(
                 inflater,
@@ -65,20 +66,12 @@ class HomeAdminFragment : Fragment() {
         getchildrenscountloket()
         getchildrenscountsewa()
 
-        btn_loket.setOnClickListener {
-            val intents = Intent(requireContext(), add_order::class.java)
-            startActivity(intents)
-        }
         btn_sewa.setOnClickListener {
             val intents = Intent(requireContext(), DashboardSewa::class.java)
             startActivity(intents)
         }
         btn_posisikurir.setOnClickListener {
             val intents = Intent(requireContext(), MapsActivity::class.java)
-            startActivity(intents)
-        }
-        btn_laporan.setOnClickListener {
-            val intents = Intent(requireContext(), LaporanSewa::class.java)
             startActivity(intents)
         }
     }
@@ -100,8 +93,7 @@ class HomeAdminFragment : Fragment() {
                         for (userSnapshot in p0.children) {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
-                            tv_no_adm.text = data!!.name
-                            tv_nama_adm.text = data.nik
+                            tv_nama_adm.text = data!!.name
                         }
                     }
                 }
@@ -155,5 +147,13 @@ class HomeAdminFragment : Fragment() {
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            HomeAdminFragment().apply {
+                arguments = Bundle().apply {}
+            }
     }
 }
