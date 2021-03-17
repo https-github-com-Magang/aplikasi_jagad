@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".DetailOrderActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_putih"
@@ -17,28 +15,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
-            android:id="@+id/detail_kode"
+            android:id="@+id/tv_rincian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/poppins_semibold"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_alignStart="@+id/detail_kode"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins"
             android:maxLines="1"
-            android:text="@string/kode_pengiriman"
-            android:textColor="@android:color/holo_orange_dark"
+            android:text="No Amplop"
             android:textColorHint="@color/black"
-            android:textSize="20sp" />
+            android:textSize="12sp" />
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/detail_kode"
-            android:background="@drawable/background_border"
+            android:layout_below="@id/tv_rincian"
+            android:layout_alignStart="@id/tv_rincian"
+            android:background="@drawable/background_white"
             android:baselineAligned="false"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -50,35 +48,41 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_totkurir2"
+                    android:id="@+id/tv_totkurir3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="3dp"
-                    android:text="Tanggal"
+                    android:text="Penerima"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_totloket2"
+                    android:id="@+id/tv_totloket4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="3dp"
-                    android:text="Driver"
+                    android:paddingVertical="0dp"
+                    android:text="Pengirim"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_totloket3"
+                    android:id="@+id/tv_totloket5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="3dp"
-                    android:text="Tujuan"
+                    android:text="Berat"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
+                <TextView
+                    android:id="@+id/tv_totkurir6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="Jenis Amplop"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,69 +92,41 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/detail_tanggal"
+                    android:id="@+id/detail_rincian_penerima"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="3dp"
-                    android:text="18-08-2020"
+                    android:text="Vira"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/detail_driver"
+                    android:id="@+id/detail_rincian_pengirim"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="3dp"
                     android:text="Padhisa"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/detail_tujuan"
+                    android:id="@+id/detail_rincian_berat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="3dp"
-                    android:text="Bandung"
+                    android:text="25kg"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/detail_rincian_jenis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="COD"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/green"
-            android:text="@string/diterima" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/red"
-            android:text="@string/ditolak" />
-
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:layout_below="@+id/linearLayout2"
-            android:layout_marginTop="10dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvLaporanAmplop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/list_amplop" />
-        </ScrollView>
     </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
