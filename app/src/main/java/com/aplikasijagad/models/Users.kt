@@ -1,5 +1,8 @@
 package com.aplikasijagad.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class Users(
     var uid: String = "",
     var name: String = "",
@@ -28,6 +31,7 @@ data class Driver(
     )
 }
 
+@Parcelize
 data class suratjalan(
     val uid :String ="",
     var nosuratjalan: String = "",
@@ -35,7 +39,7 @@ data class suratjalan(
     var tujuan: String = "",
     var tanggal: String = ""
 
-) {
+): Parcelable {
     constructor() : this(
         "",
         "",
