@@ -1,22 +1,28 @@
 package com.aplikasijagad
 
-import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.aplikasijagad.database.Loket
-import com.aplikasijagad.database.Order
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.aplikasijagad.models.Amplop
+import com.aplikasijagad.models.SURATJALAN
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_detail_order.*
+import kotlinx.android.synthetic.main.list_amplop.view.*
 
 class DetailOrderActivity : AppCompatActivity() {
 
-    private lateinit var orderId: String
     private lateinit var auth: FirebaseAuth
-    private lateinit var listOrder: MutableList<Order>
+    private lateinit var listOrder: MutableList<SURATJALAN>
+    private lateinit var listAmplop: MutableList<Amplop>
     private lateinit var database: FirebaseDatabase
+    private lateinit var adapter: AdapterUtil<Amplop>
+    private lateinit var user: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,21 +31,53 @@ class DetailOrderActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         listOrder = mutableListOf()
-        orderId = database.getReference("ORDER").push().key!!
+        listAmplop = mutableListOf()
+        user = auth.currentUser!!
 
-        val data = intent.getParcelableExtra<Order>("data")
-        detail_kode.text = data?.uidorder
-        detail_nama_pengirim.text = data?.namaPenerima
-        detail_no_pengirim.text = data?.noPengirim
-        detail_nama_penerima.text = data?.namaPenerima
-        detail_no_penerima.text = data?.noPenerima
-        detail_alamat_penerima.text = data?.alamat
-//        detail_rincian_waktu.text = data?.waktu
-//        detail_rincian_tanggal.text = data?.tanggal
-        detail_rincian_berat.text = data?.berat
-        detail_rincian_harga.text = data?.harga
-        detail_rincian_status.text = data?.status
-        detail_rincian_kurir.text = data?.kurir
+        val data = intent.getParcelableExtra<SURATJALAN>("data")
+        detail_kode.text = data?.uidSRJ
+        detail_driver.text = data?.driver
+        detail_tanggal.text = data?.tanggal
+        detail_tujuan.text = data?.tujuan
+
+        amplop()
+    }
+
+    private fun amplop() {
+//        val uid = user.uid
+
+        database.getReference("SURATJALAN").child("SRJ001").child("Amplop").addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    for (eventSnapshot in p0.children) {
+                        val data = eventSnapshot.getValue(Amplop::class.java)
+                        data?.let {
+                            listAmplop.add(it)
+                        }
+                    }
+                }
+
+                adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
+                    itemView.tv_rincian.text = item.noamplop
+                    itemView.detail_rincian_penerima.text = item.penerima
+                    itemView.detail_rincian_pengirim.text = item.pengirim
+                    itemView.detail_rincian_berat.text = item.berat
+                    itemView.detail_rincian_jenis.text = item.jenisamplop
+                }, { _, item ->
+                    val intent = Intent(applicationContext, DetailOrderActivity::class.java)
+//                    intent.putExtra("data", item)
+                    startActivity(intent)
+                })
+
+                rvLaporanAmplop.apply {
+                    adapter = this@DetailOrderActivity.adapter
+                    layoutManager = LinearLayoutManager(context)
+                }
+            }
+        })
     }
 
 //    private fun accepted() {

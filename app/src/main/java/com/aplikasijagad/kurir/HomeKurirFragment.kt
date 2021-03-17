@@ -84,9 +84,9 @@ class HomeKurirFragment : Fragment() {
     }
 
     private fun orderKurir() {
-        //val uid = auth.currentUser!!
+        val uid = user.uid
 
-        database.getReference("SURATJALAN").orderByChild("uidSRJ").addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").orderByChild("idDriver").equalTo(uid).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 

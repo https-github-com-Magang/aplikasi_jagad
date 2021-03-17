@@ -78,16 +78,13 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/linearLayout"
-                android:layout_marginHorizontal="22dp"
-                android:layout_marginVertical="22dp">
+                android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvLaporanKurir"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/list_laporan_kurir" />
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/list_suratjalan" />
             </ScrollView>
 
         </LinearLayout>
