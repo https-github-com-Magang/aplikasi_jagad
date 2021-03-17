@@ -30,8 +30,8 @@ class HomeAdminFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var namadriver: DatabaseReference
-    private lateinit var databaseorder: DatabaseReference
-    private lateinit var databasesewa: DatabaseReference
+    private lateinit var databaseAmplop: DatabaseReference
+    private lateinit var databaseSuratjalan: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
 
     private var currentUserId: String = ""
@@ -45,8 +45,8 @@ class HomeAdminFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         namadriver = FirebaseDatabase.getInstance().getReference().child("DRIVER")
-        databaseorder = FirebaseDatabase.getInstance().getReference().child("ORDER")
-        databasesewa = FirebaseDatabase.getInstance().getReference().child("SEWA")
+        databaseAmplop = FirebaseDatabase.getInstance().getReference().child("Amplop")
+        databaseSuratjalan = FirebaseDatabase.getInstance().getReference().child("suratjalan")
 
         listUsers = mutableListOf()
 
@@ -117,15 +117,15 @@ class HomeAdminFragment : Fragment() {
     }
 
     private fun getchildrenscountloket() {
-        databaseorder.child(currentUserId).addValueEventListener(object : ValueEventListener {
+        databaseAmplop.child(currentUserId).addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // get total available quest
                 if (dataSnapshot.exists()) {
                     countfriend = dataSnapshot.childrenCount.toInt()
-                    tv_totalloket.setText(Integer.toString(countfriend) + " order")
+                    tv_totalloket.setText(Integer.toString(countfriend) + " Amplop")
                 } else {
-                    tv_totalloket.setText("0 order")
+                    tv_totalloket.setText("0 Amplop")
                 }
             }
 
@@ -134,14 +134,14 @@ class HomeAdminFragment : Fragment() {
     }
 
     private fun getchildrenscountsewa() {
-        databasesewa.child(currentUserId).addValueEventListener(object : ValueEventListener {
+        databaseSuratjalan.child(currentUserId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // get total available quest
                 if (dataSnapshot.exists()) {
                     countfriend = dataSnapshot.childrenCount.toInt()
-                    tv_totalsewa.setText(Integer.toString(countfriend) + " sewa")
+                    tv_totalsewa.setText(Integer.toString(countfriend) + " Surat Jalan")
                 } else {
-                    tv_totalsewa.setText("0 sewa")
+                    tv_totalsewa.setText("0 Surat Jalan")
                 }
             }
 

@@ -12,6 +12,7 @@
         android:layout_above="@id/bottomNavigation"
         android:id="@+id/fragmentContainer"/>
 
+
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
