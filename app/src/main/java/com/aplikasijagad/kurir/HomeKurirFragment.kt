@@ -17,7 +17,7 @@ import com.aplikasijagad.adapter.SuratJalanAdapter
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
-import com.aplikasijagad.models.suratjalan
+import com.aplikasijagad.models.SURATJALAN
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -30,8 +30,8 @@ class HomeKurirFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var listUsers: MutableList<Users>
-    private lateinit var listSuratjalan: MutableList<suratjalan>
-    private lateinit var adapter: AdapterUtil<suratjalan>
+    private lateinit var listSuratjalan: MutableList<SURATJALAN>
+    private lateinit var adapter: AdapterUtil<SURATJALAN>
     private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHomeKurirBinding
 
@@ -84,16 +84,16 @@ class HomeKurirFragment : Fragment() {
     }
 
     private fun orderKurir() {
-        val uid = auth.currentUser!!.uid
+        //val uid = auth.currentUser!!
 
-        database.getReference("SURATJALAN").orderByChild("uidSRJ").equalTo(uid).addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").orderByChild("uidSRJ").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     for (eventSnapshot in p0.children) {
-                        val data = eventSnapshot.getValue(suratjalan::class.java)
+                        val data = eventSnapshot.getValue(SURATJALAN::class.java)
                         data?.let {
                             listSuratjalan.add(it)
                         }
@@ -101,6 +101,7 @@ class HomeKurirFragment : Fragment() {
                 }
 
                 adapter = AdapterUtil(R.layout.list_suratjalan, listSuratjalan, { itemView, item ->
+                    itemView.tv_noSTB.text = item.uidSRJ
                     itemView.tv_tglsurat.text = item.tanggal
                     itemView.tv_Tujuan.text = item.tujuan
                     itemView.tv_drive.text = item.driver
