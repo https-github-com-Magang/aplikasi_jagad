@@ -1,5 +1,5 @@
 package com.aplikasijagad.admin
-
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
+import com.aplikasijagad.LaporanSewa
 import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.add.add_order
@@ -20,6 +21,7 @@ import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_laporan_sewa.*
 import kotlinx.android.synthetic.main.fragment_home_admin.*
 
 class HomeAdminFragment : Fragment() {
@@ -28,8 +30,8 @@ class HomeAdminFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var namadriver: DatabaseReference
-    private lateinit var databaseorder: DatabaseReference
-    private lateinit var databasesewa: DatabaseReference
+    private lateinit var databaseAmplop: DatabaseReference
+    private lateinit var databaseSuratjalan: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
 
     private var currentUserId: String = ""
@@ -43,51 +45,39 @@ class HomeAdminFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         namadriver = FirebaseDatabase.getInstance().getReference().child("DRIVER")
-        databaseorder = FirebaseDatabase.getInstance().getReference().child("ORDER")
-        databasesewa = FirebaseDatabase.getInstance().getReference().child("SEWA")
+        databaseAmplop = FirebaseDatabase.getInstance().getReference().child("Amplop")
+        databaseSuratjalan = FirebaseDatabase.getInstance().getReference().child("suratjalan")
 
         listUsers = mutableListOf()
+
         binding =
             DataBindingUtil.inflate(
                 inflater,
                 R.layout.fragment_home_admin, container, false
             )
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //load()
+        load()
         getchildrenscountdriver()
         getchildrenscountloket()
         getchildrenscountsewa()
 
-        btn_loket.setOnClickListener {
-            val intents = Intent(requireContext(), add_order::class.java)
-            startActivity(intents)
-        }
-
         btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), add_sewa_kendaraan::class.java)
+            val intents = Intent(requireContext(), DashboardSewa::class.java)
             startActivity(intents)
         }
-
         btn_posisikurir.setOnClickListener {
             val intents = Intent(requireContext(), MapsActivity::class.java)
-            startActivity(intents)
-        }
-
-        btn_laporan.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
             startActivity(intents)
         }
     }
 
     private fun load() {
         val uid = auth.currentUser!!.uid
-
         database.orderByChild("uid").equalTo(uid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
@@ -103,8 +93,7 @@ class HomeAdminFragment : Fragment() {
                         for (userSnapshot in p0.children) {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
-                            tv_no_adm.text = data!!.name
-                            tv_nama_adm.text = data.nik
+                            tv_nama_adm.text = data!!.name
                         }
                     }
                 }
@@ -128,14 +117,15 @@ class HomeAdminFragment : Fragment() {
     }
 
     private fun getchildrenscountloket() {
-        databaseorder.child(currentUserId).addValueEventListener(object : ValueEventListener {
+        databaseAmplop.child(currentUserId).addValueEventListener(object : ValueEventListener {
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // get total available quest
                 if (dataSnapshot.exists()) {
                     countfriend = dataSnapshot.childrenCount.toInt()
-                    tv_totalloket.setText(Integer.toString(countfriend) + " order")
+                    tv_totalloket.setText(Integer.toString(countfriend) + " Amplop")
                 } else {
-                    tv_totalloket.setText("0 order")
+                    tv_totalloket.setText("0 Amplop")
                 }
             }
 
@@ -144,18 +134,26 @@ class HomeAdminFragment : Fragment() {
     }
 
     private fun getchildrenscountsewa() {
-        databasesewa.child(currentUserId).addValueEventListener(object : ValueEventListener {
+        databaseSuratjalan.child(currentUserId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // get total available quest
                 if (dataSnapshot.exists()) {
                     countfriend = dataSnapshot.childrenCount.toInt()
-                    tv_totalsewa.setText(Integer.toString(countfriend) + " sewa")
+                    tv_totalsewa.setText(Integer.toString(countfriend) + " Surat Jalan")
                 } else {
-                    tv_totalsewa.setText("0 sewa")
+                    tv_totalsewa.setText("0 Surat Jalan")
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            HomeAdminFragment().apply {
+                arguments = Bundle().apply {}
+            }
     }
 }

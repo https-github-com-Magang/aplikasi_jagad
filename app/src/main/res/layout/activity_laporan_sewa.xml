@@ -49,20 +49,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!--            <androidx.recyclerview.widget.RecyclerView-->
-            <!--                android:id="@+id/rv_laporansewa"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                tools:listitem="@layout/list_sewa" />-->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_laporansewa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:listitem="@layout/list_sewa" />
 
-            <ListView
-                android:id="@+id/rv_laporansewa"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/list_sewa"
-                android:layout_margin="5dp"
-                android:padding="5dp"
-               />
+<!--            <ListView-->
+<!--                android:id="@+id/rv_laporansewa"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                tools:listitem="@layout/list_sewa"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:padding="5dp"-->
+<!--               />-->
         </ScrollView>
 
     </LinearLayout>

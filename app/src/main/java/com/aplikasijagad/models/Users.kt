@@ -27,3 +27,20 @@ data class Driver(
         ""
     )
 }
+
+data class suratjalan(
+    val uid :String ="",
+    var nosuratjalan: String = "",
+    var driver: String = "",
+    var tujuan: String = "",
+    var tanggal: String = ""
+
+) {
+    constructor() : this(
+        "",
+        "",
+        "",
+        "",
+        ""
+    )
+}

@@ -30,6 +30,7 @@ class ProfileAdminFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
         listUsers = mutableListOf()
+
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_profile_admin, container, false)
 
@@ -76,5 +77,13 @@ class ProfileAdminFragment : Fragment() {
                     }
                 }
             })
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            ProfileAdminFragment().apply {
+                arguments = Bundle().apply {}
+            }
     }
 }

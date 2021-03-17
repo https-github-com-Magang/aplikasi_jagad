@@ -21,17 +21,18 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
-                android:background="@drawable/background_orange2"
+                android:background="#46B46B"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="159dp"
-                    android:layout_height="159dp"
+                    android:layout_width="143dp"
+                    android:layout_height="92dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="13dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_baseline_account_circle_24" />
+                    android:src="@drawable/akun" />
+
 
                 <TextView
                     android:id="@+id/tv_namaKurir"
@@ -49,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/poppins"
-                    android:text="Kurir"
+                    android:text="Driver"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -64,7 +65,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/background_putih"
+                android:background="#F4F4F4"
                 android:orientation="vertical">
 
                 <TextView
@@ -164,11 +165,14 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="#F4F4F4"
                     android:orientation="vertical"
                     android:text="Log Out"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
                     android:textColor="@color/red">
                 </Button>
+
         </RelativeLayout>
     </RelativeLayout>
 </layout>

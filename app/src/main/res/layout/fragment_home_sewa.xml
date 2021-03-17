@@ -24,7 +24,7 @@
             android:textSize="36sp" />
 
         <Button
-            android:id="@+id/btn_motor"
+            android:id="@+id/btn_sewaa"
             android:layout_width="104dp"
             android:layout_height="104dp"
             android:layout_below="@+id/tv_jagad2"
@@ -33,21 +33,21 @@
             android:layout_marginTop="84dp"
             android:background="@drawable/background_putih"
             android:shadowColor="@color/btn"
-            android:text="Motor"
+            android:text="Sewa"
             android:textColor="@color/btn"
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/btn_mobil"
+            android:id="@+id/btn_kendaraan"
             android:layout_width="104dp"
             android:layout_height="104dp"
-            android:layout_alignTop="@+id/btn_motor"
+            android:layout_alignTop="@+id/btn_sewaa"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="63dp"
             android:background="@drawable/background_putih"
             android:shadowColor="@color/btn"
-            android:text="Mobil"
+            android:text="Kendaraan"
             android:textColor="@color/btn"
             android:textSize="18sp" />
 

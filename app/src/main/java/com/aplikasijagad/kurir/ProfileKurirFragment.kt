@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.MainActivity
 import com.aplikasijagad.R
+import com.aplikasijagad.admin.HomeAdminFragment
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentProfileKurirBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -76,5 +77,13 @@ class ProfileKurirFragment : Fragment() {
                     }
                 }
             })
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            ProfileKurirFragment().apply {
+                arguments = Bundle().apply {}
+            }
     }
 }

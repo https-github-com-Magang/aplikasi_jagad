@@ -1,68 +1,64 @@
 package com.aplikasijagad.add
 
 import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
-import android.icu.util.TimeZone
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.databinding.ActivityAddOrderBinding
-import com.aplikasijagad.models.Driver
-import com.aplikasijagad.models.Users
-import com.google.firebase.database.*
+
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
-import java.text.SimpleDateFormat
 
-class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
+
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+
+
+class add_order : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddOrderBinding
+
+    private lateinit var ref: DatabaseReference
     private lateinit var orderId: String
-    lateinit var ref: DatabaseReference
-    lateinit var kurirRef: DatabaseReference
-    lateinit var datauser: DatabaseReference
-    private var spinner: Spinner? = null
-    var maxidorder :String =""
-    var arrayList: ArrayList<String> = ArrayList()
+
+//    private lateinit var namadriver: DatabaseReference
     private lateinit var database:DatabaseReference
-    lateinit var FirebaseLoadData: FirebaseLoadData
+//    private lateinit var auth: FirebaseAuth
+    private var status: String = ""
+//    private var countId: Int = 0
+//    var maxid: String = ""
+    var maxidorder :String =""
+
+    private var currentUser: String = ""
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
-        kurirRef = FirebaseDatabase.getInstance().getReference("DRIVER")
-        datauser = FirebaseDatabase.getInstance().getReference("Users")
+
+        orderId = ref.child("Events").push().key!!
+
         onItemSelectedstatus()
-        //onItemSelectedkurir()
+        onItemSelectedkurir()
 
-        //SPINNER GET DATA KURIR
-        FirebaseLoadData = this
-        kurirRef.addValueEventListener(object : ValueEventListener {
-            var kurirList:MutableList<Driver> = ArrayList<Driver>()
-            override fun onCancelled(error: DatabaseError) {
-                FirebaseLoadData.onFirebaseLoadFailed(error.message)
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (kurirSnapshot in snapshot.children)
-                    kurirSnapshot.getValue<Driver>(Driver::class.java!!)?.let { kurirList.add(it) }
-                FirebaseLoadData.onFirebaseLoadSuccess(kurirList)
-            }
-
-        })
-        spinner = findViewById(R.id.spinKurir)
-
-        //UBAH ID
+        database = FirebaseDatabase.getInstance().getReference("Users")
+        //namadriver = FirebaseDatabase.getInstance().getReference("DRIVER")
+        onItemSelectedstatus()
+        onItemSelectedkurir()
+        //dataload()
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // get total available quest
@@ -70,12 +66,27 @@ class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
                     // maxid = dataSnapshot.childrenCount.toString()
                     maxidorder=dataSnapshot.childrenCount.toString()
 
-
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+        database.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    currentUser=dataSnapshot.childrenCount.toString()
+
+                }
+
+            }
+
+        })
+
+
         btn_addOrder.setOnClickListener {
             when {
                 ed_nmPengirim.text.isEmpty() -> {
@@ -104,13 +115,15 @@ class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
                 }
                 else -> {
                     saveDataOrder()
+
                 }
             }
         }
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
+
     @SuppressLint("SimpleDateFormat")
     private fun saveDataOrder() {
         val namaPengirim = ed_nmPengirim.text.toString()
@@ -122,12 +135,15 @@ class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
         val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
-       //val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
-        //val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
-        val uidorder =maxidorder!!
+        val tanggal =SimpleDateFormat("dd-mm-yyyy").format(Calendar.getInstance().time)
+        val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
+        val uidorder = maxidorder!!
+        val uiduser = currentUser!!
+
 
         val order = Order(
             uidorder,
+            uiduser,
             namaPengirim,
             noPengirim,
             namaPenerima,
@@ -136,13 +152,17 @@ class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
             berat,
             harga,
             status,
-            kurir
-            //tanggal,
-           // waktu
+            kurir,
+            tanggal,
+            waktu
+
         )
-        val orderid = ref.push().key.toString()
-        //val objek="order"
-        ref.child(orderid).setValue(order).addOnCompleteListener() {
+//        ref.child("uid").setValue(order).addOnCompleteListener(){
+//            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//        }
+
+        val objek = "order"
+        ref.child((objek+maxidorder)).setValue(order).addOnCompleteListener() {
             Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
@@ -154,21 +174,24 @@ class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
             binding.spinStatus.selectedItem
             binding.spinKurir.selectedItem
 
+        }.addOnFailureListener() {
+            Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
         }
+//        ref.child(uid).setValue(order)
+//            .addOnFailureListener { e ->
+//                Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnSuccessListener {
+//                Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//
+//
+//                val orderid = ref.push().key.toString()
+//                ref.child(orderid).setValue(order).addOnCompleteListener() {
+//                    Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//                }
+//            }
     }
-    private fun getIdKurir(){
-        datauser.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                if (dataSnapshot.exists()) {
-
-
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {}
-        })
-    }
 
     private fun onItemSelectedstatus() {
         val option_order = binding.spinStatus
@@ -207,41 +230,10 @@ class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
                 position: Int,
                 id: Long
             ) {
+                val item = parent?.getItemAtPosition(position).toString()
+                status = item
             }
         }
-    }
-    override fun onFirebaseLoadSuccess(kurirList: List<Driver>) {
-        val kurir_name_title = getKurirNameList(kurirList)
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, kurir_name_title)
 
-        spinKurir.adapter = adapter
-    }
-
-    private fun getKurirNameList(kurirList: List<Driver>): List<String> {
-        val result = ArrayList<String>()
-        for (Driver in kurirList)
-            result.add(Driver.name!!)
-        return result
-
-    }
-
-    override fun onFirebaseLoadFailed(message: String) {
-        TODO("Not yet implemented")
-    }
-    private fun getIdKurirList(IdkurirList: List<Driver>): List<String> {
-        val resultIdKurir = ArrayList<String>()
-        for (Driver in IdkurirList)
-            resultIdKurir.add(Driver.uidriver!!)
-        return resultIdKurir
-
-    }
-
-    override fun onFirebaseLoadIdKurirSuccess(IDKurir: List<Driver>) {
-        val getidkurir=getIdKurirList(IDKurir)
-
-    }
-
-    override fun onFirebaseLoadIdKurirFailed(message: String) {
-        TODO("Not yet implemented")
     }
 }
