@@ -122,7 +122,7 @@ class add_order : AppCompatActivity(),FirebaseLoadData,FirebaseLoadIdKurir {
         val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
-       // val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
+       //val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
         //val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
         val uidorder =maxidorder!!
 
