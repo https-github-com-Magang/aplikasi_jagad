@@ -1,5 +1,6 @@
 package com.aplikasijagad.kurir
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,31 +8,45 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.aplikasijagad.AdapterUtil
+import com.aplikasijagad.DetailOrderActivity
+import com.aplikasijagad.MainActivity
+//import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.R
+import com.aplikasijagad.adapter.SuratJalanAdapter
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
+import com.aplikasijagad.models.suratjalan
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_home_kurir.*
-import kotlinx.android.synthetic.main.list_laporan_kurir.*
+import kotlinx.android.synthetic.main.fragment_home_kurir.tv_totkurir
+import kotlinx.android.synthetic.main.list_laporan_kurir.view.*
+import kotlinx.android.synthetic.main.list_suratjalan.view.*
 
 class HomeKurirFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var databasesuratjalan: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
-//    private lateinit var listOrder: MutableList<Order>
-
+    private lateinit var listSuratjalan: MutableList<suratjalan>
+    private lateinit var adapter: SuratJalanAdapter<suratjalan>
+    private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHomeKurirBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().getReference("Users")
+        databasesuratjalan = FirebaseDatabase.getInstance().getReference("suratjalan")
         listUsers = mutableListOf()
+        listSuratjalan = mutableListOf()
+        user = auth.currentUser!!
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_kurir, container, false)
 
@@ -40,16 +55,16 @@ class HomeKurirFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        infoProfile()
+        orderKurir()
 
-        load()
-//        loadLaporan()
     }
 
 
-    private fun load() {
-        val uid = auth.currentUser!!.uid
+    private fun infoProfile() {
+        val uid = user.uid
 
-        database.orderByChild("uid").equalTo(uid)
+        database.getReference("Users").orderByChild("uid").equalTo(uid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     Toast.makeText(
@@ -65,38 +80,55 @@ class HomeKurirFragment : Fragment() {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
                             tv_totkurir.text = data!!.name
-                            tv_totloket.text = data.nik
                         }
                     }
                 }
             })
     }
 
-    private fun munculData() {
+    private fun orderKurir() {
         val uid = auth.currentUser!!.uid
 
-        database.orderByChild("uid").equalTo(uid)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Error",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+        databasesuratjalan.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
 
-                override fun onDataChange(p0: DataSnapshot) {
-                    if (p0.exists()) {
-                        for (userSnapshot in p0.children) {
-                            val data = userSnapshot.getValue(Users::class.java)
-                            data?.let { listUsers.add(it) }
-                            tv_totkurir.text = data!!.name
-                            tv_totloket.text = data.nik
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()) {
+                    for (eventSnapshot in p0.children) {
+                        val data = eventSnapshot.getValue(suratjalan::class.java)
+                        data?.let {
+                            listSuratjalan.add(it)
                         }
                     }
                 }
-            })
+
+               val adapter = SuratJalanAdapter(R.layout.list_suratjalan, listSuratjalan,
+                    { itemView, item ->
+                        itemView.tv_noSTB.text = item.nosuratjalan
+                        itemView.tv_tglsurat.text = item.tanggal
+                        itemView.tv_Tujuan.text = item.tujuan
+                        itemView.tv_drive.text = item.driver
+                }, { _, item ->
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+//                    intent.putExtra("data", item)
+                    startActivity(intent)
+                })
+
+                binding.rvLaporankurir.apply {
+                    this.adapter = this@HomeKurirFragment.adapter
+                    this.layoutManager = LinearLayoutManager(context)
+                }
+            }
+        })
     }
 
-
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            HomeKurirFragment().apply {
+                arguments = Bundle().apply {}
+            }
+    }
 }
+

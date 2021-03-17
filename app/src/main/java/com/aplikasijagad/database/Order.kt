@@ -1,37 +1,40 @@
 package com.aplikasijagad.database
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Order(
-    val uidorder: String,
-    val uiduser: String,
-    val namaPengirim: String,
-    val noPengirim: String,
-    val namaPenerima: String,
-    val noPenerima: String,
-    val alamat: String,
-    val berat:String,
-    val harga:String,
-    val status:String,
-    val kurir: String,
-    val tanggal: String,
-    val waktu: String
+    val uidorder:String = "",
+    val uiuser: String,
+    val namaPengirim: String= "",
+    val noPengirim: String = "",
+    val namaPenerima: String = "",
+    val noPenerima: String = "",
+    val alamat: String = "",
+    val berat:String = "",
+    val harga:String = "",
+    val status:String = "",
+    val kurir: String = "",
+    val tanggal:String ="",
+    val waktu:String=""
 
-){ constructor():
-        this(
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "18-02-2021",
-            "15:44"
+):Parcelable{
+    constructor():
+            this(
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
 
-
-        )
-
+            )
 }

@@ -1,80 +1,69 @@
 package com.aplikasijagad.add
 
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.os.Build
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.icu.util.TimeZone
+
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.databinding.ActivityAddOrderBinding
-import com.aplikasijagad.models.Driver
-import com.aplikasijagad.models.Users
-import com.google.firebase.database.*
-import com.itextpdf.text.Document
-import com.itextpdf.text.Paragraph
-import com.itextpdf.text.pdf.PdfWriter
+
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
-import java.io.FileOutputStream
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
-class add_order : AppCompatActivity(), FirebaseLoadData {
+
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+
+
+class add_order : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddOrderBinding
-    lateinit var ref: DatabaseReference
-    private val STORAGE_CODE: Int = 100
-    private var spinner: Spinner? = null
-    var arrayList: ArrayList<String> = ArrayList()
-    private lateinit var database:DatabaseReference
 
-    lateinit var kurirRef: DatabaseReference
-    lateinit var FirebaseLoadData: FirebaseLoadData
+    private lateinit var ref: DatabaseReference
     private lateinit var orderId: String
-    private var countId: Int = 0
 
-    var maxid: String = ""
+//    private lateinit var namadriver: DatabaseReference
+    private lateinit var database:DatabaseReference
+//    private lateinit var auth: FirebaseAuth
+    private var status: String = ""
+//    private var countId: Int = 0
+//    var maxid: String = ""
     var maxidorder :String =""
+
     private var currentUser: String = ""
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
-        kurirRef = FirebaseDatabase.getInstance().getReference("DRIVER")
-        database = FirebaseDatabase.getInstance().getReference("Users")
-
-        FirebaseLoadData = this
-        kurirRef.addValueEventListener(object : ValueEventListener{
-            var kurirList:MutableList<Driver> = ArrayList<Driver>()
-            override fun onCancelled(error: DatabaseError) {
-                FirebaseLoadData.onFirebaseLoadFailed(error.message)
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (kurirSnapshot in snapshot.children)
-                    kurirSnapshot.getValue<Driver>(Driver::class.java!!)?.let { kurirList.add(it) }
-                FirebaseLoadData.onFirebaseLoadSuccess(kurirList)
-            }
-
-        })
-        onItemSelectedstatus()
 
         orderId = ref.child("Events").push().key!!
 
+        onItemSelectedstatus()
+        onItemSelectedkurir()
+
+        database = FirebaseDatabase.getInstance().getReference("Users")
+        //namadriver = FirebaseDatabase.getInstance().getReference("DRIVER")
+        onItemSelectedstatus()
+        onItemSelectedkurir()
+        //dataload()
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // get total available quest
                 if (dataSnapshot.exists()) {
+                    // maxid = dataSnapshot.childrenCount.toString()
                     maxidorder=dataSnapshot.childrenCount.toString()
 
                 }
@@ -86,16 +75,18 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
             override fun onCancelled(error: DatabaseError) {
 
             }
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     currentUser=dataSnapshot.childrenCount.toString()
 
                 }
+
             }
+
         })
 
-        spinner = findViewById(R.id.spinKurir)
-//        showDataSpinner()
+
         btn_addOrder.setOnClickListener {
             when {
                 ed_nmPengirim.text.isEmpty() -> {
@@ -124,115 +115,55 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
                 }
                 else -> {
                     saveDataOrder()
-                    savePdf()
+
                 }
             }
         }
     }
 
 
-    private fun savePdf(){
 
-        val mDoc = Document()
-        val mFileName = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
-        val mFilePath = Environment.getExternalStorageDirectory().toString() + "/" + mFileName + ".pdf"
-        try {
-            PdfWriter.getInstance(mDoc, FileOutputStream(mFilePath))
 
-            mDoc.open()
-
-            val uidorder = maxidorder!!
-            val uiduser = currentUser!!
-            val namaPengirim = ed_nmPengirim.text.toString()
-            val noPengirim = ed_noPengirim.text.toString()
-            val namaPenerima = ed_nmPenerima.text.toString()
-            val noPenerima = ed_noPenerima.text.toString()
-            val alamat = ed_almtPenerima.text.toString()
-            val berat = ed_beratBarang.text.toString()
-            val harga =ed_harga.text.toString()
-            val status = binding.spinStatus.selectedItem.toString()
-            val kurir = binding.spinKurir.selectedItem.toString()
-            val tanggal =SimpleDateFormat("dd-mm-yyyy").format(Calendar.getInstance().time)
-            val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
-
-            mDoc.addAuthor("Data Order")
-            mDoc.add(Paragraph( "Data Order \n \n" +
-                    "Id Order = " + uidorder + "\n" +
-                    "Id User = " + uiduser + "\n" +
-                    "Tanggal / Waktu = " + tanggal + " / " + waktu + "\n" +
-                    "Nama Pengirim = " + namaPengirim + "\n" +
-                    "No pengirim = " + noPengirim + "\n" +
-                    "Nama Penerima = " + namaPenerima + "\n" +
-                    "No Penerma = "  + noPenerima + "\n" +
-                    "Alamat = " + alamat + "\n" + "Berat = " + berat + "\n" +
-                    "Harga = " + harga + "\n" +
-                    "Status = " + status + "\n" +
-                    "Kurir = "+ kurir))
-
-            mDoc.close()
-
-            Toast.makeText(this, "$mFileName.pdf\n is saved to \n $mFilePath", Toast.LENGTH_SHORT)
-        }
-        catch (e: Exception){
-            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when(requestCode) {
-            STORAGE_CODE -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    savePdf()
-                }
-                else{
-                    Toast.makeText(this, "Permission Denied....", Toast.LENGTH_SHORT)
-                }
-            }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SimpleDateFormat")
     private fun saveDataOrder() {
-        val uidorder = maxidorder!!
-        val uiduser = currentUser!!
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
         val namaPenerima = ed_nmPenerima.text.toString()
         val noPenerima = ed_noPenerima.text.toString()
         val alamat = ed_almtPenerima.text.toString()
         val berat = ed_beratBarang.text.toString()
-        val harga =ed_harga.text.toString()
+        val harga = ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
         val tanggal =SimpleDateFormat("dd-mm-yyyy").format(Calendar.getInstance().time)
         val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
+        val uidorder = maxidorder!!
+        val uiduser = currentUser!!
+
 
         val order = Order(
-         uidorder,
-         uiduser,
-         namaPengirim ,
-         noPengirim,
-         namaPenerima,
-         noPenerima,
-         alamat,
-         berat,
-         harga,
-         status,
-         kurir,
+            uidorder,
+            uiduser,
+            namaPengirim,
+            noPengirim,
+            namaPenerima,
+            noPenerima,
+            alamat,
+            berat,
+            harga,
+            status,
+            kurir,
             tanggal,
             waktu
+
         )
+//        ref.child("uid").setValue(order).addOnCompleteListener(){
+//            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//        }
 
         val objek = "order"
-        val orderid=ref.push().key.toString()
-        ref.child((objek+orderid+maxidorder)).setValue(order).addOnCompleteListener() {
-            Toast.makeText(this,"data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+        ref.child((objek+maxidorder)).setValue(order).addOnCompleteListener() {
+            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
             ed_nmPenerima.setText("")
@@ -246,7 +177,21 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
         }.addOnFailureListener() {
             Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
         }
+//        ref.child(uid).setValue(order)
+//            .addOnFailureListener { e ->
+//                Toast.makeText(this, "data gagal ditambahkan", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnSuccessListener {
+//                Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//
+//
+//                val orderid = ref.push().key.toString()
+//                ref.child(orderid).setValue(order).addOnCompleteListener() {
+//                    Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//                }
+//            }
     }
+
 
     private fun onItemSelectedstatus() {
         val option_order = binding.spinStatus
@@ -269,30 +214,26 @@ class add_order : AppCompatActivity(), FirebaseLoadData {
 
     }
 
-    override fun onFirebaseLoadSuccess(kurirList: List<Driver>) {
-        val kurir_name_title = getKurirNameList(kurirList)
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, kurir_name_title)
+    private fun onItemSelectedkurir() {
+        val option_kurir = binding.spinKurir
+        val options_kurir = arrayOf("phadisa", "vira", "veronika")
+        option_kurir.adapter =
+            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options_kurir)
+        option_kurir.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
 
-        spinKurir.adapter = adapter
-    }
-
-    private fun getKurirNameList(kurirList: List<Driver>): List<String> {
-        val result = ArrayList<String>()
-        for (Driver in kurirList)
-            result.add(Driver.name!!)
-        return result
-
-    }
-
-    override fun onFirebaseLoadFailed(message: String) {
-        TODO("Not yet implemented")
-    }
-
-    private fun getKurirIdList(kurirList: List<Driver>): List<String> {
-        val result = ArrayList<String>()
-        for (Driver in kurirList)
-            result.add(Driver.uid!!)
-        return result
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: android.view.View?,
+                position: Int,
+                id: Long
+            ) {
+                val item = parent?.getItemAtPosition(position).toString()
+                status = item
+            }
+        }
 
     }
 }

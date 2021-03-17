@@ -1,10 +1,10 @@
 package com.aplikasijagad.database
 
 data class SewaKendaraan(
+//    val idSewa:String,
     val nama_pengirim_sewa: String,
     val no_Ktp_sewa: String,
     val kendaraan_sewa: String,
-    val noPolisi: String,
     val hari_sewa: String,
     val deskripsi_hari: String
 ) {
@@ -14,23 +14,23 @@ data class SewaKendaraan(
                 "",
                 "",
                 "",
-                "",
                 ""
 
             )
 }
-
 data class Kendaraan(
 //    val idKendaraan: String,
     val nama_kendaran:String,
     val warna_kendaraan: String,
-    val no_polisi:String
+    val no_polisi:String,
+//    val jenis:String
 ){
     constructor():
             this(
                 "",
                 "",
-                ""
+                "",
 
-                )
+
+            )
 }
