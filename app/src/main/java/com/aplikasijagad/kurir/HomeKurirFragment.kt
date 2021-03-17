@@ -86,7 +86,7 @@ class HomeKurirFragment : Fragment() {
     private fun orderKurir() {
         val uid = auth.currentUser!!.uid
 
-        database.getReference("suratjalan").equalTo(uid).addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").orderByChild("uidSRJ").equalTo(uid).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -101,7 +101,6 @@ class HomeKurirFragment : Fragment() {
                 }
 
                 adapter = AdapterUtil(R.layout.list_suratjalan, listSuratjalan, { itemView, item ->
-                    itemView.tv_noSTB.text = item.nosuratjalan
                     itemView.tv_tglsurat.text = item.tanggal
                     itemView.tv_Tujuan.text = item.tujuan
                     itemView.tv_drive.text = item.driver
@@ -111,7 +110,7 @@ class HomeKurirFragment : Fragment() {
                     startActivity(intent)
                 })
 
-                binding.rvLaporankurir.apply {
+                binding.rvLaporanKurir.apply {
                     this.adapter = this@HomeKurirFragment.adapter
                     this.layoutManager = LinearLayoutManager(context)
                 }

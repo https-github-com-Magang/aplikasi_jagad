@@ -33,8 +33,7 @@ data class Driver(
 
 @Parcelize
 data class suratjalan(
-    val uid :String ="",
-    var nosuratjalan: String = "",
+    val uidSRJ :String ="",
     var driver: String = "",
     var tujuan: String = "",
     var tanggal: String = ""
@@ -45,6 +44,5 @@ data class suratjalan(
         "",
         "",
         "",
-        ""
     )
 }
