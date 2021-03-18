@@ -1,10 +1,15 @@
 package com.aplikasijagad.add
 
+import android.annotation.SuppressLint
+import android.icu.util.Calendar
+import android.icu.util.TimeZone
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
 import com.aplikasijagad.database.Order
@@ -12,25 +17,17 @@ import com.aplikasijagad.databinding.ActivityAddOrderBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
-import android.annotation.SuppressLint
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
-import java.util.*
+import java.text.SimpleDateFormat
 
 class add_order : AppCompatActivity() {
-
     private lateinit var binding: ActivityAddOrderBinding
-    private lateinit var ref: DatabaseReference
-    private lateinit var orderId: String
-
+    lateinit var ref: DatabaseReference
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_order)
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_order)
         ref = FirebaseDatabase.getInstance().getReference("ORDER")
-        orderId = ref.child("Events").push().key!!
-
         onItemSelectedstatus()
         onItemSelectedkurir()
         btn_addOrder.setOnClickListener {
@@ -67,7 +64,8 @@ class add_order : AppCompatActivity() {
     }
 
 
-    @SuppressLint("NewApi")
+    @RequiresApi(Build.VERSION_CODES.N)
+    @SuppressLint("SimpleDateFormat")
     private fun saveDataOrder() {
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
@@ -75,7 +73,7 @@ class add_order : AppCompatActivity() {
         val noPenerima = ed_noPenerima.text.toString()
         val alamat = ed_almtPenerima.text.toString()
         val berat = ed_beratBarang.text.toString()
-        val harga = ed_harga.text.toString()
+        val harga =ed_harga.text.toString()
         val status = binding.spinStatus.selectedItem.toString()
         val kurir = binding.spinKurir.selectedItem.toString()
         val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
@@ -83,23 +81,21 @@ class add_order : AppCompatActivity() {
 
 
         val order = Order(
-            namaPengirim,
-            noPengirim,
-            namaPenerima,
-            noPenerima,
-            alamat,
-            berat,
-            harga,
-            status,
-            kurir,
-            orderId,
-            orderId,
+            namaPengirim ,
+         noPengirim,
+         namaPenerima,
+         noPenerima,
+         alamat,
+         berat,
+         harga,
+         status,
+         kurir,
             tanggal,
             waktu
         )
-        val orderid = ref.push().key.toString()
-        ref.child(orderid).setValue(order).addOnCompleteListener() {
-            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+        val orderid=ref.push().key.toString()
+        ref.child(orderid).setValue(order).addOnCompleteListener(){
+            Toast.makeText(this,"data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             ed_nmPengirim.setText("")
             ed_noPengirim.setText("")
             ed_nmPenerima.setText("")
