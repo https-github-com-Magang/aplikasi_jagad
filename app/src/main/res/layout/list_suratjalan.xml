@@ -24,9 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="6dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0dp"
             android:layout_marginRight="8dp"
             android:fontFamily="@font/poppins_semibold"
             android:maxLines="1"
@@ -36,17 +36,46 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_tglsurat"
-            android:layout_width="134dp"
+            android:id="@+id/tv_tglsurat1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_noSTB"
             android:layout_alignStart="@+id/tv_noSTB"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins_medium"
+            android:hint="SJL20210317"
+            android:maxLines="1"
+            android:text="Tanggal"
+            android:textColorHint="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_tglsurat"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_noSTB"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/tv_tglsurat1"
             android:fontFamily="@font/poppins"
             android:hint="SJL20210317"
             android:maxLines="1"
             android:text="Tanggal"
+            android:textColorHint="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_Tujuan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_tglsurat1"
+            android:layout_alignStart="@+id/tv_tglsurat1"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="1"
+            android:text="Tujuan"
             android:textColorHint="@color/black"
             android:textSize="14sp" />
 
@@ -65,28 +94,51 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_drive1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Tujuan1"
+            android:layout_alignStart="@+id/tv_Tujuan1"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="1"
+            android:text="Driver"
+            android:textColorHint="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
             android:id="@+id/tv_drive"
             android:layout_width="134dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_Tujuan"
             android:layout_alignStart="@+id/tv_Tujuan"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="1dp"
             android:fontFamily="@font/poppins"
             android:maxLines="1"
             android:text="Driver/Truck"
             android:textColorHint="@color/black"
             android:textSize="14sp" />
 
-        <ImageView
-            android:id="@+id/delete"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <TextView
+            android:id="@+id/tv_proses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_noSTB"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="36dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_baseline_delete_24" />
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/background_purple"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="7dp"
+            android:paddingVertical="2dp"
+            android:text="Update"
+            android:textColor="@color/white"
+            android:textColorHint="@color/black"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 

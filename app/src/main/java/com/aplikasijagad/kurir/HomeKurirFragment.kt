@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.MainActivity
-//import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.adapter.SuratJalanAdapter
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
-import com.aplikasijagad.models.suratjalan
+import com.aplikasijagad.models.SURATJALAN
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -30,10 +29,9 @@ class HomeKurirFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
-    private lateinit var databasesuratjalan: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
-    private lateinit var listSuratjalan: MutableList<suratjalan>
-    private lateinit var adapter: SuratJalanAdapter<suratjalan>
+    private lateinit var listSuratjalan: MutableList<SURATJALAN>
+    private lateinit var adapter: AdapterUtil<SURATJALAN>
     private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHomeKurirBinding
 
@@ -43,7 +41,7 @@ class HomeKurirFragment : Fragment() {
     ): View? {
 
         auth = FirebaseAuth.getInstance()
-        databasesuratjalan = FirebaseDatabase.getInstance().getReference("suratjalan")
+        database = FirebaseDatabase.getInstance()
         listUsers = mutableListOf()
         listSuratjalan = mutableListOf()
         user = auth.currentUser!!
@@ -59,7 +57,6 @@ class HomeKurirFragment : Fragment() {
         orderKurir()
 
     }
-
 
     private fun infoProfile() {
         val uid = user.uid
@@ -87,35 +84,34 @@ class HomeKurirFragment : Fragment() {
     }
 
     private fun orderKurir() {
-        val uid = auth.currentUser!!.uid
+        val uid = user.uid
 
-        databasesuratjalan.orderByChild("uid").equalTo(uid).addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").orderByChild("idDriver").equalTo(uid).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     for (eventSnapshot in p0.children) {
-                        val data = eventSnapshot.getValue(suratjalan::class.java)
+                        val data = eventSnapshot.getValue(SURATJALAN::class.java)
                         data?.let {
                             listSuratjalan.add(it)
                         }
                     }
                 }
 
-               val adapter = SuratJalanAdapter(R.layout.list_suratjalan, listSuratjalan,
-                    { itemView, item ->
-                        itemView.tv_noSTB.text = item.nosuratjalan
-                        itemView.tv_tglsurat.text = item.tanggal
-                        itemView.tv_Tujuan.text = item.tujuan
-                        itemView.tv_drive.text = item.driver
+                adapter = AdapterUtil(R.layout.list_suratjalan, listSuratjalan, { itemView, item ->
+                    itemView.tv_noSTB.text = item.uidSRJ
+                    itemView.tv_tglsurat.text = item.tanggal
+                    itemView.tv_Tujuan.text = item.tujuan
+                    itemView.tv_drive.text = item.driver
                 }, { _, item ->
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-//                    intent.putExtra("data", item)
+                    val intent = Intent(requireContext(), DetailOrderActivity::class.java)
+                    intent.putExtra("data", item)
                     startActivity(intent)
                 })
 
-                binding.rvLaporankurir.apply {
+                binding.rvLaporanKurir.apply {
                     this.adapter = this@HomeKurirFragment.adapter
                     this.layoutManager = LinearLayoutManager(context)
                 }
