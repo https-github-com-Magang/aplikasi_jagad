@@ -40,13 +40,7 @@ class DetailOrderActivity : AppCompatActivity() {
         detail_tanggal.text = data?.tanggal
         detail_tujuan.text = data?.tujuan
 
-        amplop()
-    }
-
-    private fun amplop() {
-//        val uid = user.uid
-
-        database.getReference("SURATJALAN").child("SRJ001").child("Amplop").addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").child(data!!.uidSRJ).child("Amplop").orderByChild("idSRJ").equalTo(data.uidSRJ).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -68,8 +62,7 @@ class DetailOrderActivity : AppCompatActivity() {
                     itemView.detail_rincian_jenis.text = item.jenisamplop
                 }, { _, item ->
                     val intent = Intent(applicationContext, DetailOrderActivity::class.java)
-//                    intent.putExtra("data", item)
-                    startActivity(intent)
+//        
                 })
 
                 rvLaporanAmplop.apply {
@@ -79,6 +72,7 @@ class DetailOrderActivity : AppCompatActivity() {
             }
         })
     }
+
 
 //    private fun accepted() {
 //        val builder = AlertDialog.Builder(requireContext())

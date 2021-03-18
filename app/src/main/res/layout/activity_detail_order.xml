@@ -11,7 +11,6 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_putih"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +56,7 @@
                     android:paddingVertical="3dp"
                     android:text="Tanggal"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_totloket2"
@@ -67,7 +66,7 @@
                     android:paddingVertical="3dp"
                     android:text="Driver"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/tv_totloket3"
@@ -77,7 +76,7 @@
                     android:paddingVertical="3dp"
                     android:text="Tujuan"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -95,7 +94,7 @@
                     android:paddingVertical="3dp"
                     android:text="18-08-2020"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/detail_driver"
@@ -105,7 +104,7 @@
                     android:paddingVertical="3dp"
                     android:text="Padhisa"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/detail_tujuan"
@@ -115,38 +114,20 @@
                     android:paddingVertical="3dp"
                     android:text="Bandung"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/green"
-            android:text="@string/diterima" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="200dp"
-            android:layout_height="55dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/red"
-            android:text="@string/ditolak" />
-
         <ScrollView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:layout_below="@+id/linearLayout2"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvLaporanAmplop"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/list_amplop" />
         </ScrollView>
