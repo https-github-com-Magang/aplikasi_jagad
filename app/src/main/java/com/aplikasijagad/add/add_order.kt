@@ -2,7 +2,6 @@ package com.aplikasijagad.add
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -13,7 +12,9 @@ import com.aplikasijagad.databinding.ActivityAddOrderBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_order.*
-import java.text.SimpleDateFormat
+import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import java.util.*
 
 class add_order : AppCompatActivity() {
@@ -66,6 +67,7 @@ class add_order : AppCompatActivity() {
     }
 
 
+    @SuppressLint("NewApi")
     private fun saveDataOrder() {
         val namaPengirim = ed_nmPengirim.text.toString()
         val noPengirim = ed_noPengirim.text.toString()
@@ -79,6 +81,7 @@ class add_order : AppCompatActivity() {
         val tanggal = SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().time)
         val waktu = SimpleDateFormat("HH:mm").format(Calendar.getInstance().timeZone)
 
+
         val order = Order(
             namaPengirim,
             noPengirim,
@@ -87,12 +90,12 @@ class add_order : AppCompatActivity() {
             alamat,
             berat,
             harga,
-            //val waktu : String,
-            //val tanggal : String,
             status,
             kurir,
             orderId,
-            orderId
+            orderId,
+            tanggal,
+            waktu
         )
         val orderid = ref.push().key.toString()
         ref.child(orderid).setValue(order).addOnCompleteListener() {

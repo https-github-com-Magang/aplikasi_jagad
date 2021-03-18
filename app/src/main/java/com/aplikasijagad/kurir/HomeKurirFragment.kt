@@ -51,7 +51,7 @@ class HomeKurirFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         infoProfile()
-        orderKurir()
+//        orderKurir()
     }
 
 
