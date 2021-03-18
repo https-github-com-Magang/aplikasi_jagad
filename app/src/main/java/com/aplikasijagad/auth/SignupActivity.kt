@@ -47,14 +47,14 @@ class SignupActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         btn_admin.setOnClickListener {
-            usertype = "Admin"
+            usertype = "Spv"
             btn_admin.setBackgroundColor(resources.getColor(R.color.gray))
             btn_courier.setBackgroundColor(resources.getColor(R.color.white))
         }
 
         btn_courier.setOnClickListener {
             getLastLocation()
-            usertype = "Courier"
+            usertype = "Driver"
             btn_courier.setBackgroundColor(resources.getColor(R.color.gray))
             btn_admin.setBackgroundColor(resources.getColor(R.color.white))
         }
@@ -74,7 +74,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun signUp() {
         if (checkInput()) {
-            if (usertype == "Admin" || usertype == "Courier") {
+            if (usertype == "Spv" || usertype == "Driver") {
                 val name = et2_name.text.toString().trim()
                 val nik = et2_nik.text.toString().trim()
                 val email = et2_email.text.toString().trim()
@@ -114,14 +114,14 @@ class SignupActivity : AppCompatActivity() {
                                         Toast.LENGTH_LONG
                                     ).show()
 
-                                    if (usertype == "Admin") {
+                                    if (usertype == "Spv") {
                                         startActivity(
                                             Intent(
                                                 this@SignupActivity,
                                                 DashboardAdmin::class.java
                                             )
                                         )
-                                    } else if (usertype == "Courier") {
+                                    } else if (usertype == "Driver") {
                                         startActivity(
                                             Intent(
                                                 this@SignupActivity,
@@ -151,140 +151,109 @@ class SignupActivity : AppCompatActivity() {
             true
     }
 
-    private fun getLastLocation() {
-        if (checkPermission()) {
-            if (isLocationEnabled()) {
-                if (ActivityCompat.checkSelfPermission(
-                        this,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
+    fun getLastLocation(){
+        if(CheckPermission()){
+            if(isLocationEnabled()){
+                if (ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // request permission
-                    ActivityCompat.requestPermissions(
-                        this,
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        REQUEST_LOCATION_PERMISSION
-                    )
+                    ActivityCompat.requestPermissions(this,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION);
                     return
                 }
-                fusedLocationClient.lastLocation.addOnCompleteListener { task ->
-                    val location: Location? = task.result
-                    if (location == null) {
-                        newLocationData()
-                    } else {
-                        newLocationData()
+                fusedLocationClient.lastLocation.addOnCompleteListener { task->
+                    var location:Location? = task.result
+                    if(location == null){
+                        NewLocationData()
+                    }else{
+                        NewLocationData()
                         latitude = location.latitude
                         longitude = location.longitude
-                        val lon1 = Math.toRadians(longitudeT)
-                        val lon2 = Math.toRadians(longitude)
-                        val lat1 = Math.toRadians(latitudeT)
-                        val lat2 = Math.toRadians(latitude)
+                        var lon1 = Math.toRadians(longitudeT)
+                        var lon2 = Math.toRadians(longitude)
+                        var lat1 = Math.toRadians(latitudeT)
+                        var lat2 = Math.toRadians(latitude)
 
-                        val dlon = lon2 - lon1
-                        val dlat = lat2 - lat1
+                        var dlon = lon2 - lon1
+                        var dlat = lat2 - lat1
 
-                        val a =
-                            Math.sin(dlat / 2).pow(2.0) + cos(lat1) * cos(lat2) * sin(dlon / 2).pow(
-                                2.0
-                            )
-                        val c = 2 * asin(sqrt(a))
-                        val r = 6371
-                        val result = c * r
-                        resultInMeter = result * 1000
+                        var a = Math.pow(Math.sin(dlat / 2), 2.0)+ Math.cos(lat1) * Math.cos(lat2)* Math.pow(Math.sin(dlon / 2), 2.0)
+                        var c = 2 * Math.asin(Math.sqrt(a))
+                        var r = 6371
+                        var result = c*r
+                        resultInMeter = result*1000
 
-                        if (resultInMeter >= 100) {
-                            Log.d("statusJarak", "Gagal")
-                        } else
-                            Log.d("statusJarak", "Berhasil")
+                        if (resultInMeter>= 100){
+                            Log.d("statusJarak","Gagal")
+                        }else
+                            Log.d("statusJarak","Berhasil")
 
-                        Log.d("userlocation", "Latitude: " + latitude + " Longtitude: " + longitude)
-                        Log.d("Distance", "jarak = " + resultInMeter + " M")
+                        Log.d("userlocation", "Latitude: "+latitude+" Longtitude: "+longitude)
+                        Log.d("Distance","jarak = "+resultInMeter+" M")
                     }
                 }
-            } else {
-                Toast.makeText(this, "Please Turn on Your device Location", Toast.LENGTH_SHORT)
-                    .show()
+            }else{
+                Toast.makeText(this,"Please Turn on Your device Location",Toast.LENGTH_SHORT).show()
             }
-        } else {
-            requestPermission()
+        }else{
+            RequestPermission()
         }
     }
 
-    private fun newLocationData() {
-        val locationRequest = LocationRequest()
+    fun NewLocationData(){
+        var locationRequest =  LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 0
         locationRequest.fastestInterval = 0
         locationRequest.numUpdates = 1
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // request permission
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION
-            )
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION);
             return
         }
         fusedLocationClient!!.requestLocationUpdates(
-            locationRequest, locationCallback, Looper.myLooper()
+            locationRequest,locationCallback, Looper.myLooper()
         )
     }
 
-    private val locationCallback = object : LocationCallback() {
+    private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(locationResult: LocationResult) {
-            val lastLocation: Location = locationResult.lastLocation
-            Log.d("Debug:", "your last last location: " + lastLocation.longitude.toString())
+            var lastLocation: Location = locationResult.lastLocation
+            Log.d("Debug:","your last last location: "+ lastLocation.longitude.toString())
         }
     }
 
-    private fun checkPermission(): Boolean {
-        if (
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED ||
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
+    private fun CheckPermission():Boolean{
+        if(
+            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        ){
             return true
         }
 
         return false
     }
 
-    private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
+    fun isLocationEnabled():Boolean{
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
-    private fun requestPermission() {
+    fun RequestPermission(){
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
+            arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION),
             REQUEST_LOCATION_PERMISSION
         )
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         //called when user presses ALLOW or DENY from Permission Request Popup
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
-            if (grantResults.isNotEmpty() &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED
-            ) {
+            if (grantResults.size > 0 &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLastLocation()
             }
         }

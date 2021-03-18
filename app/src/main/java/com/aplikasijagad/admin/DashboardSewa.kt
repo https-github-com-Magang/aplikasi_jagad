@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aplikasijagad.add.add_sewa_kendaraan
 import com.aplikasijagad.admin.HomeSewaFragment
-import kotlinx.android.synthetic.main.activity_dashboard_sewa.btn_mobil
+import com.aplikasijagad.master.KendaraanActivity
+import kotlinx.android.synthetic.main.fragment_home_sewa.*
 
 class DashboardSewa : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +15,8 @@ class DashboardSewa : AppCompatActivity() {
         setContentView(R.layout.fragment_home_sewa)
 
 //        btn_motor.setOnClickListener { launchIntent(Add_Sewa::class.java) }
-        btn_mobil.setOnClickListener { launchIntent(HomeSewaFragment::class.java) }
+        btn_sewaa.setOnClickListener { launchIntent(add_sewa_kendaraan::class.java) }
+        btn_kendaraan.setOnClickListener { launchIntent(KendaraanActivity::class.java) }
 
     }
 

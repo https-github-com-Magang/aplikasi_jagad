@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
 import com.aplikasijagad.R
+import com.aplikasijagad.database.Kendaraan
 import com.aplikasijagad.database.Sewa
 import com.aplikasijagad.database.SewaKendaraan
 import com.aplikasijagad.databinding.ActivityAddSewaBinding
 import com.aplikasijagad.databinding.ActivityAddSewaKendaraanBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_sewa.*
@@ -24,12 +26,15 @@ import kotlinx.android.synthetic.main.activity_add_sewa_kendaraan.*
 class add_sewa_kendaraan : AppCompatActivity() {
     private lateinit var binding: ActivityAddSewaKendaraanBinding
     lateinit var ref: DatabaseReference
+    private lateinit var idsewa: FirebaseAuth
     private var status: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_sewa_kendaraan)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_sewa_kendaraan)
+        idsewa = FirebaseAuth.getInstance()
         ref = FirebaseDatabase.getInstance().getReference("SEWA")
+//        ref = FirebaseDatabase.getInstance().getReference("Kendaraan")
 
         btnSewaKendaraan.setOnClickListener {
             when {
@@ -59,6 +64,7 @@ class add_sewa_kendaraan : AppCompatActivity() {
         onItemSelectedkendaraan()
     }
     private fun saveDataSewa() {
+//        val idSewa = idsewa.currentUser!!.uid
         val nama_pengirim_sewa = ed_nama.text.toString()
         val no_Ktp_sewa = ed_noKtp.text.toString()
         val kendaraan_sewa =binding.spinner2.selectedItem.toString()
@@ -66,6 +72,7 @@ class add_sewa_kendaraan : AppCompatActivity() {
         val deskripsi_hari = deskripsi.text.toString()
 
         val sewa = SewaKendaraan(
+//            idSewa,
             nama_pengirim_sewa,
             no_Ktp_sewa,
             kendaraan_sewa,
@@ -82,6 +89,7 @@ class add_sewa_kendaraan : AppCompatActivity() {
             ed_jmlhHari.setText("")
             deskripsi.setText("")
         }
+
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
@@ -15,22 +16,24 @@
                 android:id="@+id/imageView2"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:layout_alignTop="@+id/tv_jagad2"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="45dp"
-                android:src="@drawable/group" />
+                android:layout_alignTop="@+id/layout"
+                android:layout_alignEnd="@+id/linearLayout"
+                android:layout_alignBottom="@+id/layout"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:src="@drawable/ic_baseline_account_circle_24" />
 
             <LinearLayout
                 android:id="@+id/layout"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_alignStart="@+id/linearLayout"
+                android:layout_alignEnd="@+id/linearLayout"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="45dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="100dp"
+                android:layout_marginEnd="60dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -40,13 +43,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_no_adm"
+                        android:id="@+id/tv_selamatDatang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:fontFamily="@font/poppins"
-                        android:text="023108421048"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Selamat Datang"
+                        android:textColor="@color/biru"
                         android:textSize="18sp" />
 
                     <TextView
@@ -63,20 +66,20 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="280dp"
-                android:layout_height="135dp"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="120dp"
-                android:layout_marginEnd="45dp"
-                android:background="@drawable/background_orange2"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="112dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/background_putih"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="237dp"
-                    android:layout_height="108dp"
+                    android:layout_width="116dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -84,39 +87,12 @@
                         android:id="@+id/tv_totkurir"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:fontFamily="@font/poppins"
+                        android:gravity="center"
                         android:text="Total Kurir"
-                        android:textColor="@color/white"
+                        android:textColor="@color/abu"
                         android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tv_totloket"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:text="Total Loket"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/tv_totsewa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:text="Total Sewa"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="206dp"
-                    android:layout_height="108dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_totalkurir"
@@ -124,18 +100,28 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="20 Orang"
-                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="20"
+                        android:textColor="@color/abu"
                         android:textSize="16sp" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="128dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:id="@+id/tv_totalloket"
+                        android:id="@+id/tv_totSuratjalan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="5 Loket"
-                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Total Surat Jalan"
+                        android:textColor="@color/abu"
                         android:textSize="16sp" />
 
                     <TextView
@@ -144,63 +130,101 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="15"
-                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:text="20"
+                        android:textColor="@color/abu"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_totAmplop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Total Amplop"
+                        android:textColor="@color/abu"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_totalloket"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="20"
+                        android:textColor="@color/abu"
                         android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_posisikurir"
-                android:layout_width="104dp"
-                android:layout_height="104dp"
-                android:layout_below="@+id/linearLayout"
-                android:layout_alignStart="@+id/linearLayout"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="45dp"
-                android:background="@drawable/background_putih"
-                android:shadowColor="@color/black"
-                android:text="Posisi Kurir"
-                android:textSize="14sp" />
 
-            <Button
+            <ImageButton
+                android:id="@+id/btn_posisikurir"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
+                android:layout_below="@+id/linearLayout"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="43dp"
+                android:backgroundTint="#CAFCDB"
+                android:src="@drawable/tracking"
+                android:textSize="14sp"
+                app:cornerRadius="5dp" />
+
+            <ImageButton
                 android:id="@+id/btn_sewa"
-                android:layout_width="104dp"
-                android:layout_height="104dp"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
                 android:layout_below="@+id/linearLayout"
                 android:layout_alignEnd="@+id/linearLayout"
                 android:layout_marginTop="45dp"
-                android:layout_marginEnd="0dp"
-                android:background="@drawable/background_putih"
-                android:shadowColor="@color/black"
-                android:text="Sewa"
-                android:textSize="14sp" />
+                android:layout_marginEnd="30dp"
+                android:backgroundTint="#CAFCDB"
+                android:src="@drawable/update_pesanan"
+                android:textSize="14sp"
+                app:cornerRadius="5dp"/>
 
-            <Button
-                android:id="@+id/btn_laporan"
-                android:layout_width="104dp"
-                android:layout_height="104dp"
-                android:layout_below="@+id/btn_sewa"
-                android:layout_alignEnd="@+id/btn_sewa"
-                android:layout_marginTop="45dp"
-                android:layout_marginEnd="0dp"
-                android:background="@drawable/background_putih"
-                android:shadowColor="@color/black"
-                android:text="Laporan"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/btn_loket"
-                android:layout_width="104dp"
-                android:layout_height="104dp"
+            <TextView
+                android:id="@+id/tv_tracking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_posisikurir"
                 android:layout_alignStart="@+id/btn_posisikurir"
-                android:layout_marginTop="45dp"
-                android:background="@drawable/background_putih"
-                android:shadowColor="@color/black"
-                android:text="Loket"
-                android:textSize="14sp" />
+                android:layout_alignEnd="@+id/btn_posisikurir"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="0dp"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="Tracking"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_sewa"
+                android:layout_alignStart="@+id/btn_sewa"
+                android:layout_alignEnd="@+id/btn_sewa"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="0dp"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="Update Pesanan"
+                android:textSize="18sp" />
+
 
         </RelativeLayout>
     </RelativeLayout>

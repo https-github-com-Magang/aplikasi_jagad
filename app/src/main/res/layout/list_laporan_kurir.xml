@@ -31,16 +31,16 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_noKtp"
+            android:id="@+id/tv_alamatPenerima"
             android:layout_width="134dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_pengirim"
             android:layout_alignStart="@+id/tv_pengirim"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/poppins"
-            android:hint="Nuril Febri"
+            android:hint="Lamongan"
             android:maxLines="1"
-            android:text="Nuril Febri"
+            android:text="Lamongan"
             android:textColorHint="@color/black"
             android:textSize="14sp" />
 
@@ -53,9 +53,9 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
-            android:hint="Pengirim :"
+            android:hint="Nuril"
             android:maxLines="1"
-            android:text="Pengirim"
+            android:text="Nuril"
             android:textColorHint="@color/black"
             android:textSize="14sp" />
 

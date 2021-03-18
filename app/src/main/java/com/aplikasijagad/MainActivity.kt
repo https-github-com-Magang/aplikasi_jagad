@@ -35,9 +35,10 @@ class MainActivity : AppCompatActivity() {
             setContentView(R.layout.activity_main)
         }
 
-        btn_admin.setOnClickListener {
-            startActivity(Intent(this@MainActivity, SignupActivity::class.java))
-        }
+//        btn_admin.setOnClickListener {
+//            startActivity(Intent(this@MainActivity, SignupActivity::class.java))
+//        }
+
         btn_kurir.setOnClickListener {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         }
