@@ -38,7 +38,7 @@ class HomeAdminFragment : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Users")
         namadriver = FirebaseDatabase.getInstance().getReference().child("DRIVER")
         databaseAmplop = FirebaseDatabase.getInstance().getReference().child("Amplop")
-        databaseSuratjalan = FirebaseDatabase.getInstance().getReference().child("suratjalan")
+        databaseSuratjalan = FirebaseDatabase.getInstance().getReference().child("SURATJALAN")
 
         listUsers = mutableListOf()
 

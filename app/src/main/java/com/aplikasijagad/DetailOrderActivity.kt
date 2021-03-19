@@ -45,8 +45,9 @@ class DetailOrderActivity : AppCompatActivity() {
 
     private fun amplop() {
 //        val uid = user.uid
+        //Query query = DatabaseRef.getReference().child("Lists").orderByChild("Users").equals("gmail@gmail,com")
 
-        database.getReference("SURATJALAN").child("SRJ001").child("Amplop").addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").child("SRJ001").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
