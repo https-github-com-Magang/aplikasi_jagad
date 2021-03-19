@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aplikasijagad.auth.LoginActivity
 import com.aplikasijagad.models.Amplop
 import com.aplikasijagad.models.SURATJALAN
 import com.google.firebase.auth.FirebaseAuth
@@ -14,7 +13,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_detail_order.*
-import kotlinx.android.synthetic.main.list_amplop.*
 import kotlinx.android.synthetic.main.list_amplop.view.*
 
 class DetailOrderActivity : AppCompatActivity() {
@@ -42,8 +40,14 @@ class DetailOrderActivity : AppCompatActivity() {
         detail_tanggal.text = data?.tanggal
         detail_tujuan.text = data?.tujuan
 
-        database.getReference("SURATJALAN").child(data!!.uidSRJ).child("Amplop")
-            .orderByChild("idSRJ").equalTo(data.uidSRJ).addListenerForSingleValueEvent(object :
+        amplop()
+    }
+
+    private fun amplop() {
+//        val uid = user.uid
+        //Query query = DatabaseRef.getReference().child("Lists").orderByChild("Users").equals("gmail@gmail,com")
+
+        database.getReference("SURATJALAN").child("SRJ001").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -65,7 +69,8 @@ class DetailOrderActivity : AppCompatActivity() {
                     itemView.detail_rincian_jenis.text = item.jenisamplop
                 }, { _, item ->
                     val intent = Intent(applicationContext, DetailOrderActivity::class.java)
-
+//                    intent.putExtra("data", item)
+                    startActivity(intent)
                 })
 
                 rvLaporanAmplop.apply {
@@ -75,4 +80,37 @@ class DetailOrderActivity : AppCompatActivity() {
             }
         })
     }
+
+//    private fun accepted() {
+//        val builder = AlertDialog.Builder(requireContext())
+//        val view = layoutInflater.inflate(R.layout.accepted, null)
+//        builder.setView(view)
+//        val dialog = builder.show()
+//
+//        view.button_logout.setOnClickListener {
+//            dialog.dismiss()
+//            auth.signOut()
+//            val intent = Intent(requireActivity(), MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        view.close_builders.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//    }
+//
+//    private fun rejected() {
+//        val builder = AlertDialog.Builder(requireContext())
+//        val view = layoutInflater.inflate(R.layout.rejected, null)
+//        builder.setView(view)
+//        val dialog = builder.show()
+//
+//        view.button_logout.setOnClickListener {
+//
+//        }
+//
+//        view.close_builders.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//    }
 }

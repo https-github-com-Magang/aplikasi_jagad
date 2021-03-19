@@ -12,8 +12,8 @@ data class Users(
     var phone: String = "",
     var address: String = "",
     var usertype: String = "",
-    val lat: Double? = null,
-    val lng: Double? = null
+    val lat: Double?,
+    val lng: Double?
 ) {
     constructor() : this(
         "", "", "", "", "",
@@ -21,13 +21,19 @@ data class Users(
     )
 }
 
-data class Driver(
-    var uid: String = "",
-    var name: String = ""
+data class DRIVER(
+    var uidDriver: String = "",
+//    var uidSRJ: String="",
+    var name: String="",
+    val lat: Double?,
+    val lng: Double?
+
 ) {
     constructor() : this(
         "",
-        ""
+        "",
+        null,
+        null
     )
 }
 

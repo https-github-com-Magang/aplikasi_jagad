@@ -6,7 +6,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.aplikasijagad.R
-import com.aplikasijagad.database.Kendaraan
 import com.aplikasijagad.databinding.ActivityKendaraanBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -38,7 +37,7 @@ class KendaraanActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
                 else->{
-                saveDataKendaraan()
+                //saveDataKendaraan()
 
             }
             }
@@ -46,30 +45,30 @@ class KendaraanActivity : AppCompatActivity() {
 //        onItemSelectedkendaraan()
     }
 
-    private fun saveDataKendaraan() {
-//        val idKendaraan = idKendaraan.currentUser!!.uid
-        val namaKendaraan = ed_namaKendaraan.text.toString()
-        val warnaKendaraan = ed_warna.text.toString()
-        val noPolisi = ed_noPolisi.text.toString()
+//    private fun saveDataKendaraan() {
+//       val idKendaraan = idKendaraan.currentUser!!.uid
+//        val namaKendaraan = ed_namaKendaraan.text.toString()
+//        val warnaKendaraan = ed_warna.text.toString()
+//        val noPolisi = ed_noPolisi.text.toString()
 //        val jenis = binding.spinJenis.selectedItemId.toString()
-
-        val kendaraan = Kendaraan(
+//
+//        val kendaraan = Kendaraan(
 //            kendaraanid,
-            namaKendaraan,
-            warnaKendaraan,
-            noPolisi,
+//            namaKendaraan,
+//            warnaKendaraan,
+//            noPolisi,
 //            jenis
-        )
-        val kendaraanid = ref.push().key.toString()
-        ref.child(kendaraanid).setValue(kendaraan).addOnCompleteListener {
-            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
-            ed_namaKendaraan.setText("")
-            ed_warna.setText("")
-            ed_noPolisi.setText("")
+//        )
+//        val kendaraanid = ref.push().key.toString()
+//        ref.child(kendaraanid).setValue(kendaraan).addOnCompleteListener {
+//            Toast.makeText(this, "data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+//            ed_namaKendaraan.setText("")
+//            ed_warna.setText("")
+//            ed_noPolisi.setText("")
 //            binding.spinJenis.selectedItem
-
-        }
-    }
+//
+//        }
+//    }
 //    private fun onItemSelectedkendaraan() {
 //        val option = binding.spinJenis
 //        val options = arrayOf( "Motor", "Mobil")
