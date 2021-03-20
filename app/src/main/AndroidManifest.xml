@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
-        <activity android:name=".kurir.PageAdapterActivity"></activity>
+        <activity android:name=".DetailAmplopActivity"></activity>
+        <activity android:name=".kurir.PageAdapterActivity" />
         <activity android:name=".DetailOrderActivity" /> <!-- <activity android:name=".LoketActivity" /> -->
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".MapsActivity" />

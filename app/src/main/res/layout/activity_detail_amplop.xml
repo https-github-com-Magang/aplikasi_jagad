@@ -3,11 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="5dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="3dp"
-    tools:context=".DetailOrderActivity">
+    tools:context=".DetailAmplopActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <TextView
             android:id="@+id/tv_rincian"
             android:layout_width="wrap_content"
@@ -24,9 +23,9 @@
             android:fontFamily="@font/poppins"
             android:maxLines="1"
             android:text="No Amplop :"
-            android:textStyle="bold"
             android:textColor="@color/biru"
-            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +38,7 @@
             android:maxLines="1"
             android:text="AMP001"
             android:textColor="@color/biru"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tv_rincian"
             app:layout_constraintStart_toEndOf="@+id/tv_rincian"
@@ -67,57 +66,52 @@
                     android:id="@+id/tv_totkurir3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
-                    android:fontFamily="@font/poppins"
                     android:paddingLeft="5dp"
+                    android:fontFamily="@font/poppins"
                     android:text="Penerima"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_totloket4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
                     android:fontFamily="@font/poppins"
-                    android:paddingVertical="0dp"
                     android:paddingLeft="5dp"
+                    android:paddingVertical="0dp"
                     android:text="Pengirim"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_totloket5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
-                    android:fontFamily="@font/poppins"
                     android:paddingLeft="5dp"
+                    android:fontFamily="@font/poppins"
                     android:text="Berat Barang"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_totkurir6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
-                    android:fontFamily="@font/poppins"
                     android:paddingLeft="5dp"
+                    android:fontFamily="@font/poppins"
                     android:text="Jenis Amplop"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_totkurir7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
-                    android:fontFamily="@font/poppins"
                     android:paddingLeft="5dp"
+                    android:fontFamily="@font/poppins"
                     android:text="Status"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,60 +121,74 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/detail_rincian_penerima"
+                    android:id="@+id/detail_amplop_penerima"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
                     android:fontFamily="@font/poppins"
-                    android:paddingStart="5dp"
                     android:text="Vira"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/detail_rincian_pengirim"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
-                    android:fontFamily="@font/poppins"
                     android:paddingStart="5dp"
-                    android:text="Padhisa"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/detail_rincian_berat"
+                    android:id="@+id/detail_amplop_pengirim"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
+                    android:fontFamily="@font/poppins"
+                    android:text="Padhisa"
+                    android:paddingStart="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/detail_amplop_berat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
                     android:paddingStart="5dp"
                     android:text="25kg"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/detail_rincian_jenis"
+                    android:id="@+id/detail_amplop_jenis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
                     android:fontFamily="@font/poppins"
-                    android:paddingStart="5dp"
                     android:text="COD"
+                    android:paddingStart="5dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/detail_rincian_status"
+                    android:id="@+id/detail_amplop_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/background_amplop"
                     android:fontFamily="@font/poppins"
-                    android:paddingStart="5dp"
                     android:text="Diproses"
+                    android:paddingStart="5dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <Button
+            android:id="@+id/btn_terima"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/biru"
+            android:text="@string/diterima"/>
+
+        <Button
+            android:id="@+id/btn_tolak"
+            android:layout_width="match_parent"
+            android:layout_below="@id/btn_terima"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/red"
+            android:text="@string/ditolak"/>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

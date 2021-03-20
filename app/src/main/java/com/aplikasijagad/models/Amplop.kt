@@ -3,18 +3,24 @@ package com.aplikasijagad.models
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-
+@Parcelize
 data class Amplop(
-    var uidSRJ: String ="",
+    var idSRJ: String ="",
     var uidDriver: String="",
     var berat: String = "",
     var jenisamplop: String = "",
     var noamplop: String = "",
     var penerima: String = "",
-    var pengirim: String = ""
+    var pengirim: String = "",
+    var status: String = "",
+    var ditolak: String = "",
+    var diterima: String = ""
 
-) {
+): Parcelable  {
     constructor() : this(
+        "",
+        "",
+        "",
         "",
         "",
         "",
