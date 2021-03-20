@@ -50,7 +50,7 @@ class HistoryFragment : Fragment() {
         user = auth.currentUser!!
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
-
+        
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,6 +60,7 @@ class HistoryFragment : Fragment() {
     }
     private fun orderKurir() {
         val uid = user.uid
+
 
         database.getReference("Amplop").addListenerForSingleValueEvent(object :
             ValueEventListener {

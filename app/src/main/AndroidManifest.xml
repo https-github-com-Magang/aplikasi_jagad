@@ -14,12 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
         <activity android:name=".DetailAmplopActivity"></activity>
-        <activity android:name=".kurir.PageAdapterActivity" />
+        <activity android:name=".admin.UpdatePesananActivity"></activity>
+        <activity android:name=".MapsActivity"></activity>
         <activity android:name=".DetailOrderActivity" /> <!-- <activity android:name=".LoketActivity" /> -->
         <activity android:name=".auth.LoginActivity" />
-        <activity android:name=".MapsActivity" />
+
         <activity android:name=".master.KendaraanActivity" />
-        <activity android:name=".LaporanSewa" />
         <activity android:name=".auth.SignupActivity" />
         <activity
             android:name=".add.add_sewa_kendaraan"

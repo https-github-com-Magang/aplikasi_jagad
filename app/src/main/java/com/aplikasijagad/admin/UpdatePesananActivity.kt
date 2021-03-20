@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
+//import com.firebase.ui.FirebaseRecyclerAdapter
 import com.aplikasijagad.R
 import com.aplikasijagad.databinding.ActivityUpdatePesananBinding
 import com.aplikasijagad.models.Amplop
 import com.aplikasijagad.models.SURATJALAN
+import com.firebase.ui.auth.data.model.User
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_detail_order.*
 import kotlinx.android.synthetic.main.activity_update_pesanan.*
@@ -30,6 +32,7 @@ class UpdatePesananActivity : AppCompatActivity() {
     private lateinit var adapter: AdapterUtil<Amplop>
     lateinit var recyclerView: RecyclerView
     private lateinit var database: FirebaseDatabase
+    //lateinit var FirebaseRecyclerAdapter : FirebaseRecyclerAdapter<User , UsersViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,56 +50,39 @@ class UpdatePesananActivity : AppCompatActivity() {
             }
         }
 
-        ref.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()){
-                    amplopList.clear()
-                    for (h in p0.children){
-                        val data = h.getValue(Amplop::class.java)
-                        amplopList.add(data!!)
+
+
+        database.getReference("Amplop").orderByChild("uiDriver").addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.exists()) {
+                        for (eventSnapshot in p0.children) {
+                            val data = eventSnapshot.getValue(Amplop::class.java)
+                            data?.let {
+                                amplopList.add(it)
+                            }
+                        }
+                    }
+
+                    adapter = AdapterUtil(R.layout.list_amplop, amplopList, { itemView, item ->
+                        itemView.tv_rincian.text = item.noamplop
+                        itemView.detail_rincian_penerima.text = item.penerima
+                        itemView.detail_rincian_pengirim.text = item.pengirim
+                        itemView.detail_rincian_berat.text = item.berat
+                        itemView.detail_rincian_jenis.text = item.jenisamplop
+                    }, { _, item ->
+                        val intent = Intent(applicationContext, DetailOrderActivity::class.java)
+//
+                    })
+
+                    rvListAmplop.apply {
+                        adapter = this@UpdatePesananActivity.adapter
+                        layoutManager = LinearLayoutManager(context)
                     }
                 }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-
-
-
-//        database.getReference("Amplop").orderByChild("uiDriver").addListenerForSingleValueEvent(object :
-//                ValueEventListener {
-//                override fun onCancelled(p0: DatabaseError) {}
-//
-//                override fun onDataChange(p0: DataSnapshot) {
-//                    if (p0.exists()) {
-//                        for (eventSnapshot in p0.children) {
-//                            val data = eventSnapshot.getValue(Amplop::class.java)
-//                            data?.let {
-//                                amplopList.add(it)
-//                            }
-//                        }
-//                    }
-//
-//                    adapter = AdapterUtil(R.layout.list_amplop, amplopList, { itemView, item ->
-//                        itemView.tv_rincian.text = item.noamplop
-//                        itemView.detail_rincian_penerima.text = item.penerima
-//                        itemView.detail_rincian_pengirim.text = item.pengirim
-//                        itemView.detail_rincian_berat.text = item.berat
-//                        itemView.detail_rincian_jenis.text = item.jenisamplop
-//                    }, { _, item ->
-//                        val intent = Intent(applicationContext, DetailOrderActivity::class.java)
-////
-//                    })
-//
-//                    rvListAmplop.apply {
-//                        adapter = this@UpdatePesananActivity.adapter
-//                        layoutManager = LinearLayoutManager(context)
-//                    }
-//                }
-//            })
+            })
 
     }
 
