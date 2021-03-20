@@ -28,6 +28,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            app:boxStrokeColor="@color/btn"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_login">
@@ -47,6 +49,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/btn"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="@+id/et_lognik"
             app:layout_constraintStart_toStartOf="@+id/et_lognik"
@@ -65,12 +68,11 @@
         <Button
             android:id="@+id/btn_login"
             android:layout_marginTop="40dp"
-            android:text="Log In"
+            android:text="Login"
             android:textColor="@color/white"
             android:layout_width="254dp"
             android:layout_height="41dp"
             android:background="@drawable/background_orange"
-
             app:layout_constraintEnd_toEndOf="@+id/btn_logcourier"
             app:layout_constraintStart_toStartOf="@+id/btn_logadmin"
             app:layout_constraintTop_toBottomOf="@+id/btn_logcourier" />

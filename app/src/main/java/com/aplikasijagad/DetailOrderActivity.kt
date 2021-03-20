@@ -1,8 +1,8 @@
 package com.aplikasijagad
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aplikasijagad.models.Amplop
 import com.aplikasijagad.models.SURATJALAN
@@ -42,35 +42,52 @@ class DetailOrderActivity : AppCompatActivity() {
 
         database.getReference("SURATJALAN").child(data!!.uidSRJ).child("Amplop")
             .orderByChild("idSRJ").equalTo(data.uidSRJ).addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {}
+                ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {}
 
-            override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()) {
-                    for (eventSnapshot in p0.children) {
-                        val data = eventSnapshot.getValue(Amplop::class.java)
-                        data?.let {
-                            listAmplop.add(it)
+                override fun onDataChange(p0: DataSnapshot) {
+                    if (p0.exists()) {
+                        for (eventSnapshot in p0.children) {
+                            val data = eventSnapshot.getValue(Amplop::class.java)
+                            data?.let {
+                                listAmplop.add(it)
+                            }
                         }
                     }
-                }
 
-                adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
-                    itemView.tv_rincian.text = item.noamplop
-                    itemView.detail_rincian_penerima.text = item.penerima
-                    itemView.detail_rincian_pengirim.text = item.pengirim
-                    itemView.detail_rincian_berat.text = item.berat
-                    itemView.detail_rincian_jenis.text = item.jenisamplop
-                }, { _, item ->
-                    val intent = Intent(applicationContext, DetailOrderActivity::class.java)
-//
-                })
+                    adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
+                        itemView.tv_rincian1.text = item.noamplop
+                        itemView.detail_rincian_penerima.text = item.penerima
+                        itemView.detail_rincian_pengirim.text = item.pengirim
+                        itemView.detail_rincian_berat.text = item.berat
+                        itemView.detail_rincian_jenis.text = item.jenisamplop
+                        itemView.detail_rincian_status.text = item.status
+                    }, { _, item ->
+                        val intent = Intent(this@DetailOrderActivity, DetailAmplopActivity::class.java)
+                        intent.putExtra("data", item)
+                        startActivity(intent)
+                    })
 
-                rvLaporanAmplop.apply {
-                    adapter = this@DetailOrderActivity.adapter
-                    layoutManager = LinearLayoutManager(context)
+                    rvLaporanAmplop.apply {
+                        adapter = this@DetailOrderActivity.adapter
+                        layoutManager = LinearLayoutManager(context)
+                    }
                 }
-            }
-        })
+            })
     }
+
+//    private fun rejected() {
+//        val builder = AlertDialog.Builder(requireContext())
+//        val view = layoutInflater.inflate(R.layout.rejected, null)
+//        builder.setView(view)
+//        val dialog = builder.show()
+//
+//        view.button_logout.setOnClickListener {
+//
+//        }
+//
+//        view.close_builders.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//    }
 }

@@ -44,7 +44,6 @@ data class SURATJALAN(
     var tujuan: String = "",
     var tanggal: String = "",
     var uidDriver: String ="",
-    var idAmplop: String ="",
     var berat: String = "",
     var jenisamplop: String = "",
     var noamplop: String = "",
@@ -57,8 +56,7 @@ data class SURATJALAN(
         "",
         "",
         "",
-        "",
-        "", "",
+        "","",
         "", "","", ""
     )
 }
