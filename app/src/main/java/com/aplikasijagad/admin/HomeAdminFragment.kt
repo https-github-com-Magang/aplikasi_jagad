@@ -58,8 +58,8 @@ class HomeAdminFragment : Fragment() {
         getchildrenscountloket()
         getchildrenscountsewa()
 
-        btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+        btn_update.setOnClickListener {
+            val intents = Intent(requireContext(), UpdatePesananActivity::class.java)
             startActivity(intents)
         }
         btn_posisikurir.setOnClickListener {
