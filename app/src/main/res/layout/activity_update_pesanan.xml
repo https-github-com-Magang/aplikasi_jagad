@@ -39,7 +39,7 @@
             android:hint="Masukkan No Amplop"
             android:inputType="textPersonName"
             android:paddingLeft="15dp"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@color/biru"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -66,8 +66,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvListAmplop"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/list_amplop" />
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/list_suratjalan" />
             </ScrollView>
 
         </LinearLayout>
