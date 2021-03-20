@@ -13,21 +13,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aplikasijagad.AdapterUtil
-import com.aplikasijagad.DetailAmplopActivity
 import com.aplikasijagad.DetailOrderActivity
 
 import com.aplikasijagad.R
 import com.aplikasijagad.databinding.ActivityUpdatePesananBinding
 import com.aplikasijagad.models.Amplop
 import com.aplikasijagad.models.SURATJALAN
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_update_pesanan.*
 import kotlinx.android.synthetic.main.activity_update_pesanan.view.*
@@ -44,9 +39,6 @@ class UpdatePesananActivity : AppCompatActivity() {
     lateinit var searchtext:EditText
     lateinit var recyclerView: RecyclerView
     private lateinit var database: FirebaseDatabase
-    private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
-    private lateinit var listSuratjalan: MutableList<SURATJALAN>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,23 +47,22 @@ class UpdatePesananActivity : AppCompatActivity() {
 
         amplopList = mutableListOf()
         database = FirebaseDatabase.getInstance()
-        auth = FirebaseAuth.getInstance()
-        user = auth.currentUser!!
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_update_pesanan)
 
-        binding.btnSearch.setOnClickListener {
-            if (ed_searchAmplop.text.isEmpty()){
-                Toast.makeText(applicationContext, "Inputan tidak boleh kosong!!", Toast.LENGTH_SHORT)
-            }else{
-                cariAmplop()
-            }
-        }
+//        binding.btCariData.setOnClickListener {
+//            if (ed_searchAmplop.text.isEmpty()){
+//                Toast.makeText(applicationContext, "Inputan tidak boleh kosong!!", Toast.LENGTH_SHORT)
+//            }else{
+//                cariAmplop()
+//            }
+//        }
+//
+//        recyclerView = findViewById(R.id.rvListAmplop)
 
-        recyclerView = findViewById(R.id.rvListAmplop)
 
 
-        val uid = user.uid
-        database.getReference("SURATJALAN").orderByChild("uidDriver").equalTo(uid).addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").orderByChild("uiDriver").addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -80,28 +71,29 @@ class UpdatePesananActivity : AppCompatActivity() {
                     for (eventSnapshot in p0.children) {
                         val data = eventSnapshot.getValue(SURATJALAN::class.java)
                         data?.let {
-                            listSuratjalan.add(it)
+                            amplopList.add(it)
                         }
                     }
                 }
 
-                adapter = AdapterUtil(R.layout.list_suratjalan, listSuratjalan, { itemView, item ->
+                adapter = AdapterUtil(R.layout.list_suratjalan, amplopList, { itemView, item ->
                     itemView.tv_noSTB.text = item.uidSRJ
                     itemView.tv_tglsurat.text = item.tanggal
                     itemView.tv_Tujuan.text = item.tujuan
                     itemView.tv_drive.text = item.driver
                 }, { _, item ->
-                    val intent = Intent(this@UpdatePesananActivity, DetailAmplopActivity::class.java)
+                    val intent = Intent(this@UpdatePesananActivity, DetailOrderActivity::class.java)
                     intent.putExtra("data", item)
                     startActivity(intent)
                 })
 
                 rvListAmplop.apply {
-                    this.adapter = this@UpdatePesananActivity.adapter
-                    this.layoutManager = LinearLayoutManager(context)
+                    adapter = this@UpdatePesananActivity.adapter
+                    layoutManager = LinearLayoutManager(context)
                 }
             }
         })
+
     }
 
     private fun cariAmplop() {
@@ -132,5 +124,3 @@ class UpdatePesananActivity : AppCompatActivity() {
     }
 
 }
-
-
