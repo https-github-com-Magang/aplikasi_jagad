@@ -40,14 +40,8 @@ class DetailOrderActivity : AppCompatActivity() {
         detail_tanggal.text = data?.tanggal
         detail_tujuan.text = data?.tujuan
 
-        amplop()
-    }
-
-    private fun amplop() {
-//        val uid = user.uid
-        //Query query = DatabaseRef.getReference().child("Lists").orderByChild("Users").equals("gmail@gmail,com")
-
-        database.getReference("SURATJALAN").child("SRJ001").addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").child(data!!.uidSRJ).child("Amplop")
+            .orderByChild("idSRJ").equalTo(data.uidSRJ).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -69,8 +63,7 @@ class DetailOrderActivity : AppCompatActivity() {
                     itemView.detail_rincian_jenis.text = item.jenisamplop
                 }, { _, item ->
                     val intent = Intent(applicationContext, DetailOrderActivity::class.java)
-//                    intent.putExtra("data", item)
-                    startActivity(intent)
+//
                 })
 
                 rvLaporanAmplop.apply {
@@ -80,37 +73,4 @@ class DetailOrderActivity : AppCompatActivity() {
             }
         })
     }
-
-//    private fun accepted() {
-//        val builder = AlertDialog.Builder(requireContext())
-//        val view = layoutInflater.inflate(R.layout.accepted, null)
-//        builder.setView(view)
-//        val dialog = builder.show()
-//
-//        view.button_logout.setOnClickListener {
-//            dialog.dismiss()
-//            auth.signOut()
-//            val intent = Intent(requireActivity(), MainActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//        view.close_builders.setOnClickListener {
-//            dialog.dismiss()
-//        }
-//    }
-//
-//    private fun rejected() {
-//        val builder = AlertDialog.Builder(requireContext())
-//        val view = layoutInflater.inflate(R.layout.rejected, null)
-//        builder.setView(view)
-//        val dialog = builder.show()
-//
-//        view.button_logout.setOnClickListener {
-//
-//        }
-//
-//        view.close_builders.setOnClickListener {
-//            dialog.dismiss()
-//        }
-//    }
 }
