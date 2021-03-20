@@ -9,7 +9,7 @@
         tools:context=".admin.UpdatePesananActivity">
 
         <ImageView
-            android:id="@+id/bt_cari_data"
+            android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignTop="@+id/ed_searchAmplop"
@@ -73,8 +73,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
-
 
 </layout>

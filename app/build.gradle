@@ -72,6 +72,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth:20.0.2'
     implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.firebaseui:firebase-ui-database:6.3.0'
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:5.0.0'

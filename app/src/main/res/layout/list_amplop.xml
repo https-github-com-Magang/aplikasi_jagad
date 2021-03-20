@@ -37,7 +37,6 @@
             android:layout_marginStart="6dp"
             android:fontFamily="@font/poppins"
             android:maxLines="1"
-            android:text="AMP001"
             android:textColor="@color/biru"
             android:textSize="14sp"
             android:textStyle="bold"
