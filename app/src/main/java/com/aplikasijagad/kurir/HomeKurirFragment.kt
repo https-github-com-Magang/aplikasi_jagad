@@ -127,4 +127,3 @@ class HomeKurirFragment : Fragment() {
             }
     }
 }
-
