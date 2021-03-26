@@ -34,35 +34,31 @@ class HistoryFragment : Fragment() {
     private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHistoryBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         listAmplop = mutableListOf()
         user = auth.currentUser!!
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
-        
+            DataBindingUtil.inflate(inflater , R.layout.fragment_history , container , false)
+
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        orderKurir()
 
+    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
+        super.onViewCreated(view , savedInstanceState)
+        orderKurir()
     }
+
     private fun orderKurir() {
         val uid = user.uid
 
+        database.getReference("Amplop").orderByChild("uidDriver").equalTo(uid)
 
-        database.getReference("Amplop").addListenerForSingleValueEvent(object :
+            .addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -76,13 +72,13 @@ class HistoryFragment : Fragment() {
                     }
                 }
 
-                adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
+                adapter = AdapterUtil(R.layout.list_amplop , listAmplop , { itemView , item ->
                     itemView.tv_rincian.text = item.noamplop
                     itemView.detail_rincian_penerima.text = item.penerima
                     itemView.detail_rincian_pengirim.text = item.pengirim
                     itemView.detail_rincian_berat.text = item.berat
                     itemView.detail_rincian_jenis.text = item.jenisamplop
-                }, { _, item ->
+                } , { _ , item ->
 //                    val intent = Intent(requireContext(), DetailOrderActivity::class.java)
 //                    intent.putExtra("data", item)
 //                    startActivity(intent)

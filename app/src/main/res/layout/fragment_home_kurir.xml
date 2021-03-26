@@ -86,12 +86,6 @@
                     android:layout_height="match_parent"
                     tools:listitem="@layout/list_suratjalan" />
             </ScrollView>
-
         </LinearLayout>
-
     </RelativeLayout>
-
-
-
-
 </layout>

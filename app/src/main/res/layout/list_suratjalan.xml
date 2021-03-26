@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="0dp"
     app:cardCornerRadius="15dp"
-    app:cardElevation="4dp"
+    app:cardElevation="1dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     tools:ignore="MissingDefaultResource">
@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/background_putih"
         android:padding="10dp">
-
 
         <TextView
             android:id="@+id/tv_noSTB"
@@ -139,7 +138,5 @@
             android:textColor="@color/white"
             android:textColorHint="@color/black"
             android:textSize="14sp" />
-
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>

@@ -14,7 +14,7 @@
         android:layout_height="39dp"
         android:background="@drawable/background_orange"
         android:fontFamily="@font/lato_bold"
-        android:text="Login"
+        android:text="Mulai"
         android:textColor="@color/white"
         android:layout_marginTop="190dp"
         app:layout_constraintEnd_toEndOf="parent"
