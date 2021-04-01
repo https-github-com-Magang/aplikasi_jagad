@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_dashboard_kurir.bottomNavigation
 import kotlinx.android.synthetic.main.fragment_home_kurir.*
 
 class DashboardKurir : AppCompatActivity() {
+
     @SuppressLint("PrivateResource")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

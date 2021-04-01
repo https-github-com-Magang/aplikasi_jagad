@@ -12,8 +12,8 @@ data class Users(
     var phone: String = "",
     var address: String = "",
     var usertype: String = "",
-    val lat: Double? = null,
-    val lng: Double? = null
+    var lat: Double? = null,
+    var lng: Double? = null
 ) {
     constructor() : this(
         "", "", "", "", "",
