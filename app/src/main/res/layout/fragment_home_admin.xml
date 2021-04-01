@@ -183,7 +183,7 @@
                 app:cornerRadius="5dp" />
 
             <ImageButton
-                android:id="@+id/btn_sewa"
+                android:id="@+id/btn_update"
                 android:layout_width="115dp"
                 android:layout_height="115dp"
                 android:layout_below="@+id/linearLayout"
@@ -214,9 +214,9 @@
                 android:id="@+id/tv_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_sewa"
-                android:layout_alignStart="@+id/btn_sewa"
-                android:layout_alignEnd="@+id/btn_sewa"
+                android:layout_below="@+id/btn_update"
+                android:layout_alignStart="@+id/btn_update"
+                android:layout_alignEnd="@+id/btn_update"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="0dp"

@@ -50,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
 
         btn_login.setOnClickListener {
             logIn()
-
         }
     }
 
@@ -170,7 +169,7 @@ class LoginActivity : AppCompatActivity() {
             }
         } else {
             Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG)
-                .show()
+                .show(  )
         }
     }
 }

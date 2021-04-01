@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
                         for (userSnapshot in p0.children) {
                             val pass = userSnapshot.getValue(Users::class.java)
                             pass?.let { listUsers.add(it) }
-                            if (pass!!.usertype == "Admin") {
+                            if (pass!!.usertype == "Spv") {
                                 startActivity(Intent(this@MainActivity, DashboardAdmin::class.java))
-                            } else if (pass!!.usertype == "Courier") {
+                            } else if (pass!!.usertype == "Driver") {
                                 startActivity(Intent(this@MainActivity, DashboardKurir::class.java))
                             }
                         }

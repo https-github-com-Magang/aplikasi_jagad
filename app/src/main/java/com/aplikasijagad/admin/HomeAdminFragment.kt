@@ -1,5 +1,4 @@
 package com.aplikasijagad.admin
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,19 +8,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.aplikasijagad.DashboardSewa
-import com.aplikasijagad.LaporanSewa
 import com.aplikasijagad.MapsActivity
 import com.aplikasijagad.R
-import com.aplikasijagad.add.add_order
-import com.aplikasijagad.add.add_sewa_kendaraan
-import com.aplikasijagad.database.Order
-import com.aplikasijagad.database.SewaKendaraan
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_laporan_sewa.*
 import kotlinx.android.synthetic.main.fragment_home_admin.*
 
 class HomeAdminFragment : Fragment() {
@@ -46,7 +38,7 @@ class HomeAdminFragment : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Users")
         namadriver = FirebaseDatabase.getInstance().getReference().child("DRIVER")
         databaseAmplop = FirebaseDatabase.getInstance().getReference().child("Amplop")
-        databaseSuratjalan = FirebaseDatabase.getInstance().getReference().child("suratjalan")
+        databaseSuratjalan = FirebaseDatabase.getInstance().getReference().child("SURATJALAN")
 
         listUsers = mutableListOf()
 
@@ -66,8 +58,8 @@ class HomeAdminFragment : Fragment() {
         getchildrenscountloket()
         getchildrenscountsewa()
 
-        btn_sewa.setOnClickListener {
-            val intents = Intent(requireContext(), DashboardSewa::class.java)
+        btn_update.setOnClickListener {
+            val intents = Intent(requireContext(), UpdatePesananActivity::class.java)
             startActivity(intents)
         }
         btn_posisikurir.setOnClickListener {
