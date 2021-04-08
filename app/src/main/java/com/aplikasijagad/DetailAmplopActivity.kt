@@ -1,8 +1,10 @@
 package com.aplikasijagad
 
 import android.app.AlertDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.aplikasijagad.models.Amplop
@@ -15,11 +17,12 @@ import kotlinx.android.synthetic.main.rejected.view.*
 
 class DetailAmplopActivity : AppCompatActivity() {
 
+    private lateinit var uri: Uri
     private lateinit var auth: FirebaseAuth
     private lateinit var listAmplop: MutableList<Amplop>
     private lateinit var database: FirebaseDatabase
-    private lateinit var adapter: AdapterUtil<Amplop>
     private lateinit var user: FirebaseUser
+    private lateinit var dropDownText: AutoCompleteTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +55,7 @@ class DetailAmplopActivity : AppCompatActivity() {
 
         btn_terima.setOnClickListener {
             val builder = AlertDialog.Builder(this)
-            val view = layoutInflater.inflate(R.layout.accepted, null)
+            val view = layoutInflater.inflate(R.layout.accepted , null)
             builder.setView(view)
             val dialog = builder.show()
             val penerima = view.findViewById<EditText>(R.id.penerima).text
@@ -72,7 +75,7 @@ class DetailAmplopActivity : AppCompatActivity() {
 
         btn_tolak.setOnClickListener {
             val builder = AlertDialog.Builder(this)
-            val view = layoutInflater.inflate(R.layout.rejected, null)
+            val view = layoutInflater.inflate(R.layout.rejected , null)
             builder.setView(view)
             val dialog = builder.show()
             val ditolak = view.findViewById<EditText>(R.id.penolak).text

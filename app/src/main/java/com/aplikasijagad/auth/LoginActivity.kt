@@ -1,18 +1,14 @@
 package com.aplikasijagad.auth
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ProgressBar
+import android.util.Log
 import android.widget.Toast
 import com.aplikasijagad.admin.DashboardAdmin
 import com.aplikasijagad.kurir.DashboardKurir
 import com.aplikasijagad.R
 import com.aplikasijagad.models.Users
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -36,17 +32,17 @@ class LoginActivity : AppCompatActivity() {
         listUsers = mutableListOf()
         usertype = ""
 
-        btn_logadmin.setOnClickListener {
-            usertype = "Spv"
-            btn_logadmin.setBackgroundColor(resources.getColor(R.color.gray))
-            btn_logcourier.setBackgroundColor(resources.getColor(R.color.white))
-        }
-
-        btn_logcourier.setOnClickListener {
-            usertype = "Driver"
-            btn_logcourier.setBackgroundColor(resources.getColor(R.color.gray))
-            btn_logadmin.setBackgroundColor(resources.getColor(R.color.white))
-        }
+//        btn_logadmin.setOnClickListener {
+//            usertype = "Spv"
+//            btn_logadmin.setBackgroundColor(resources.getColor(R.color.gray))
+//            btn_logcourier.setBackgroundColor(resources.getColor(R.color.white))
+//        }
+//
+//        btn_logcourier.setOnClickListener {
+//            usertype = "Driver"
+//            btn_logcourier.setBackgroundColor(resources.getColor(R.color.gray))
+//            btn_logadmin.setBackgroundColor(resources.getColor(R.color.white))
+//        }
 
         btn_login.setOnClickListener {
             logIn()
@@ -55,82 +51,62 @@ class LoginActivity : AppCompatActivity() {
 
     private fun logIn() {
         if (checkInput()) {
-            if (usertype == "Spv" || usertype == "Driver") {
-                val nik = et2_lognik.text.toString().trim()
-                val password = et2_logpassword.text.toString().trim()
+            val nik = et2_lognik.text.toString().trim()
+            val password = et2_logpassword.text.toString().trim()
 
-                database.orderByChild("nik").equalTo(nik)
-                    .addValueEventListener(object : ValueEventListener {
+            database.orderByChild("nik").equalTo(nik)
+                .addValueEventListener(object : ValueEventListener {
 
-                        override fun onCancelled(p0: DatabaseError) {
+                    override fun onCancelled(p0: DatabaseError) {
+                        Toast.makeText(
+                            this@LoginActivity ,
+                            "Database Error" ,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {  
+                        if (p0.exists()) {
+                            for (userSnapshot in p0.children) {
+                                val pass = userSnapshot.getValue(Users::class.java)
+                                pass?.let {
+                                    listUsers.add(it)
+                                    usertype = pass.usertype
+                                    Log.d("pirapira", usertype)
+                                }
+                                if (pass!!.password == password) {
+                                    loginUser(pass.email , password)
+                                } else {
+                                    Toast.makeText(
+                                        this@LoginActivity ,
+                                        "Wrong Password" ,
+                                        Toast.LENGTH_LONG
+                                    ).show()
+
+                                }
+                            }
+                        } else {
                             Toast.makeText(
-                                this@LoginActivity,
-                                "Database Error",
+                                this@LoginActivity ,
+                                "NIK Not Found" ,
                                 Toast.LENGTH_LONG
                             ).show()
                         }
-
-                        override fun onDataChange(p0: DataSnapshot) {
-                            if (p0.exists()) {
-                                for (userSnapshot in p0.children) {
-                                    val pass = userSnapshot.getValue(Users::class.java)
-                                    pass?.let { listUsers.add(it) }
-                                    if (pass!!.password == password) {
-                                        when (usertype) {
-                                            pass.usertype -> {
-                                                loginUser(pass.email, password)
-
-                                            }
-                                            pass.usertype -> {
-                                                loginUser(pass.email, password)
-
-                                            }
-                                            else -> {
-                                                Toast.makeText(
-                                                    this@LoginActivity,
-                                                    "Select the correct user",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
-                                            }
-                                        }
-                                    } else {
-                                        Toast.makeText(
-                                            this@LoginActivity,
-                                            "Wrong Password",
-                                            Toast.LENGTH_LONG
-                                        ).show()
-
-                                    }
-                                }
-                            } else {
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "NIK Not Found",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-                        }
-                    })
-            } else {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Select User",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+                    }
+                })
         }
     }
 
     private fun checkInput(): Boolean {
         return if (et2_lognik.text.isNullOrBlank() || et2_logpassword.text.isNullOrBlank()) {
-            Toast.makeText(this@LoginActivity, "Fields cannot be null", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@LoginActivity , "Fields cannot be null" , Toast.LENGTH_SHORT).show()
             false
         } else
             true
     }
 
-    private fun loginUser(email: String, password: String) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+    private fun loginUser(email: String , password: String) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email , password)
             .addOnCompleteListener { task ->
                 checkResult(task)
             }
@@ -142,34 +118,34 @@ class LoginActivity : AppCompatActivity() {
                 if (usertype == "Spv") {
                     startActivity(
                         Intent(
-                            this@LoginActivity,
+                            this@LoginActivity ,
                             DashboardAdmin::class.java
                         )
                     )
                 } else if (usertype == "Driver") {
                     startActivity(
                         Intent(
-                            this@LoginActivity,
+                            this@LoginActivity ,
                             DashboardKurir::class.java
                         )
                     )
                 } else {
                     Toast.makeText(
-                        this@LoginActivity,
-                        "No User Detected",
+                        this@LoginActivity ,
+                        "No User Detected" ,
                         Toast.LENGTH_LONG
                     ).show()
                 }
             } else {
                 Toast.makeText(
-                    this@LoginActivity,
-                    "No User Detected",
+                    this@LoginActivity ,
+                    "No User Detected" ,
                     Toast.LENGTH_LONG
                 ).show()
             }
         } else {
-            Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG)
-                .show(  )
+            Toast.makeText(this , "Error: ${task.exception?.message}" , Toast.LENGTH_LONG)
+                .show()
         }
     }
 }

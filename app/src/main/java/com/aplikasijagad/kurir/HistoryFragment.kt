@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aplikasijagad.AdapterUtil
-import com.aplikasijagad.DetailAmplopActivity
 import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.databinding.FragmentHistoryBinding
@@ -28,40 +27,38 @@ import kotlinx.android.synthetic.main.list_amplop.view.*
 import kotlinx.android.synthetic.main.list_suratjalan.view.*
 
 class HistoryFragment : Fragment() {
-
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: FirebaseDatabase
-    private lateinit var listOrder: MutableList<SURATJALAN>
     private lateinit var listAmplop: MutableList<Amplop>
+    private lateinit var database: FirebaseDatabase
     private lateinit var adapter: AdapterUtil<Amplop>
     private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHistoryBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
     ): View? {
-
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         listAmplop = mutableListOf()
         user = auth.currentUser!!
-
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
-        
+            DataBindingUtil.inflate(inflater , R.layout.fragment_history , container , false)
+
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        historyAmplop()
 
-
+    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
+        super.onViewCreated(view , savedInstanceState)
+        orderKurir()
     }
-    private fun historyAmplop() {
+
+    private fun orderKurir() {
         val uid = user.uid
 
-        database.getReference("SURATJALAN").child("Amplop").equalTo(uid).addListenerForSingleValueEvent(object :
+        database.getReference("Amplop").orderByChild("uidDriver").equalTo(uid)
+
+            .addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -75,14 +72,13 @@ class HistoryFragment : Fragment() {
                     }
                 }
 
-                adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
-                    itemView.tv_rincian1.text = item.noamplop
+                adapter = AdapterUtil(R.layout.list_amplop , listAmplop , { itemView , item ->
+                    itemView.tv_rincian.text = item.noamplop
                     itemView.detail_rincian_penerima.text = item.penerima
                     itemView.detail_rincian_pengirim.text = item.pengirim
                     itemView.detail_rincian_berat.text = item.berat
                     itemView.detail_rincian_jenis.text = item.jenisamplop
-                    itemView.detail_rincian_status.text = item.status
-                }, { _, item ->
+                } , { _ , item ->
 //                    val intent = Intent(requireContext(), DetailOrderActivity::class.java)
 //                    intent.putExtra("data", item)
 //                    startActivity(intent)
