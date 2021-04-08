@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -13,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
-        <activity android:name=".kurir.HistoryActivity"></activity>
+        <activity android:name=".DiterimaActivity"></activity>
         <activity android:name=".DetailAmplopActivity" />
         <activity android:name=".admin.UpdatePesananActivity" />
         <activity android:name=".MapsActivity" />
@@ -21,9 +24,6 @@
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".master.KendaraanActivity" />
         <activity android:name=".auth.SignupActivity" />
-        <activity
-            android:name=".add.add_sewa_kendaraan"
-            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".add.add_order"
             android:theme="@style/Theme.Design.Light.NoActionBar" />

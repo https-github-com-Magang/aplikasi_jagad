@@ -51,10 +51,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun logIn() {
         if (checkInput()) {
-            val nik = et2_lognik.text.toString().trim()
+            val phone = et2_logphone.text.toString().trim()
             val password = et2_logpassword.text.toString().trim()
 
-            database.orderByChild("nik").equalTo(nik)
+            database.orderByChild("phone").equalTo(phone)
                 .addValueEventListener(object : ValueEventListener {
 
                     override fun onCancelled(p0: DatabaseError) {
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkInput(): Boolean {
-        return if (et2_lognik.text.isNullOrBlank() || et2_logpassword.text.isNullOrBlank()) {
+        return if (et2_logphone.text.isNullOrBlank() || et2_logpassword.text.isNullOrBlank()) {
             Toast.makeText(this@LoginActivity , "Fields cannot be null" , Toast.LENGTH_SHORT).show()
             false
         } else
