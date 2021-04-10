@@ -19,8 +19,7 @@ class DashboardKurir : AppCompatActivity() {
         addFragment(HomeKurirFragment.newInstance())
         bottomNavigation.show(0)
         bottomNavigation.add(MeowBottomNavigation.Model(0,R.drawable.homeicon))
-        bottomNavigation.add(MeowBottomNavigation.Model(1,R.drawable.list))
-        bottomNavigation.add(MeowBottomNavigation.Model(2,R.drawable.akun))
+        bottomNavigation.add(MeowBottomNavigation.Model(1,R.drawable.akun))
 
         bottomNavigation.setOnClickMenuListener {
             when(it.id){
@@ -28,9 +27,6 @@ class DashboardKurir : AppCompatActivity() {
                     replaceFragment(HomeKurirFragment.newInstance())
                 }
                 1 -> {
-                    replaceFragment(HistoryFragment.newInstance())
-                }
-                2 -> {
                     replaceFragment(ProfileKurirFragment.newInstance())
                 }
                 else -> {

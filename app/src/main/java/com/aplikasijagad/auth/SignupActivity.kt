@@ -94,10 +94,10 @@ class SignupActivity : AppCompatActivity() {
                                 email,
                                 password,
                                 phone,
-                                address,
-                                usertype,
-                                latitude,
-                                longitude
+                                address
+//                                usertype,
+//                                latitude,
+//                                longitude
                             )
                             database.child(uid).setValue(data)
                                 .addOnFailureListener { e ->

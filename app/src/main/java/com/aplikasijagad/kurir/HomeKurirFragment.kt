@@ -36,6 +36,9 @@ class HomeKurirFragment : Fragment() {
     private lateinit var user: FirebaseUser
     private lateinit var binding: FragmentHomeKurirBinding
 
+    var usersReference : DatabaseReference? = null
+    var firebaseUser : FirebaseUser? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +46,10 @@ class HomeKurirFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+        usersReference = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+
         listUsers = mutableListOf()
         listSuratjalan = mutableListOf()
         user = auth.currentUser!!
@@ -62,7 +69,7 @@ class HomeKurirFragment : Fragment() {
     private fun infoProfile() {
         val uid = user.uid
 
-        database.getReference("Users").orderByChild("uid").equalTo(uid)
+        database!!.getReference("Users").orderByChild("uid").equalTo(uid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     Toast.makeText(
@@ -77,7 +84,7 @@ class HomeKurirFragment : Fragment() {
                         for (userSnapshot in p0.children) {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
-                            tv_totkurir.text = data!!.name
+                            binding.tvTotkurir.text = data!!.name
                         }
                     }
                 }

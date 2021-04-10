@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 data class Users(
     var uid: String = "",
+    var profile: String ="",
     var name: String = "",
     var nik: String = "",
     var email: String = "",
@@ -16,7 +17,7 @@ data class Users(
     var lng: Double? = null
 ) {
     constructor() : this(
-        "", "", "", "", "",
+        "", "", "", "", "", "",
         "", "", "", null, null
     )
 }
