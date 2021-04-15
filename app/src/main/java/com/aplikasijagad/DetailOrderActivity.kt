@@ -28,6 +28,11 @@ class DetailOrderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_order)
 
+        val actionbar = supportActionBar
+        actionbar!!.title = "SPB"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         listOrder = mutableListOf()
@@ -35,13 +40,13 @@ class DetailOrderActivity : AppCompatActivity() {
         user = auth.currentUser!!
 
         val data = intent.getParcelableExtra<SURATJALAN>("data")
-        detail_kode.text = data?.uidSRJ
+        detail_kode.text = data?.uidSPB
         detail_driver.text = data?.driver
         detail_tanggal.text = data?.tanggal
         detail_tujuan.text = data?.tujuan
 
-        database.getReference("SURATJALAN").child(data!!.uidSRJ).child("Amplop")
-            .orderByChild("idSRJ").equalTo(data.uidSRJ).addListenerForSingleValueEvent(object :
+        database.getReference("SURATJALAN").child(data!!.uidSPB).child("TTB")
+            .orderByChild("idSPB").equalTo(data.uidSPB).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
@@ -56,11 +61,11 @@ class DetailOrderActivity : AppCompatActivity() {
                     }
 
                     adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
-                        itemView.tv_rincian1.text = item.noamplop
+                        itemView.tv_rincian1.text = item.nottb
                         itemView.detail_rincian_penerima.text = item.penerima
                         itemView.detail_rincian_pengirim.text = item.pengirim
                         itemView.detail_rincian_berat.text = item.berat
-                        itemView.detail_rincian_jenis.text = item.jenisamplop
+                        itemView.detail_rincian_jenis.text = item.jenisttb
                         itemView.detail_rincian_status.text = item.status
                     }, { _, item ->
                         val intent = Intent(this@DetailOrderActivity, DetailAmplopActivity::class.java)
@@ -75,6 +80,11 @@ class DetailOrderActivity : AppCompatActivity() {
                 }
             })
     }
+
+//    override fun onSupportNavigateUp(): Boolean {
+//        onBackPressed()
+//        return true
+//    }
 
 //    private fun rejected() {
 //        val builder = AlertDialog.Builder(requireContext())

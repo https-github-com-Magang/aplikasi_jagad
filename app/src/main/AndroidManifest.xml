@@ -17,10 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiJagad">
         <activity android:name=".DiterimaActivity"></activity>
-        <activity android:name=".DetailAmplopActivity" />
+
+        <activity android:name=".DetailAmplopActivity"
+            android:theme="@style/Theme.Design.Light"/>
+
         <activity android:name=".admin.UpdatePesananActivity" />
-        <activity android:name=".MapsActivity" />
-        <activity android:name=".DetailOrderActivity" /> <!-- <activity android:name=".LoketActivity" /> -->
+        <activity android:name=".MapsActivity"
+            android:theme="@style/Theme.Design.Light"/>
+
+        <activity android:name=".DetailOrderActivity"
+            android:theme="@style/Theme.Design.Light"/>
+
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".master.KendaraanActivity" />
         <activity android:name=".auth.SignupActivity" />

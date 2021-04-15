@@ -49,6 +49,11 @@ class DetailAmplopActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_amplop)
 
+        val actionbar = supportActionBar
+        actionbar!!.title = "Detail TTB"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         storageRef = FirebaseStorage.getInstance().reference.child("Bukti images")
@@ -56,8 +61,9 @@ class DetailAmplopActivity : AppCompatActivity() {
         user = auth.currentUser!!
 
         val data = intent.getParcelableExtra<Amplop>("data")
+        tv_rincian1.text = data?.nottb
         detail_amplop_berat.text = data?.berat
-        detail_amplop_jenis.text = data?.jenisamplop
+        detail_amplop_jenis.text = data?.jenisttb
         detail_amplop_penerima.text = data?.penerima
         detail_amplop_pengirim.text = data?.pengirim
         detail_amplop_status.text = data?.status
@@ -70,10 +76,10 @@ class DetailAmplopActivity : AppCompatActivity() {
             btn_tolak.visibility = View.VISIBLE
         }
 
-        val idSRJ = data?.idSRJ.toString()
-        val idAMP = data?.noamplop.toString()
-        val amplop = database.getReference("SURATJALAN").child(idSRJ).child("Amplop")
-            .child(idAMP)
+        val idSPB = data?.idSPB.toString()
+        val idTTB = data?.nottb.toString()
+        val amplop = database.getReference("SURATJALAN").child(idSPB).child("TTB")
+            .child(idTTB)
 
 
         btn_terima.setOnClickListener {
@@ -81,12 +87,12 @@ class DetailAmplopActivity : AppCompatActivity() {
             startActivity(Intent(this, DiterimaActivity::class.java))
 
 //            val builder = AlertDialog.Builder(this)
-//            val view = layoutInflater.inflate(R.layout.accepted , null)
+//            val view = layoutInflater.inflate(R.layout.accepted, null)
 //            builder.setView(view)
 //            val dialog = builder.show()
 //            val penerima = view.findViewById<EditText>(R.id.penerima).text
 //
-//            view.save_data.setOnClickListener {
+//            view.save_builder.setOnClickListener {
 //                amplop.child("diterima").setValue(penerima.toString())
 //                amplop.child("status").setValue("Diterima")
 //                dialog.dismiss()
@@ -101,7 +107,7 @@ class DetailAmplopActivity : AppCompatActivity() {
 
         btn_tolak.setOnClickListener {
             val builder = AlertDialog.Builder(this)
-            val view = layoutInflater.inflate(R.layout.rejected , null)
+            val view = layoutInflater.inflate(R.layout.rejected, null)
             builder.setView(view)
             val dialog = builder.show()
             val ditolak = view.findViewById<EditText>(R.id.penolak).text
@@ -119,5 +125,10 @@ class DetailAmplopActivity : AppCompatActivity() {
             }
         }
     }
+//
+//    override fun onSupportNavigateUp(): Boolean {
+//        onBackPressed()
+//        return true
+//    }
 
 }

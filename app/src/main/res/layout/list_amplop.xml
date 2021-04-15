@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:maxLines="1"
-            android:text="No Amplop :"
+            android:text="No TTB :"
             android:textStyle="bold"
             android:textColor="@color/biru"
             android:textSize="14sp"
@@ -103,7 +103,7 @@
                     android:background="@drawable/background_amplop"
                     android:fontFamily="@font/poppins"
                     android:paddingLeft="5dp"
-                    android:text="Jenis Amplop"
+                    android:text="Jenis TTB"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 

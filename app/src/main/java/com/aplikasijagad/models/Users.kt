@@ -44,7 +44,8 @@ data class SURATJALAN(
     var jenisamplop: String = "",
     var noamplop: String = "",
     var penerima: String = "",
-    var pengirim: String = ""
+    var pengirim: String = "",
+    var uidSPB: String =""
 
 ): Parcelable {
     constructor() : this(

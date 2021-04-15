@@ -16,10 +16,16 @@ data class Amplop(
     var ditolak: String = "",
     var diterima: String = "",
     var pilihpenerima: String= "",
-    var imageUrl: String= ""
+    var imageUrl: String= "",
+    var jenisttb: String= "",
+    var idSPB: String= "",
+    var nottb: String= ""
 
 ): Parcelable  {
     constructor() : this(
+        "",
+        "",
+        "",
         "",
         "",
         "",

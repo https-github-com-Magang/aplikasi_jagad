@@ -8,23 +8,49 @@
         android:layout_height="match_parent"
         tools:context=".DiterimaActivity">
 
-        <Spinner
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/spinStatus"
-            android:layout_width="340dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:scrollbarSize="4dp"
-            android:spinnerMode="dropdown"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Light"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="70dp"
+            android:orientation="vertical"
+            android:hint="@string/penerima"
+            android:textColorHint="@color/black"
+            app:endIconMode="dropdown_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/dropdown_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:editable="false"
+                android:fontFamily="@font/poppins"
+                android:textSize="7pt"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <Spinner-->
+<!--            android:id="@+id/spinStatus"-->
+<!--            android:layout_width="340dp"-->
+<!--            android:layout_height="45dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:padding="10dp"-->
+<!--            android:scrollbarSize="4dp"-->
+<!--            android:spinnerMode="dropdown"-->
+<!--            android:theme="@style/ThemeOverlay.MaterialComponents.Light"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/teksbuil"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="340dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:boxStrokeColor="@color/btn"
@@ -64,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.53" />
+            app:layout_constraintVertical_bias="0.63" />
 
         <Button
             android:id="@+id/save_data"
@@ -76,9 +102,6 @@
             app:layout_constraintEnd_toEndOf="@+id/teksbuil"
             app:layout_constraintStart_toStartOf="@+id/teksbuil"
             app:layout_constraintTop_toBottomOf="@+id/capture_btn" />
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

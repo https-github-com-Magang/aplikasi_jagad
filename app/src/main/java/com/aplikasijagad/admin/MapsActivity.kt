@@ -36,6 +36,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
+        val actionbar = supportActionBar
+        actionbar!!.title = "Maps"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         database = FirebaseDatabase.getInstance().getReference("DRIVER")
         databasesuratjalan = FirebaseDatabase.getInstance().getReference("SURATJALAN")
 
@@ -104,6 +109,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             draw(Canvas(bitmap))
             BitmapDescriptorFactory.fromBitmap(bitmap)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 //    private fun loadMarkersFromDB(){

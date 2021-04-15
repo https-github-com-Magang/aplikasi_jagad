@@ -111,7 +111,7 @@ class HomeKurirFragment : Fragment() {
                 }
 
                 adapter = AdapterUtil(R.layout.list_suratjalan, listSuratjalan, { itemView, item ->
-                    itemView.tv_noSTB.text = item.uidSRJ
+                    itemView.tv_noSTB.text = item.uidSPB
                     itemView.tv_tglsurat.text = item.tanggal
                     itemView.tv_Tujuan.text = item.tujuan
                     itemView.tv_drive.text = item.driver

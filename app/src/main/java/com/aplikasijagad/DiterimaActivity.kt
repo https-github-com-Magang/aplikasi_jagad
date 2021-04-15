@@ -20,6 +20,7 @@ import com.aplikasijagad.models.Amplop
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -39,7 +40,6 @@ class DiterimaActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var listAmplop: MutableList<Amplop>
 
-
     private val PERMISSION_CODE = 1000
     private val IMAGE_CAPTURE_CODE = 1001
     var image_uri: Uri? = null
@@ -47,7 +47,8 @@ class DiterimaActivity : AppCompatActivity() {
     private var storageRef: StorageReference? = null
     private lateinit var user: FirebaseUser
 
-
+    private lateinit var textInputLayout: TextInputLayout
+    private lateinit var dropDownText: AutoCompleteTextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +61,7 @@ class DiterimaActivity : AppCompatActivity() {
 
         storageRef = FirebaseStorage.getInstance().reference.child("Bukti images")
 
+        dropDown()
         val penerima = findViewById<EditText>(R.id.penerima).text
 
         val data = intent.getParcelableExtra<Amplop>("data")
@@ -103,6 +105,33 @@ class DiterimaActivity : AppCompatActivity() {
             btn_terima.visibility = View.INVISIBLE
             btn_tolak.visibility = View.INVISIBLE
         }
+    }
+
+    private fun dropDown() {
+        textInputLayout = findViewById(R.id.spinStatus)
+        dropDownText = findViewById(R.id.dropdown_text)
+
+        val items = arrayOf(
+            "Satpam" ,
+            "Teman Kantor" ,
+            "Temen Kerja" ,
+            "Temen Dekat" ,
+            "Sahabat Selamanya" ,
+            "Orang Rumah"
+        )
+
+        val adapter = ArrayAdapter(
+            this ,
+            R.layout.dropddown_item ,
+            items
+        )
+
+        dropDownText.setAdapter(adapter)
+        dropDownText.onItemClickListener =
+            AdapterView.OnItemClickListener { p0 , p1 , p2 , p3 ->
+                val category = items[p2]
+                dropDownText.setText(category)
+            }
     }
 
 //    private fun onItemSelectedStatus() {
