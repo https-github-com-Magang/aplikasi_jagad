@@ -11,9 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTintMode="screen"
-        android:layout_margin="10dp">
+        android:layout_height="116dp"
+        android:layout_margin="10dp"
+        android:backgroundTintMode="screen">
 
         <ImageView
             android:id="@+id/close_builder"
@@ -36,13 +36,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/penerima"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Nama Penerima"
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/penerima"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Nama Penerima"
+                android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

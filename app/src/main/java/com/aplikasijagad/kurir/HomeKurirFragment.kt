@@ -1,18 +1,26 @@
 package com.aplikasijagad.kurir
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aplikasijagad.API.Repository
 import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
 import com.aplikasijagad.MainActivity
 import com.aplikasijagad.R
+import com.aplikasijagad.ViewModel.MainViewModel
+import com.aplikasijagad.ViewModel.MainViewModelFactory
+import com.aplikasijagad.adapter.ResiAdapter
 import com.aplikasijagad.adapter.SuratJalanAdapter
 import com.aplikasijagad.database.Order
 import com.aplikasijagad.models.Users
@@ -22,11 +30,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home_kurir.tv_totkurir
+import kotlinx.android.synthetic.main.list_amplop.view.*
 import kotlinx.android.synthetic.main.list_laporan_kurir.view.*
 import kotlinx.android.synthetic.main.list_suratjalan.view.*
 
 class HomeKurirFragment : Fragment() {
-
+    private lateinit var viewModel: MainViewModel
+    private val myAdapter by lazy {
+        ResiAdapter()
+    }
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var listUsers: MutableList<Users>
@@ -39,7 +51,9 @@ class HomeKurirFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         listUsers = mutableListOf()
@@ -49,13 +63,33 @@ class HomeKurirFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_kurir, container, false)
 
         return binding.root
+
+
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        infoProfile()
-        orderKurir()
 
+        //reclerview show
+        viewModel.getResiviewModel()
+        viewModel.myResponse.observe(this, Observer { response ->
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    myAdapter.setData(it)
+                }
+            } else {
+            }
+        })
+
+        setupRecylerview()
+        infoProfile()
+        //orderKurir()
+
+    }
+    private fun setupRecylerview() {
+        val recylerView = binding.rvLaporanKurir
+        recylerView.adapter = myAdapter
+        recylerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun infoProfile() {
@@ -85,11 +119,15 @@ class HomeKurirFragment : Fragment() {
 
     private fun orderKurir() {
         val uid = user.uid
+        database.getReference("SURATJALAN").child("SRJ001").child("Amplop").orderByChild("idSRJ")
+            .addListenerForSingleValueEvent(object :ValueEventListener{
+//        database.getReference("SURATJALAN").child("SRJ003").child("Amplop")
+//            .addListenerForSingleValueEvent(object :ValueEventListener{
 
-        database.getReference("SURATJALAN")
-            .orderByChild("uidDriver")
-            .equalTo(uid).addListenerForSingleValueEvent(object :
-            ValueEventListener {
+//        database.getReference("SURATJALAN")
+//            .orderByChild("uidDriver")
+//            .equalTo(uid).addListenerForSingleValueEvent(object :
+//            ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -102,11 +140,12 @@ class HomeKurirFragment : Fragment() {
                     }
                 }
 
-                adapter = AdapterUtil(R.layout.list_suratjalan, listSuratjalan, { itemView, item ->
-                    itemView.tv_noSTB.text = item.uidSRJ
-                    itemView.tv_tglsurat.text = item.tanggal
-                    itemView.tv_Tujuan.text = item.tujuan
-                    itemView.tv_drive.text = item.driver
+                adapter = AdapterUtil(R.layout.list_amplop, listSuratjalan, { itemView, item ->
+                    itemView.tv_Rincian1.text = item.noamplop
+                    itemView.detail_rincian_penerima.text = item.penerima
+                    itemView.detail_rincian_pengirim.text = item.pengirim
+                    itemView.detail_rincian_berat.text = item.berat
+                    itemView.detail_rincian_jenis.text = item.jenisamplop
                 }, { _, item ->
                     val intent = Intent(requireContext(), DetailOrderActivity::class.java)
                     intent.putExtra("data", item)

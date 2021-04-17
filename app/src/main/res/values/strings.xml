@@ -35,6 +35,9 @@
     <string name="rp_20_000">Rp. 20.000</string>
     <string name="diterima">Diterima</string>
     <string name="ditolak">Ditolak</string>
+    <string name="Return">return</string>
+    <string name="satpam">satpam</string>
+    <string name="TemanKantor">temankantor</string>
 
     <string-array name="status">
         <item>Status Pembayaran</item>

@@ -1,34 +1,26 @@
 package com.aplikasijagad.admin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
-
 import com.aplikasijagad.R
+import com.aplikasijagad.adapter.CariAdapter
 import com.aplikasijagad.databinding.ActivityUpdatePesananBinding
-import com.aplikasijagad.models.Amplop
 import com.aplikasijagad.models.SURATJALAN
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_update_pesanan.*
-import kotlinx.android.synthetic.main.activity_update_pesanan.view.*
-import kotlinx.android.synthetic.main.list_amplop.*
-import kotlinx.android.synthetic.main.list_amplop.view.*
 import kotlinx.android.synthetic.main.list_suratjalan.view.*
+
 
 class UpdatePesananActivity : AppCompatActivity() {
 
@@ -39,8 +31,8 @@ class UpdatePesananActivity : AppCompatActivity() {
     lateinit var searchtext:EditText
     lateinit var recyclerView: RecyclerView
     private lateinit var database: FirebaseDatabase
-
-
+    private var listData: ArrayList<SURATJALAN>? = null
+      var databaseReference = FirebaseDatabase.getInstance().reference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -50,16 +42,18 @@ class UpdatePesananActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_update_pesanan)
 
-//        binding.btCariData.setOnClickListener {
-//            if (ed_searchAmplop.text.isEmpty()){
-//                Toast.makeText(applicationContext, "Inputan tidak boleh kosong!!", Toast.LENGTH_SHORT)
-//            }else{
-//                cariAmplop()
-//            }
-//        }
-//
-//        recyclerView = findViewById(R.id.rvListAmplop)
+        //cari data
+        country_search.setOnClickListener {
+            if (country_search.isEmpty()){
+                Toast.makeText(applicationContext, "Inputan tidak boleh kosong!!", Toast.LENGTH_SHORT)
+            }else{
+              //  cariAmplop()
 
+            }
+        }
+
+        //showEnviroBoxListFirebase()
+        recyclerView = findViewById(R.id.rvListAmplop)
 
 
         database.getReference("SURATJALAN").orderByChild("uiDriver").addListenerForSingleValueEvent(object :
@@ -93,34 +87,61 @@ class UpdatePesananActivity : AppCompatActivity() {
                 }
             }
         })
-
     }
 
-    private fun cariAmplop() {
 
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.list_amplop, null)
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-            .setTitle("Data Found!")
+//    private var mAdapter: CariAdapter? = null
+//    private fun setupRecyclerview(data: ArrayList<SURATJALAN>) {
+//
+//        //set data recylerview
+//        mAdapter = CariAdapter(data)
+//        rvListAmplop.setAdapter(mAdapter)
+//        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+//        rvListAmplop.setLayoutManager(layoutManager)
+//        rvListAmplop.setItemAnimator(DefaultItemAnimator())
+//
+//    }
+//    private fun sortedArray(
+//        data: ArrayList<SURATJALAN> ,
+//        query: String
+//    ): ArrayList<SURATJALAN>? {
+//        val tempData: ArrayList<SURATJALAN> = ArrayList()
+//        for (i in 0 until data.size) {
+//            if (data[i].driver.toLowerCase().contains(query)) {
+//                tempData.add(data[i])
+//            }
+//        }
+//        return tempData
+//    }
+//    private fun showEnviroBoxListFirebase() {
+//        databaseReference.child("SURATJALAN").addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                listData = ArrayList()
+//                for (item in snapshot.children) {
+//                    val suratjalan: SURATJALAN = item.getValue(SURATJALAN::class.java)!!
+//                    suratjalan.uidSRJ= item.toString()
+//                    listData!!.add(suratjalan)
+//                }
+//                setupRecyclerview(listData!!)
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {}
+//        })
+//    }
 
-        val mAlertDialog = mBuilder.show()
-
-        val tv_rincian1 = mDialogView.findViewById<TextView>(R.id.tv_rincian1)
-
-
-        FirebaseDatabase.getInstance().reference
-            .child("Amplop")
-            .orderByChild("noamplop").equalTo(ed_searchAmplop.text.toString().trim())
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                }
-
-                override fun onDataChange(p0: DataSnapshot) {
-                    var map = p0.children.first().value as Map<String, String>
-                    tv_rincian1.text = map["noamplop"].toString()
-
-                }
-            })
-    }
+//    private fun cariAmplop() {
+//        val searchView: SearchView = country_search as SearchView
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(s: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(s: String?): Boolean {
+//                setupRecyclerview(sortedArray(listData!! , s!!)!!)
+//                return true
+//            }
+//        })
+//        searchView.setQueryHint("Search")
+//    }
 
 }

@@ -37,7 +37,7 @@ class DetailAmplopActivity : AppCompatActivity() {
         detail_amplop_pengirim.text = data?.pengirim
         detail_amplop_status.text = data?.status
 
-        if (data?.status == "Ditolak" || data?.status == "Diterima") {
+        if (data?.status == "Return" || data?.status == "Diterima") {
             btn_terima.visibility = View.INVISIBLE
             btn_tolak.visibility = View.INVISIBLE
         } else {
@@ -78,8 +78,8 @@ class DetailAmplopActivity : AppCompatActivity() {
             val ditolak = view.findViewById<EditText>(R.id.penolak).text
 
             view.save_builders.setOnClickListener {
-                amplop.child("ditolak").setValue(ditolak.toString())
-                amplop.child("status").setValue("Ditolak")
+                amplop.child("return").setValue(ditolak.toString())
+                amplop.child("status").setValue("Return")
                 dialog.dismiss()
                 btn_terima.visibility = View.INVISIBLE
                 btn_tolak.visibility = View.INVISIBLE

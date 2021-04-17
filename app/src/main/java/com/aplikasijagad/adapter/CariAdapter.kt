@@ -7,30 +7,34 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.aplikasijagad.R
+import com.aplikasijagad.databinding.ListSuratjalanBinding
 import com.aplikasijagad.models.Amplop
 import com.aplikasijagad.models.SURATJALAN
+import com.itextpdf.text.ListItem
 
-class CariAdapter (val mCtx: Context , val layoutResId: Int , val dataList: List<SURATJALAN>) :
-    ArrayAdapter<SURATJALAN>(mCtx, layoutResId, dataList) {
+class CariAdapter (private val cari: List<SURATJALAN>) : RecyclerView.Adapter<CariAdapter.CariViewHolder>(){
+    //var listener: AdapterListener<DummyParent>? = null
+    inner class CariViewHolder(val listitemcaribinding:ListSuratjalanBinding)
+        :RecyclerView.ViewHolder(listitemcaribinding.root)
 
-    override fun getView(position: Int , convertView: View? , parent: ViewGroup): View {
-        val layoutInflater: LayoutInflater = LayoutInflater.from(mCtx)
-        val view: View = layoutInflater.inflate(layoutResId , null)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CariViewHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.list_suratjalan,
+            parent,
+            false
+        )
+    )
 
-        //read data target
-        val tv_rincian = view.findViewById<TextView>(R.id.tv_rincian)
-        val detail_rincian_penerima = view.findViewById<TextView>(R.id.detail_rincian_penerima)
-        val detail_rincian_pengirim = view.findViewById<TextView>(R.id.detail_rincian_pengirim)
-        val detail_rincian_jenis = view.findViewById<TextView>(R.id.detail_rincian_jenis)
-        val detail_rincian_status = view.findViewById<TextView>(R.id.detail_rincian_status)
+    override fun getItemCount() = cari.size
 
 
-        val data = dataList[position]
+    override fun onBindViewHolder(holder: CariViewHolder , position: Int) {
 
-        tv_rincian.text = data.noamplop
-
-        return view
+        holder.listitemcaribinding.tvDrive.text=cari[position].driver
     }
 }
 

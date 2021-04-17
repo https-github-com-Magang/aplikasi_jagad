@@ -76,7 +76,7 @@ class HistoryFragment : Fragment() {
                 }
 
                 adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
-                    itemView.tv_rincian1.text = item.noamplop
+                    itemView.tv_Rincian1.text = item.noamplop
                     itemView.detail_rincian_penerima.text = item.penerima
                     itemView.detail_rincian_pengirim.text = item.pengirim
                     itemView.detail_rincian_berat.text = item.berat
