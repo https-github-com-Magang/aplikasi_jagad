@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/accepted"
     android:layout_width="350dp"
-    android:layout_height="wrap_content"
+    android:layout_height="220dp"
     android:layout_gravity="center"
     app:cardCornerRadius="10dp"
     android:backgroundTint="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:backgroundTintMode="screen"
-        android:layout_margin="10dp">
+        android:layout_height="116dp"
+        android:layout_margin="10dp"
+        android:backgroundTintMode="screen">
 
         <ImageView
             android:id="@+id/close_builder"
@@ -25,29 +25,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_close_24" />
 
-        <Spinner
-            android:id="@+id/spinStatus"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="50dp"
-            android:padding="10dp"
-            android:scrollbarSize="4dp"
-            android:spinnerMode="dropdown"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/teksbuil"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="50dp"
             app:boxStrokeColor="@color/btn"
-            app:layout_constraintEnd_toEndOf="@+id/spinStatus"
-            app:layout_constraintStart_toStartOf="@+id/spinStatus"
-            app:layout_constraintTop_toBottomOf="@+id/spinStatus">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <EditText
                 android:id="@+id/penerima"
@@ -58,42 +45,16 @@
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="193dp"
-            android:layout_height="168dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/teksbuil"
-            app:layout_constraintVertical_bias="0.078"
-            app:srcCompat="@drawable/ic_baseline_image_24" />
-
         <Button
-            android:id="@+id/capture_btn"
-            android:layout_width="115dp"
-            android:layout_height="39dp"
-            android:background="@drawable/roundbtn"
-            android:text="Capture"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_view"
-            app:layout_constraintVertical_bias="0.085" />
-
-        <Button
-            android:id="@+id/save_data"
+            android:id="@+id/save_builder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:backgroundTint="@color/biru"
             android:text="Simpan"
             app:layout_constraintEnd_toEndOf="@+id/teksbuil"
             app:layout_constraintStart_toStartOf="@+id/teksbuil"
-            app:layout_constraintTop_toBottomOf="@+id/capture_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/teksbuil" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

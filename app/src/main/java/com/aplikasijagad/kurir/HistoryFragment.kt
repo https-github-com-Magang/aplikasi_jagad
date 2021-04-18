@@ -76,7 +76,7 @@ class HistoryFragment : Fragment() {
                     itemView.tv_rincian.text = item.noamplop
                     itemView.detail_rincian_penerima.text = item.penerima
                     itemView.detail_rincian_pengirim.text = item.pengirim
-                    itemView.detail_rincian_berat.text = item.berat
+                    itemView.detail_rincian_alamat.text = item.berat
                     itemView.detail_rincian_jenis.text = item.jenisamplop
                 } , { _ , item ->
 //                    val intent = Intent(requireContext(), DetailOrderActivity::class.java)
