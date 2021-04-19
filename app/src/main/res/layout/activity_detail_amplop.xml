@@ -15,14 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <TextView
             android:id="@+id/tv_rincian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:maxLines="1"
-            android:text="No Amplop :"
+            android:text="No TTB :"
             android:textColor="@color/biru"
             android:textStyle="bold"
             android:textSize="18sp"
@@ -99,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="5dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Jenis Amplop"
+                    android:text="Jenis TTB"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

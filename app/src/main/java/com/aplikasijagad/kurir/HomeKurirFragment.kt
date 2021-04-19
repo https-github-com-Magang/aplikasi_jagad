@@ -1,39 +1,43 @@
 package com.aplikasijagad.kurir
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aplikasijagad.API.Repository
+import com.aplikasijagad.API.ResiListener
 import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
+import com.aplikasijagad.MainActivity
+import com.aplikasijagad.Model.DataAPI
 import com.aplikasijagad.R
 import com.aplikasijagad.ViewModel.MainViewModel
 import com.aplikasijagad.ViewModel.MainViewModelFactory
 import com.aplikasijagad.adapter.ResiAdapter
-import com.aplikasijagad.auth.LoginActivity
+import com.aplikasijagad.adapter.SuratJalanAdapter
+import com.aplikasijagad.database.Order
+import com.aplikasijagad.models.Users
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
 import com.aplikasijagad.models.SURATJALAN
-import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_home_kurir.*
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_home_kurir.tv_totkurir
 import kotlinx.android.synthetic.main.list_amplop.view.*
+import kotlinx.android.synthetic.main.list_laporan_kurir.view.*
+import kotlinx.android.synthetic.main.list_suratjalan.view.*
 
+class HomeKurirFragment : Fragment(), ResiListener {
 
-class HomeKurirFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private val myAdapter by lazy {
         ResiAdapter()
@@ -50,6 +54,7 @@ class HomeKurirFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -85,12 +90,11 @@ class HomeKurirFragment : Fragment() {
         //orderKurir()
 
     }
+
     private fun setupRecylerview() {
         val recylerView = binding.rvLaporanKurir
         recylerView.adapter = myAdapter
         recylerView.layoutManager = LinearLayoutManager(requireContext())
-
-
     }
 
     private fun infoProfile() {
@@ -118,54 +122,15 @@ class HomeKurirFragment : Fragment() {
             })
     }
 
-    private fun orderKurir() {
-        val uid = user.uid
-        database.getReference("SURATJALAN").child("SRJ001").child("Amplop").orderByChild("idSRJ")
-            .addListenerForSingleValueEvent(object :ValueEventListener{
-//        database.getReference("SURATJALAN").child("SRJ003").child("Amplop")
-//            .addListenerForSingleValueEvent(object :ValueEventListener{
-
-//        database.getReference("SURATJALAN")
-//            .orderByChild("uidDriver")
-//            .equalTo(uid).addListenerForSingleValueEvent(object :
-//            ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {}
-
-            override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()) {
-                    for (eventSnapshot in p0.children) {
-                        val data = eventSnapshot.getValue(SURATJALAN::class.java)
-                        data?.let {
-                            listSuratjalan.add(it)
-                        }
-                    }
-                }
-
-                adapter = AdapterUtil(R.layout.list_amplop, listSuratjalan, { itemView, item ->
-                    itemView.tv_Rincian1.text = item.noamplop
-                    itemView.detail_rincian_penerima.text = item.penerima
-                    itemView.detail_rincian_pengirim.text = item.pengirim
-                    itemView.detail_rincian_berat.text = item.berat
-                    itemView.detail_rincian_jenis.text = item.jenisamplop
-                }, { _, item ->
-                    val intent = Intent(requireContext(), DetailOrderActivity::class.java)
-                    intent.putExtra("data", item)
-                    startActivity(intent)
-                })
-
-                binding.rvLaporanKurir.apply {
-                    this.adapter = this@HomeKurirFragment.adapter
-                    this.layoutManager = LinearLayoutManager(context)
-                }
-            }
-        })
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() =
             HomeKurirFragment().apply {
                 arguments = Bundle().apply {}
             }
+    }
+
+    override fun onResiClicked(view: View , dataAPI: DataAPI) {
+        Toast.makeText(context, "dataAPI.hp_driver", Toast.LENGTH_SHORT).show()
     }
 }

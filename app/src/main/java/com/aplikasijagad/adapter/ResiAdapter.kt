@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.aplikasijagad.API.ResiListener
 import com.aplikasijagad.Model.APICoronaProv
 import com.aplikasijagad.Model.ApiSPB
 import com.aplikasijagad.Model.DataAPI
@@ -22,6 +23,7 @@ class ResiAdapter :
         RecyclerView.ViewHolder(recyclerciewListItemResiBinding.root)
 
     private var myList = emptyList<DataAPI>()
+    var listener : ResiListener ? = null
 
     override fun onCreateViewHolder(parent: ViewGroup , viewType: Int) = ResiAdapterViewHolder(
         DataBindingUtil.inflate(
@@ -37,10 +39,23 @@ class ResiAdapter :
 
     override fun onBindViewHolder(holder: ResiAdapterViewHolder , position: Int) {
         holder.recyclerciewListItemResiBinding.tvRincian1.text = myList[position].id_surat_jalan
-        holder.recyclerciewListItemResiBinding.detailRincianPenerima.text = myList[position].hp_driver
+        holder.recyclerciewListItemResiBinding.detailRincianPenerima.text = myList[position].nama_penerima
         holder.recyclerciewListItemResiBinding.detailRincianPengirim.text = myList[position].nama_pengirim
-        holder.recyclerciewListItemResiBinding.detailRincianBerat.text = myList[position].alamat_pengirim
+        holder.recyclerciewListItemResiBinding.detailRincianAlamat.text = myList[position].alamat_pengirim
         holder.recyclerciewListItemResiBinding.detailRincianJenis.text = myList[position].tanggal
+        holder.recyclerciewListItemResiBinding.detailRincianStatus.text = myList[position].status
+
+        val item = myList[position]
+
+        holder.itemView.apply {
+            tv_rincian.setOnClickListener {
+                listener?.onResiClicked(it, item)
+            }
+        }
+
+//        holder.recyclerciewListItemResiBinding.detailStb.setOnClickListener {
+//            listener?.onResiClicked(it, item)
+//        }
     }
 
     fun setData(newList: List<DataAPI>) {

@@ -55,16 +55,17 @@ class DetailOrderActivity : AppCompatActivity() {
                         }
                     }
 
-                    adapter = AdapterUtil(R.layout.list_amplop, listAmplop, { itemView, item ->
+                    adapter = AdapterUtil(R.layout.list_amplop , listAmplop , { itemView , item ->
                         itemView.tv_Rincian1.text = item.noamplop
                         itemView.detail_rincian_penerima.text = item.penerima
                         itemView.detail_rincian_pengirim.text = item.pengirim
-                        itemView.detail_rincian_berat.text = item.berat
+                        itemView.detail_rincian_alamat.text = item.berat
                         itemView.detail_rincian_jenis.text = item.jenisamplop
                         itemView.detail_rincian_status.text = item.status
-                    }, { _, item ->
-                        val intent = Intent(this@DetailOrderActivity, DetailAmplopActivity::class.java)
-                        intent.putExtra("data", item)
+                    } , { _ , item ->
+                        val intent =
+                            Intent(this@DetailOrderActivity , DetailAmplopActivity::class.java)
+                        intent.putExtra("data" , item)
                         startActivity(intent)
                     })
 
@@ -75,19 +76,4 @@ class DetailOrderActivity : AppCompatActivity() {
                 }
             })
     }
-
-//    private fun rejected() {
-//        val builder = AlertDialog.Builder(requireContext())
-//        val view = layoutInflater.inflate(R.layout.rejected, null)
-//        builder.setView(view)
-//        val dialog = builder.show()
-//
-//        view.button_logout.setOnClickListener {
-//
-//        }
-//
-//        view.close_builders.setOnClickListener {
-//            dialog.dismiss()
-//        }
-//    }
 }

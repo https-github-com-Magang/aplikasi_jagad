@@ -37,4 +37,3 @@ class CariAdapter (private val cari: List<SURATJALAN>) : RecyclerView.Adapter<Ca
         holder.listitemcaribinding.tvDrive.text=cari[position].driver
     }
 }
-

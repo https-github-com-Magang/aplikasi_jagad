@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jagad</string>
+    <string name="app_name">Aplikasi Jagad</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="noPengiriman_wajib_diisi" />
@@ -34,10 +34,7 @@
     <string name="lunas">Lunas</string>
     <string name="rp_20_000">Rp. 20.000</string>
     <string name="diterima">Diterima</string>
-    <string name="ditolak">Ditolak</string>
-    <string name="Return">return</string>
-    <string name="satpam">satpam</string>
-    <string name="TemanKantor">temankantor</string>
+    <string name="ditolak">Return</string>
 
     <string-array name="status">
         <item>Status Pembayaran</item>

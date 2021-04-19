@@ -13,6 +13,7 @@ import com.aplikasijagad.R
 import com.aplikasijagad.databinding.FragmentHomeAdminBinding
 import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_home_admin.*
 
@@ -20,12 +21,13 @@ class HomeAdminFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeAdminBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var database: DatabaseReference
+    var database: DatabaseReference? = null
     private lateinit var namadriver: DatabaseReference
     private lateinit var databaseAmplop: DatabaseReference
     private lateinit var databaseSuratjalan: DatabaseReference
     private lateinit var listUsers: MutableList<Users>
-
+    var usersReference : DatabaseReference? = null
+    var firebaseUser : FirebaseUser? = null
     private var currentUserId: String = ""
     private var countfriend: Int = 0
 
@@ -40,6 +42,8 @@ class HomeAdminFragment : Fragment() {
         databaseAmplop = FirebaseDatabase.getInstance().getReference().child("Amplop")
         databaseSuratjalan = FirebaseDatabase.getInstance().getReference().child("SURATJALAN")
 
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+        usersReference = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
         listUsers = mutableListOf()
 
         binding =
@@ -70,7 +74,8 @@ class HomeAdminFragment : Fragment() {
 
     private fun load() {
         val uid = auth.currentUser!!.uid
-        database.orderByChild("uid").equalTo(uid)
+
+        database!!.orderByChild("uid").equalTo(uid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     Toast.makeText(
@@ -85,7 +90,7 @@ class HomeAdminFragment : Fragment() {
                         for (userSnapshot in p0.children) {
                             val data = userSnapshot.getValue(Users::class.java)
                             data?.let { listUsers.add(it) }
-                            tv_nama_adm.text = data!!.name
+                            binding.tvNamaAdm.text = data!!.name
                         }
                     }
                 }
