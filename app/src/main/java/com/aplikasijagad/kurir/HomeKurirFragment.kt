@@ -1,38 +1,37 @@
 package com.aplikasijagad.kurir
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aplikasijagad.API.Repository
 import com.aplikasijagad.AdapterUtil
 import com.aplikasijagad.DetailOrderActivity
-import com.aplikasijagad.MainActivity
 import com.aplikasijagad.R
 import com.aplikasijagad.ViewModel.MainViewModel
 import com.aplikasijagad.ViewModel.MainViewModelFactory
 import com.aplikasijagad.adapter.ResiAdapter
-import com.aplikasijagad.adapter.SuratJalanAdapter
-import com.aplikasijagad.database.Order
-import com.aplikasijagad.models.Users
+import com.aplikasijagad.auth.LoginActivity
 import com.aplikasijagad.databinding.FragmentHomeKurirBinding
 import com.aplikasijagad.models.SURATJALAN
+import com.aplikasijagad.models.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_home_kurir.tv_totkurir
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_home_kurir.*
 import kotlinx.android.synthetic.main.list_amplop.view.*
-import kotlinx.android.synthetic.main.list_laporan_kurir.view.*
-import kotlinx.android.synthetic.main.list_suratjalan.view.*
+
 
 class HomeKurirFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
@@ -90,6 +89,8 @@ class HomeKurirFragment : Fragment() {
         val recylerView = binding.rvLaporanKurir
         recylerView.adapter = myAdapter
         recylerView.layoutManager = LinearLayoutManager(requireContext())
+
+
     }
 
     private fun infoProfile() {
