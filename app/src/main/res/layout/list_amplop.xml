@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:maxLines="1"
-                android:text="ID STB :"
+                android:text="ID TTB :"
                 android:textStyle="bold"
                 android:textColor="@color/biru"
                 android:textSize="14sp"
@@ -158,6 +158,7 @@
                         android:fontFamily="@font/poppins"
                         android:paddingStart="5dp"
                         android:text="25kg"
+                        android:maxLength="20"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -177,10 +178,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/background_amplop"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/poppins_semibold"
                         android:paddingStart="5dp"
-                        android:text="Dikirim"
-                        android:textColor="@color/black"
+                        android:text="Diproses"
+                        android:textColor="#FDD835"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>

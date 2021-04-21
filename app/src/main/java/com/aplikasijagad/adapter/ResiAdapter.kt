@@ -1,10 +1,14 @@
 package com.aplikasijagad.adapter
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.aplikasijagad.API.ResiListener
+import com.aplikasijagad.MainActivity2
 import com.aplikasijagad.Model.APICoronaProv
 import com.aplikasijagad.Model.ApiSPB
 import com.aplikasijagad.Model.DataAPI
@@ -16,6 +20,7 @@ import kotlinx.android.synthetic.main.list_amplop.view.*
 
 class ResiAdapter :
     RecyclerView.Adapter<ResiAdapter.ResiAdapterViewHolder>() {
+
     inner class ResiAdapterViewHolder(
         val recyclerciewListItemResiBinding
         : ListAmplopBinding
@@ -23,7 +28,7 @@ class ResiAdapter :
         RecyclerView.ViewHolder(recyclerciewListItemResiBinding.root)
 
     private var myList = emptyList<DataAPI>()
-    var listener : ResiListener ? = null
+    private var onItemSelectedListener : ResiListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup , viewType: Int) = ResiAdapterViewHolder(
         DataBindingUtil.inflate(
@@ -38,20 +43,20 @@ class ResiAdapter :
     override fun getItemCount(): Int = myList.size
 
     override fun onBindViewHolder(holder: ResiAdapterViewHolder , position: Int) {
-        holder.recyclerciewListItemResiBinding.tvRincian1.text = myList[position].id_surat_jalan
+        holder.recyclerciewListItemResiBinding.tvRincian1.text = myList[position].id_amplop
         holder.recyclerciewListItemResiBinding.detailRincianPenerima.text = myList[position].nama_penerima
         holder.recyclerciewListItemResiBinding.detailRincianPengirim.text = myList[position].nama_pengirim
         holder.recyclerciewListItemResiBinding.detailRincianAlamat.text = myList[position].alamat_pengirim
         holder.recyclerciewListItemResiBinding.detailRincianJenis.text = myList[position].tanggal
-        holder.recyclerciewListItemResiBinding.detailRincianStatus.text = myList[position].status
+//        holder.recyclerciewListItemResiBinding.detailRincianStatus.text = myList[position].status
 
         val item = myList[position]
 
-        holder.itemView.apply {
-            tv_rincian.setOnClickListener {
-                listener?.onResiClicked(it, item)
-            }
-        }
+//        holder.itemView.apply {
+//            tv_rincian.setOnClickListener {
+//                listener?.onResiClicked(it, item)
+//            }
+//        }
 
 //        holder.recyclerciewListItemResiBinding.detailStb.setOnClickListener {
 //            listener?.onResiClicked(it, item)
@@ -63,5 +68,8 @@ class ResiAdapter :
         notifyDataSetChanged()
     }
 
+    fun setOnClickItemListener(onClickListener: ResiListener){
+        this.onItemSelectedListener = onClickListener
+    }
 
 }
